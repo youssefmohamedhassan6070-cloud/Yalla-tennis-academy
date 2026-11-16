@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Yalla Tennis Academy</title>
+    <title>يلا تنس أكاديمي | Yalla Tennis Academy</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/jpeg" href="logo.jpg">
+
     <!-- استيراد مكتبات Firebase المتوافقة مع الكود -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
@@ -65,8 +65,8 @@
                     <img src="logo.jpg" alt="Yalla Tennis Logo" class="w-full h-full object-contain rounded-xl">
                 </div>
                 <div>
-                    <h1 class="text-sm sm:text-base font-black text-slate-900 leading-tight">Yalla Tennis Academy </h1>
-                    <p class="text-[9px] sm:text-[10px] text-lime-600 font-bold tracking-wider"> يلا تنس اكاديمي</p>
+                    <h1 class="text-sm sm:text-base font-black text-slate-900 leading-tight">يلا تنس أكاديمي</h1>
+                    <p class="text-[9px] sm:text-[10px] text-lime-600 font-bold tracking-wider">Yalla Tennis Academy</p>
                 </div>
             </div>
             <div class="flex gap-1.5 sm:gap-2">
@@ -84,8 +84,8 @@
                 <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-2xl mx-auto p-1.5 border border-white/40 shadow-inner mb-2 flex items-center justify-center overflow-hidden">
                     <img src="logo.jpg" alt="Yalla Tennis Logo" class="w-full h-full object-contain rounded-xl">
                 </div>
-                <h2 class="text-lg sm:text-xl font-black">Welcome to Yalla Tennis Academy🎾✨</h2>
-                <p class="text-xs text-lime-100 font-bold tracking-wide"> اهلا بك في يلا تنس اكاديمي</p>
+                <h2 class="text-lg sm:text-xl font-black">أهلاً بك في يلا تنس! 🎾✨</h2>
+                <p class="text-xs text-lime-100 font-bold tracking-wide">Welcome to Yalla Tennis Academy</p>
                 <p class="text-[11px] text-white/80 leading-relaxed pt-1">المكان الأفضل لتطوير مهاراتك في التنس وتتبع تقييمك اليومي مع أفضل الكباتن!</p>
             </div>
 
@@ -216,7 +216,7 @@
                                 </div>
                                 <div>
                                     <div class="flex justify-between items-center mb-1">
-                                        <label class="text-xs font-bold text-slate-700">تمرين التنس  (Tennis):</label>
+                                        <label class="text-xs font-bold text-slate-700">تمرين التنسيق (Coordination):</label>
                                         <span id="val-tennis" class="text-xs font-bold px-2.5 py-0.5 rounded-lg text-white bg-lime-600 shadow-sm transition-all duration-300">8</span>
                                     </div>
                                     <input type="range" id="input-tennis" min="1" max="10" value="8" oninput="updateSliderUI('tennis')" class="w-full cursor-pointer">
@@ -576,7 +576,7 @@
             </div>
 
             <div class="pt-1 space-y-2">
-                <a href="https://wa.me/201284429494?text=%D8%A3%D9%87%D9%84%D8%A7%D9%8B%20%D9%83%D8%A7%D8%A8%D8%AA%D9%86%D8%8C%20%D8%A3%D9%86%D8%A7%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%AD%D8%B5%D9%84%20%D8%B9%D9%84%D9%89%20%D9%83%D9%88%D8%AF%D9%8A%20%D8%A7%D9%84%D8%AE%D8%A7%D8%B5%20%D9%81%D9%8A%20%D9%8A%D9%84%D8%A7%20%D8%AA%D9%86%D8%B3%20%D8%A3%D9%83%D8%A7%D8%AF%D9%8A%D9%85%D9%8A" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2 shadow-md transition">
+                <a href="https://wa.me/201284429494?text=%D8%A3%D9%87%D9%84%D8%A7%D9%8B%20%D9%83%D8%A7%D8%A8%D8%AA%D9%86%D8%8C%20%D8%A3%D9%86%D8%A7%20%D8%B9%D8%A7%D9%85%D9%84%20%D8%B7%D9%84%D8%A8%20%D8%A7%D9%86%D8%B6%D9%85%D8%A7%D9%85%20%D9%88%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%AD%D8%B5%D9%84%20%D8%B9%D9%84%D9%89%20%D9%83%D9%88%D8%AF%D9%8A%20%D8%A7%D9%84%D8%AE%D8%A7%D8%B5" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2 shadow-md transition">
                     <i class="fa-brands fa-whatsapp text-base"></i> إرسال رسالة للكابتن على الواتساب (01284429494)
                 </a>
                 <button onclick="closeModals()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-xs transition">حسناً، فهمت</button>
