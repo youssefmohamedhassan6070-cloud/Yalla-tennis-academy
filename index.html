@@ -659,7 +659,7 @@
             dailyEvaluations: {}
         };
 
-        // دالة حفظ آمنة بالكامل (تدمج البيانات بذكاء لمنع مسح أو فقدان أي سجلات قديمة)
+        // دالة حفظ آمنة بالكامل ({ merge: true }) لمنع مسح أو استبدال السجلات القديمة
         function saveData() {
             dbFirestore.collection("academy").doc("main_data").set(db, { merge: true })
                 .then(() => {
@@ -1410,22 +1410,23 @@
             showToast('تم رفض الطلب', 'info');
         }
 
+        // دالة التحميل الآمنة (حماية كاملة ضد الرجوع للديفولت وضمان سحب الداتا الحقيقية)
         window.onload = function() {
             const coachDateEl = document.getElementById('coach-selected-date');
             const playerDateEl = document.getElementById('player-selected-date');
             if(coachDateEl) coachDateEl.value = todayStr;
             if(playerDateEl) playerDateEl.value = todayStr;
 
-            // جلب البيانات من السيرفر بدمج ذكي وآمن يحمي الداتا ولا يحذفها
             dbFirestore.collection("academy").doc("main_data").get()
                 .then((doc) => {
                     if (doc.exists) {
                         let remoteData = doc.data();
+                        // دمج ذكي وآمن يحمي البيانات ويمنع مسحها أو تصفيرها
                         if(remoteData.coaches && remoteData.coaches.length > 0) db.coaches = remoteData.coaches;
                         if(remoteData.players && remoteData.players.length > 0) db.players = remoteData.players;
                         if(remoteData.requests) db.requests = remoteData.requests;
                         if(remoteData.dailyEvaluations) db.dailyEvaluations = remoteData.dailyEvaluations;
-                        console.log("تم تحميل ودمج البيانات من سيرفر فايربيز بنجاح تام");
+                        console.log("تم تحميل ودمج البيانات الحقيقية من سيرفر فايربيز بنجاح تام.");
                     } else {
                         saveData();
                     }
