@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>يلا تنس أكاديمي | Yalla Tennis Academy</title>
+    <!-- أيقونة التاب (Favicon) بشعار الأكاديمية logo.jpg -->
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -576,7 +578,7 @@
             </div>
 
             <div class="pt-1 space-y-2">
-                <a href="https://wa.me/201284429494?text=%D8%A3%D9%87%D9%84%D8%A7%D9%8b%20%D9%83%D8%A7%D8%A8%D8%AA%D9%86%D8%8C%20%D8%A3%D9%86%D8%A7%20%D8%B9%D8%A7%D9%85%D9%84%20%D8%B7%D9%84%D8%A8%20%D8%A7%D9%86%D8%B6%D9%85%D8%A7%D9%85%20%D9%88%D8%B9%D8%A7%D9%82%D8%B1%20%D8%A3%D8%AD%D8%B5%D9%84%20%D8%B9%D9%84%D9%89%20%D9%83%D9%88%D8%AF%D9%8A%20%D8%A7%D9%84%D8%AE%D8%A7%D8%B5" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2 shadow-md transition">
+                <a href="https://wa.me/201284429494?text=%D8%A3%D9%87%D9%84%D8%A7%D9%8b%20%D9%83%D8%A7%D8%A8%D8%AA%D9%86%D8%8C%20%D8%A3%D9%86%D8%A7%20%D8%B9%D8%A7%D9%85%D9%84%20%D8%B7%D9%84%D8%A8%20%D8%A7%D9%86%D8%B6%D9%85%D8%A7%D9%85%20%D9%88%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%AD%D8%B5%D9%84%20%D8%B9%D9%84%D9%89%20%D9%83%D9%88%D8%AF%D9%8A%20%D8%A7%D9%84%D8%AE%D8%A7%D8%B5" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2 shadow-md transition">
                     <i class="fa-brands fa-whatsapp text-base"></i> إرسال رسالة للكابتن على الواتساب (01284429494)
                 </a>
                 <button onclick="closeModals()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-xs transition">حسناً، فهمت</button>
@@ -657,11 +659,11 @@
             dailyEvaluations: {}
         };
 
-        // دالة حفظ آمنة 100% (تحدث البيانات دون أن تمسح أو تستبدل البيانات الموجودة مسبقاً)
+        // دالة حفظ آمنة بالكامل (تدمج البيانات بذكاء لمنع مسح أو فقدان أي سجلات قديمة)
         function saveData() {
             dbFirestore.collection("academy").doc("main_data").set(db, { merge: true })
                 .then(() => {
-                    console.log("تم الحفظ على سيرفر فايربيز بنجاح بشكل آمن ودائم!");
+                    console.log("تم الحفظ على سيرفر فايربيز بنجاح بشكل آمن!");
                     refreshUI();
                 })
                 .catch((error) => {
@@ -1414,17 +1416,16 @@
             if(coachDateEl) coachDateEl.value = todayStr;
             if(playerDateEl) playerDateEl.value = todayStr;
 
-            // عند التحميل: نسحب الداتا الحالية من السيرفر ونحدث بها التطبيق محلياً
+            // جلب البيانات من السيرفر بدمج ذكي وآمن يحمي الداتا ولا يحذفها
             dbFirestore.collection("academy").doc("main_data").get()
                 .then((doc) => {
                     if (doc.exists) {
                         let remoteData = doc.data();
-                        // دمج البيانات بلطف لضمان عدم ضياع أي مصفوفة
-                        if(remoteData.coaches) db.coaches = remoteData.coaches;
-                        if(remoteData.players) db.players = remoteData.players;
+                        if(remoteData.coaches && remoteData.coaches.length > 0) db.coaches = remoteData.coaches;
+                        if(remoteData.players && remoteData.players.length > 0) db.players = remoteData.players;
                         if(remoteData.requests) db.requests = remoteData.requests;
                         if(remoteData.dailyEvaluations) db.dailyEvaluations = remoteData.dailyEvaluations;
-                        console.log("تم دمج وتحميل البيانات من سيرفر فايربيز بنجاح تام");
+                        console.log("تم تحميل ودمج البيانات من سيرفر فايربيز بنجاح تام");
                     } else {
                         saveData();
                     }
