@@ -646,15 +646,13 @@
 
         const todayStr = getTodayDateString();
 
+        // القاعدة الأساسية تبدأ خالية تماماً لتعتمد كلياً على سيرفر فايربيز الحقيقي
         let db = {
             coaches: [
                 { id: 10, name: "كابتن أحمد", pass: "1234", isAdmin: true, isBlocked: false },
                 { id: 11, name: "كابتن محمود", pass: "1234", isAdmin: false, isBlocked: false }
             ],
-            players: [
-                { id: 101, code: "P-101", name: "محمد إبراهيم", age: 16, level: "متقدم", phone: "01284429494", avatar: "م", isBlocked: false },
-                { id: 102, code: "P-102", name: "عمر خالد", age: 14, level: "متوسط", phone: "01284429494", avatar: "ع", isBlocked: false }
-            ],
+            players: [],
             requests: [],
             dailyEvaluations: {}
         };
@@ -1410,7 +1408,7 @@
             showToast('تم رفض الطلب', 'info');
         }
 
-        // دالة التحميل الآمنة (حماية كاملة ضد الرجوع للديفولت وضمان سحب الداتا الحقيقية)
+        // دالة التحميل الذكية (تعتمد كلياً على سيرفر فايربيز ولا تفرض ديفولت وهمي)
         window.onload = function() {
             const coachDateEl = document.getElementById('coach-selected-date');
             const playerDateEl = document.getElementById('player-selected-date');
@@ -1421,12 +1419,12 @@
                 .then((doc) => {
                     if (doc.exists) {
                         let remoteData = doc.data();
-                        // دمج ذكي وآمن يحمي البيانات ويمنع مسحها أو تصفيرها
-                        if(remoteData.coaches && remoteData.coaches.length > 0) db.coaches = remoteData.coaches;
-                        if(remoteData.players && remoteData.players.length > 0) db.players = remoteData.players;
+                        if(remoteData.coaches) db.coaches = remoteData.coaches;
+                        // اعتماد داتا اللاعبين من الفايربيز بشكل مباشر
+                        if(remoteData.players) db.players = remoteData.players;
                         if(remoteData.requests) db.requests = remoteData.requests;
                         if(remoteData.dailyEvaluations) db.dailyEvaluations = remoteData.dailyEvaluations;
-                        console.log("تم تحميل ودمج البيانات الحقيقية من سيرفر فايربيز بنجاح تام.");
+                        console.log("تم تحميل البيانات الحقيقية من فايربيز بنجاح تام.");
                     } else {
                         saveData();
                     }
