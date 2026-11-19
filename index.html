@@ -29,33 +29,61 @@
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #090d16;
-            color: #f8fafc;
+            background-color: #090e1a;
+            color: #e2e8f0;
             -webkit-tap-highlight-color: transparent;
         }
 
-        .hero-arena {
+        .ambient-bg {
             background:
-                radial-gradient(circle at 82% 18%, rgba(163, 230, 53, 0.16), transparent 42%),
-                radial-gradient(circle at 15% 85%, rgba(16, 185, 129, 0.22), transparent 45%),
-                linear-gradient(145deg, #062e22 0%, #09131d 55%, #060911 100%);
+                radial-gradient(circle at 80% 15%, rgba(52, 211, 153, 0.11), transparent 45%),
+                radial-gradient(circle at 18% 85%, rgba(163, 230, 53, 0.08), transparent 45%),
+                linear-gradient(155deg, #09121e 0%, #0b1322 55%, #070b14 100%);
         }
 
-        .glass-panel {
-            background: rgba(15, 23, 42, 0.72);
+        .calm-card {
+            background: rgba(17, 25, 42, 0.78);
             backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            box-shadow: 0 16px 36px -20px rgba(0, 0, 0, 0.75);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .lime-cta {
-            background: linear-gradient(135deg, #a3e635 0%, #65a30d 100%);
-            color: #061005;
+        .calm-card:hover {
+            border-color: rgba(163, 230, 53, 0.24);
+            box-shadow: 0 20px 42px -22px rgba(16, 185, 129, 0.16);
+        }
+
+        .calm-surface {
+            background: rgba(11, 17, 30, 0.75);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+        }
+
+        .soft-cta {
+            background: linear-gradient(135deg, #84cc16 0%, #4d7c0f 100%);
+            color: #071104;
+            box-shadow: 0 10px 25px -10px rgba(132, 204, 22, 0.45);
+            transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .soft-cta:hover {
+            filter: brightness(1.06);
+            transform: translateY(-1px);
+            box-shadow: 0 14px 30px -10px rgba(132, 204, 22, 0.55);
         }
 
         .yc-badge {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.95) 100%);
-            border: 1px solid rgba(163, 230, 53, 0.35);
-            box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.65);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(20, 33, 51, 0.92) 100%);
+            border: 1px solid rgba(163, 230, 53, 0.25);
+            box-shadow: 0 12px 28px -14px rgba(0, 0, 0, 0.7);
+        }
+
+        .stealth-coach-btn {
+            opacity: 0.2;
+            transition: opacity 0.25s ease, color 0.25s ease;
+        }
+        .stealth-coach-btn:hover {
+            opacity: 0.85;
         }
 
         @keyframes toastIn {
@@ -70,8 +98,8 @@
         .toast-exit { animation: toastOut 0.3s cubic-bezier(0.7, 0, 0.84, 0) forwards; }
 
         ::-webkit-scrollbar { width: 5px; height: 5px; }
-        ::-webkit-scrollbar-track { background: #1e293b; }
-        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 999px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 999px; }
 
         @media print {
             aside, nav, footer, #toast-container, .no-print { display: none !important; }
@@ -80,36 +108,33 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col selection:bg-lime-300 selection:text-slate-950">
+<body class="min-h-screen flex flex-col ambient-bg text-slate-200 selection:bg-lime-400/25 selection:text-lime-200">
 
     <div id="toast-container" class="fixed top-4 left-1/2 -translate-x-1/2 z-[100] w-full max-w-xs sm:max-w-sm px-3 pointer-events-none flex flex-col gap-2"></div>
 
     <!-- =========================================================
-         1. الهوم بيج الرئيسية (Homepage فخمة برسالة ترحيبية وزر انضم إلينا)
+         1. الهوم بيج الهادئة والمريحة
          ========================================================= -->
-    <div id="page-home" class="min-h-screen flex flex-col justify-between hero-arena text-white">
-        <header class="border-b border-white/10 bg-slate-950/45 backdrop-blur-md sticky top-0 z-40">
+    <div id="page-home" class="min-h-screen flex flex-col justify-between">
+        <header class="border-b border-slate-800/80 bg-slate-950/55 backdrop-blur-md sticky top-0 z-40">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
                 <div class="flex items-center gap-3">
-                    <img src="logo.jpg" alt="Yalla Tennis Academy" class="w-11 h-11 rounded-2xl object-cover border border-lime-400/40 shadow-md">
+                    <img src="logo.jpg" alt="Yalla Tennis Academy" class="w-11 h-11 rounded-2xl object-cover border border-lime-400/25">
                     <div>
                         <span class="block text-sm sm:text-base font-black text-white">يلا تنس أكاديمي</span>
-                        <span class="block text-[10px] text-lime-300 font-extrabold tracking-wide">YALLA TENNIS ACADEMY</span>
+                        <span class="block text-[10px] text-lime-300/80 font-extrabold tracking-wide">YALLA TENNIS ACADEMY</span>
                     </div>
                 </div>
 
                 <div class="flex items-center gap-2">
-                    <button onclick="showPlayerLoginModal()" class="px-3.5 py-2 rounded-xl text-xs font-black bg-white/10 hover:bg-white/15 text-white border border-white/10 transition flex items-center gap-1.5">
-                        <i class="fa-solid fa-trophy text-amber-300"></i>
+                    <button onclick="showPlayerLoginModal()" class="px-3.5 py-2 rounded-xl text-xs font-black bg-slate-800/80 hover:bg-slate-700/80 text-slate-100 border border-slate-700/70 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-trophy text-amber-300/90"></i>
                         <span>لوحة الأوائل</span>
                     </button>
-                    <a href="https://yalla-tennis-gallery.vercel.app/" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl text-xs font-extrabold bg-amber-400/15 hover:bg-amber-400/25 text-amber-200 border border-amber-300/25 transition flex items-center gap-1.5">
-                        <i class="fa-solid fa-camera-retro text-amber-300"></i>
+                    <a href="https://yalla-tennis-gallery.vercel.app/" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl text-xs font-extrabold bg-emerald-950/70 hover:bg-emerald-900/70 text-emerald-200 border border-emerald-700/40 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-camera-retro text-emerald-300/90"></i>
                         <span>معرض الصور</span>
                     </a>
-                    <button onclick="showCoachLoginModal()" class="px-3 py-2 rounded-xl text-xs font-extrabold bg-white/10 hover:bg-white/15 text-slate-200 border border-white/10 transition" title="دخول الكباتن">
-                        <i class="fa-solid fa-shield-halved text-lime-300"></i>
-                    </button>
                 </div>
             </div>
         </header>
@@ -117,81 +142,88 @@
         <main class="max-w-6xl w-full mx-auto px-4 sm:px-6 py-10 sm:py-16 flex-grow flex flex-col justify-center">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div class="lg:col-span-8 space-y-6">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-lime-400/15 border border-lime-300/30 text-lime-300 text-xs font-black">
-                        <span class="w-2 h-2 rounded-full bg-lime-400 animate-pulse"></span>
-                        <span>أكاديمية صناعة أبطال التنس</span>
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/20 text-emerald-300 text-xs font-black">
+                        <span class="w-2 h-2 rounded-full bg-lime-400/90"></span>
+                        <span>أهلاً بك في يلا تنس أكاديمي</span>
                     </div>
 
-                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.18] tracking-tight text-white">
-                        أهلاً بك في عالم
-                        <span class="text-lime-300 block sm:inline">يلا تنس أكاديمي</span>
-                        <span class="block text-xl sm:text-3xl text-emerald-100/90 font-extrabold mt-3">
-                            حيث يُبنى الأداء الاحترافي خطوة بخطوة على أرض الملعب 🎾
+                    <h1 class="text-3xl sm:text-5xl font-black leading-[1.2] text-white">
+                        مساحة هادئة واحترافية لصناعة
+                        <span class="text-lime-300 block sm:inline">أبطال التنس</span>
+                        <span class="block text-xl sm:text-2xl text-slate-300 font-extrabold mt-3">
+                            متابعة يومية دقيقة، تطور واضح، وتجربة مريحة للاعب وولي الأمر 🎾
                         </span>
                     </h1>
 
-                    <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl font-semibold">
-                        نرحب بك في منصتنا الرياضية المتكاملة؛ تجربة تدريبية حديثة تجمع بين المتابعة الفنية الدقيقة، التقييم اليومي، وروح المنافسة الحقيقية لكل لاعب يسعى للتميز.
+                    <p class="text-sm sm:text-base text-slate-400 leading-relaxed max-w-2xl font-semibold">
+                        مرحباً بك في منصتنا؛ هنا نتابع أداء كل لاعب خطوة بخطوة في أجواء رياضية منظمة ومحفزة بعيداً عن التعقيد.
                     </p>
 
                     <div class="flex flex-wrap items-center gap-3.5 pt-2">
-                        <button onclick="showPage('register')" class="lime-cta hover:brightness-105 font-black px-7 py-4 rounded-2xl text-sm sm:text-base transition shadow-xl flex items-center gap-2.5">
-                            <span>انضم إلينا الآن</span>
+                        <button onclick="showPage('register')" class="soft-cta font-black px-7 py-4 rounded-2xl text-sm sm:text-base flex items-center gap-2.5">
+                            <span>انضم إلينا</span>
                             <i class="fa-solid fa-arrow-left"></i>
                         </button>
 
-                        <button onclick="showPlayerLoginModal()" class="glass-panel hover:bg-white/10 text-white font-extrabold px-5 py-4 rounded-2xl text-xs sm:text-sm transition flex items-center gap-2">
-                            <i class="fa-solid fa-key text-lime-300"></i>
-                            <span>معي كود اللاعب</span>
+                        <button onclick="showPlayerLoginModal()" class="calm-card text-slate-200 hover:text-white font-extrabold px-5 py-4 rounded-2xl text-xs sm:text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-key text-lime-300/90"></i>
+                            <span>دخول بكود اللاعب</span>
                         </button>
                     </div>
                 </div>
 
                 <div class="lg:col-span-4 space-y-4">
-                    <div class="glass-panel rounded-3xl p-6 space-y-4 shadow-2xl">
-                        <div class="flex items-center justify-between border-b border-white/10 pb-3.5">
-                            <span class="text-xs font-black text-lime-300">نظام يلا تنس</span>
-                            <i class="fa-solid fa-award text-amber-300 text-lg"></i>
+                    <div class="calm-card rounded-3xl p-6 space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                            <span class="text-xs font-black text-lime-300">مميزات المتابعة</span>
+                            <i class="fa-solid fa-feather-pointed text-emerald-300/80"></i>
                         </div>
-                        <div class="space-y-3 text-xs">
-                            <div class="flex items-center gap-3 p-3 rounded-2xl bg-white/5 border border-white/5">
-                                <i class="fa-solid fa-chart-line text-lime-300 text-base"></i>
-                                <span class="font-bold text-slate-100">تقييم يومي للياقة والتنسيق والكفاءة</span>
+                        <div class="space-y-2.5 text-xs">
+                            <div class="flex items-center gap-3 p-3 rounded-2xl calm-surface">
+                                <i class="fa-solid fa-chart-line text-lime-300/90"></i>
+                                <span class="font-bold text-slate-200">تقييم يومي للياقة والتنسيق والكفاءة</span>
                             </div>
-                            <div class="flex items-center gap-3 p-3 rounded-2xl bg-white/5 border border-white/5">
-                                <i class="fa-solid fa-crown text-amber-300 text-base"></i>
-                                <span class="font-bold text-slate-100">لوحة أوائل وترتيب تنافسي مستمر</span>
+                            <div class="flex items-center gap-3 p-3 rounded-2xl calm-surface">
+                                <i class="fa-solid fa-crown text-amber-300/90"></i>
+                                <span class="font-bold text-slate-200">لوحة أوائل وترتيب واضح ومريح</span>
                             </div>
-                            <div class="flex items-center gap-3 p-3 rounded-2xl bg-white/5 border border-white/5">
-                                <i class="fa-solid fa-user-check text-emerald-300 text-base"></i>
-                                <span class="font-bold text-slate-100">كود خاص لكل لاعب ومتابعة مباشرة</span>
+                            <div class="flex items-center gap-3 p-3 rounded-2xl calm-surface">
+                                <i class="fa-solid fa-shield-heart text-emerald-300/90"></i>
+                                <span class="font-bold text-slate-200">كود خاص لكل لاعب ومتابعة مستمرة</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="yc-badge text-white rounded-3xl p-4 flex items-center justify-between gap-3">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-2xl bg-lime-400 text-slate-950 font-black text-sm flex items-center justify-center shrink-0">
+                            <div class="w-10 h-10 rounded-2xl bg-lime-400/90 text-slate-950 font-black text-sm flex items-center justify-center shrink-0">
                                 YC
                             </div>
                             <div>
-                                <span class="block text-[10px] uppercase tracking-widest text-lime-300 font-extrabold">Powered by</span>
+                                <span class="block text-[10px] uppercase tracking-widest text-lime-300/85 font-extrabold">Powered by</span>
                                 <span class="block text-sm font-black text-white">Y Creations</span>
                             </div>
                         </div>
-                        <span class="text-[10px] font-black bg-lime-400/15 text-lime-300 px-2.5 py-1 rounded-full border border-lime-300/25">
-                            OFFICIAL SYSTEM
+                        <span class="text-[10px] font-black bg-lime-400/10 text-lime-300/90 px-2.5 py-1 rounded-full border border-lime-400/20">
+                            Y CREATIONS
                         </span>
                     </div>
                 </div>
             </div>
         </main>
 
-        <footer class="border-t border-white/10 bg-slate-950/60 py-4 px-4">
+        <footer class="border-t border-slate-800/80 bg-slate-950/60 py-4 px-4">
             <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-                <p class="text-slate-400 font-bold">© 2026 يلا تنس أكاديمي — جميع الحقوق محفوظة</p>
-                <div class="inline-flex items-center gap-2 bg-slate-900 border border-lime-400/30 text-white px-3.5 py-1.5 rounded-full">
-                    <span class="w-2 h-2 rounded-full bg-lime-400"></span>
+                <div class="flex items-center gap-3">
+                    <p class="text-slate-400 font-bold">© 2026 يلا تنس أكاديمي</p>
+                    <!-- زر دخول الكابتن مخفي بشكل هادئ للغاية -->
+                    <button onclick="showCoachLoginModal()" class="stealth-coach-btn text-[10px] text-slate-500 hover:text-slate-300 px-2 py-0.5 rounded" aria-label="دخول الكابتن">
+                        <i class="fa-solid fa-circle-dot"></i>
+                    </button>
+                </div>
+
+                <div class="inline-flex items-center gap-2 bg-slate-900/90 border border-lime-400/25 text-white px-3.5 py-1.5 rounded-full">
+                    <span class="w-2 h-2 rounded-full bg-lime-400/90"></span>
                     <span class="text-[11px] font-bold text-slate-300">Powered by</span>
                     <span class="text-xs font-black text-lime-300">Y Creations</span>
                 </div>
@@ -202,46 +234,45 @@
     <!-- =========================================================
          2. صفحة انضم إلينا (تُفتح بالضغط على زر انضم إلينا)
          ========================================================= -->
-    <div id="page-register" class="hidden min-h-screen flex flex-col justify-between hero-arena text-white">
-        <header class="border-b border-white/10 bg-slate-950/45 backdrop-blur-md sticky top-0 z-40">
+    <div id="page-register" class="hidden min-h-screen flex flex-col justify-between">
+        <header class="border-b border-slate-800/80 bg-slate-950/55 backdrop-blur-md sticky top-0 z-40">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-3">
-                <button onclick="showPage('home')" class="px-3.5 py-2 rounded-xl text-xs font-black bg-white/10 hover:bg-white/15 text-white border border-white/10 transition flex items-center gap-2">
-                    <i class="fa-solid fa-arrow-right text-lime-300"></i>
+                <button onclick="showPage('home')" class="px-3.5 py-2 rounded-xl text-xs font-black bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 border border-slate-700/70 transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-right text-lime-300/90"></i>
                     <span>العودة للرئيسية</span>
                 </button>
 
                 <div class="flex items-center gap-2.5">
-                    <img src="logo.jpg" alt="Logo" class="w-9 h-9 rounded-xl object-cover border border-lime-400/30">
+                    <img src="logo.jpg" alt="Logo" class="w-9 h-9 rounded-xl object-cover border border-lime-400/25">
                     <span class="text-xs sm:text-sm font-black text-white">انضم إلينا</span>
                 </div>
             </div>
         </header>
 
         <main class="max-w-xl w-full mx-auto px-4 py-8 sm:py-12 flex-grow flex items-center justify-center">
-            <div class="w-full glass-panel rounded-[2rem] p-6 sm:p-8 shadow-2xl">
-                <!-- فورم التسجيل -->
+            <div class="w-full calm-card rounded-[2rem] p-6 sm:p-8">
                 <div id="reg-form-box" class="space-y-5">
-                    <div class="text-center space-y-1.5 border-b border-white/10 pb-4">
-                        <span class="inline-block text-[11px] font-black text-lime-300 bg-lime-400/10 px-3 py-1 rounded-full">طلب التحاق جديد</span>
+                    <div class="text-center space-y-1.5 border-b border-slate-800 pb-4">
+                        <span class="inline-block text-[11px] font-black text-lime-300 bg-lime-400/10 px-3 py-1 rounded-full">طلب انضمام</span>
                         <h2 class="text-xl sm:text-2xl font-black text-white">سجل بيانات اللاعب</h2>
-                        <p class="text-xs text-slate-300 font-semibold">أكمل البيانات التالية وسيتم مراجعة طلبك وإصدار الكود الخاص بك</p>
+                        <p class="text-xs text-slate-400 font-semibold">أدخل البيانات بدقة ليتم مراجعتها وإرسال الكود الخاص بك</p>
                     </div>
 
                     <form onsubmit="submitPublicRegistration(event)" class="space-y-4">
                         <div>
-                            <label class="block text-xs font-extrabold text-slate-200 mb-1.5">اسم اللاعب الثلاثي</label>
-                            <input type="text" id="pub-name" required placeholder="اكتب الاسم الكامل..." class="w-full bg-slate-950/75 border border-white/15 rounded-2xl p-3.5 text-xs sm:text-sm text-white font-bold placeholder:text-slate-500 focus:outline-none focus:border-lime-400 transition">
+                            <label class="block text-xs font-extrabold text-slate-300 mb-1.5">اسم اللاعب الثلاثي</label>
+                            <input type="text" id="pub-name" required placeholder="اكتب الاسم الكامل..." class="w-full calm-surface rounded-2xl p-3.5 text-xs sm:text-sm text-white font-bold placeholder:text-slate-500 focus:outline-none focus:border-lime-400/70 transition">
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-extrabold text-slate-200 mb-1.5">العمر</label>
-                                <input type="number" id="pub-age" required placeholder="مثال: 11" class="w-full bg-slate-950/75 border border-white/15 rounded-2xl p-3.5 text-xs sm:text-sm text-white font-bold placeholder:text-slate-500 focus:outline-none focus:border-lime-400 transition">
+                                <label class="block text-xs font-extrabold text-slate-300 mb-1.5">العمر</label>
+                                <input type="number" id="pub-age" required placeholder="مثال: 11" class="w-full calm-surface rounded-2xl p-3.5 text-xs sm:text-sm text-white font-bold placeholder:text-slate-500 focus:outline-none focus:border-lime-400/70 transition">
                             </div>
 
                             <div>
-                                <label class="block text-xs font-extrabold text-slate-200 mb-1.5">المستوى</label>
-                                <select id="pub-level" class="w-full bg-slate-950/75 border border-white/15 rounded-2xl p-3.5 text-xs sm:text-sm text-white font-bold focus:outline-none focus:border-lime-400 transition">
+                                <label class="block text-xs font-extrabold text-slate-300 mb-1.5">المستوى</label>
+                                <select id="pub-level" class="w-full calm-surface rounded-2xl p-3.5 text-xs sm:text-sm text-white font-bold focus:outline-none focus:border-lime-400/70 transition">
                                     <option value="مبتدئ">مبتدئ</option>
                                     <option value="متوسط">متوسط</option>
                                     <option value="متقدم">متقدم</option>
@@ -251,46 +282,45 @@
                         </div>
 
                         <div>
-                            <label class="block text-xs font-extrabold text-slate-200 mb-1.5">رقم هاتف ولي الأمر</label>
-                            <input type="tel" id="pub-phone" required placeholder="012xxxxxxxx" class="w-full bg-slate-950/75 border border-white/15 rounded-2xl p-3.5 text-xs sm:text-sm text-white font-bold placeholder:text-slate-500 focus:outline-none focus:border-lime-400 transition">
+                            <label class="block text-xs font-extrabold text-slate-300 mb-1.5">رقم هاتف ولي الأمر</label>
+                            <input type="tel" id="pub-phone" required placeholder="012xxxxxxxx" class="w-full calm-surface rounded-2xl p-3.5 text-xs sm:text-sm text-white font-bold placeholder:text-slate-500 focus:outline-none focus:border-lime-400/70 transition">
                         </div>
 
-                        <button type="submit" class="w-full lime-cta hover:brightness-105 font-black py-4 rounded-2xl text-xs sm:text-sm transition shadow-lg mt-2">
+                        <button type="submit" class="w-full soft-cta font-black py-4 rounded-2xl text-xs sm:text-sm mt-2">
                             إرسال طلب الانضمام
                         </button>
                     </form>
                 </div>
 
-                <!-- شاشة تأكيد ما بعد الإرسال: انتظر كودك -->
                 <div id="reg-waiting-code-box" class="hidden text-center space-y-5 py-3">
-                    <div class="w-16 h-16 rounded-2xl bg-lime-400/15 border border-lime-300/35 text-lime-300 flex items-center justify-center mx-auto text-2xl">
+                    <div class="w-16 h-16 rounded-2xl bg-lime-400/10 border border-lime-400/25 text-lime-300 flex items-center justify-center mx-auto text-2xl">
                         <i class="fa-solid fa-hourglass-half"></i>
                     </div>
                     <div class="space-y-2">
-                        <h3 class="text-xl sm:text-2xl font-black text-white">تم استلام طلبك بنجاح!</h3>
+                        <h3 class="text-xl sm:text-2xl font-black text-white">تم إرسال طلبك بنجاح</h3>
                         <p class="text-sm text-lime-300 font-black">انتظر كودك الخاص</p>
-                        <p class="text-xs text-slate-300 leading-relaxed max-w-sm mx-auto font-semibold">
-                            طلبك الآن قيد المراجعة لدى الكابتن. بمجرد اعتماد طلبك سيتم إرسال كود الدخول الخاص باللاعب لتتمكن من متابعة لوحة الأوائل والتقييمات.
+                        <p class="text-xs text-slate-400 leading-relaxed max-w-sm mx-auto font-semibold">
+                            طلبك الآن قيد المراجعة لدى الكابتن. بمجرد قبوله سيتم إرسال كود الدخول الخاص باللاعب لمتابعة التقييمات ولوحة الأوائل.
                         </p>
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-2.5 pt-2">
-                        <button onclick="resetRegistrationFormView()" class="flex-1 py-3 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-extrabold text-xs border border-white/10 transition">
+                        <button onclick="resetRegistrationFormView()" class="flex-1 py-3 rounded-2xl calm-surface hover:bg-slate-800/80 text-slate-200 font-extrabold text-xs transition">
                             تسجيل لاعب آخر
                         </button>
-                        <button onclick="showPage('home')" class="flex-1 lime-cta hover:brightness-105 font-black py-3 rounded-2xl text-xs transition">
-                            العودة للصفحة الرئيسية
+                        <button onclick="showPage('home')" class="flex-1 soft-cta font-black py-3 rounded-2xl text-xs">
+                            العودة للرئيسية
                         </button>
                     </div>
                 </div>
             </div>
         </main>
 
-        <footer class="border-t border-white/10 bg-slate-950/60 py-4 px-4">
+        <footer class="border-t border-slate-800/80 bg-slate-950/60 py-4 px-4">
             <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
                 <p class="text-slate-400 font-bold">يلا تنس أكاديمي</p>
-                <div class="inline-flex items-center gap-2 bg-slate-900 border border-lime-400/30 text-white px-3.5 py-1.5 rounded-full">
-                    <span class="w-2 h-2 rounded-full bg-lime-400"></span>
+                <div class="inline-flex items-center gap-2 bg-slate-900/90 border border-lime-400/25 text-white px-3.5 py-1.5 rounded-full">
+                    <span class="w-2 h-2 rounded-full bg-lime-400/90"></span>
                     <span class="text-[11px] font-bold text-slate-300">Powered by</span>
                     <span class="text-xs font-black text-lime-300">Y Creations</span>
                 </div>
@@ -299,51 +329,51 @@
     </div>
 
     <!-- =========================================================
-         3. لوحة تحكم الكابتن (App Shell بشريط جانبي Sidebar)
+         3. لوحة تحكم الكابتن (تصميم هادئ ومريح للعين)
          ========================================================= -->
-    <div id="page-coach" class="hidden min-h-screen flex flex-col md:flex-row bg-slate-100 text-slate-900 pb-20 md:pb-0">
-        <aside class="hidden md:flex md:w-64 lg:w-72 bg-gradient-to-b from-emerald-950 via-slate-900 to-slate-950 text-white flex-col justify-between p-5 shrink-0 sticky top-0 h-screen no-print">
+    <div id="page-coach" class="hidden min-h-screen flex flex-col md:flex-row pb-20 md:pb-0">
+        <aside class="hidden md:flex md:w-64 lg:w-72 bg-slate-950/85 border-l border-slate-800/80 text-slate-200 flex-col justify-between p-5 shrink-0 sticky top-0 h-screen no-print">
             <div class="space-y-6">
-                <div class="flex items-center gap-3 pb-4 border-b border-white/10">
-                    <img src="logo.jpg" alt="Logo" class="w-11 h-11 rounded-2xl object-cover border border-emerald-400/40">
+                <div class="flex items-center gap-3 pb-4 border-b border-slate-800/80">
+                    <img src="logo.jpg" alt="Logo" class="w-11 h-11 rounded-2xl object-cover border border-lime-400/25">
                     <div>
                         <h2 id="coach-welcome-title" class="text-sm font-black text-white leading-snug">لوحة الكابتن</h2>
-                        <p id="coach-role-badge" class="text-[10px] text-lime-300 font-bold">مشرف</p>
+                        <p id="coach-role-badge" class="text-[10px] text-lime-300/85 font-bold">مشرف</p>
                     </div>
                 </div>
 
                 <nav class="space-y-1.5">
-                    <button onclick="switchCoachTab('eval')" id="tab-btn-eval" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-black bg-lime-400 text-slate-950 transition">
+                    <button onclick="switchCoachTab('eval')" id="tab-btn-eval" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-black bg-lime-400/90 text-slate-950 transition">
                         <i class="fa-solid fa-clipboard-check text-sm"></i>
                         <span>التقييم اليومي</span>
                     </button>
-                    <button onclick="switchCoachTab('leaderboard')" id="tab-btn-leaderboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-extrabold text-emerald-100 hover:bg-white/10 transition">
-                        <i class="fa-solid fa-trophy text-sm text-amber-300"></i>
+                    <button onclick="switchCoachTab('leaderboard')" id="tab-btn-leaderboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-extrabold text-slate-300 hover:bg-slate-800/70 transition">
+                        <i class="fa-solid fa-trophy text-sm text-amber-300/90"></i>
                         <span>لوحة الأوائل والترتيب</span>
                     </button>
-                    <button onclick="switchCoachTab('players')" id="tab-btn-players" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-extrabold text-emerald-100 hover:bg-white/10 transition">
+                    <button onclick="switchCoachTab('players')" id="tab-btn-players" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-extrabold text-slate-300 hover:bg-slate-800/70 transition">
                         <i class="fa-solid fa-users text-sm"></i>
                         <span>إدارة اللاعبين</span>
                     </button>
-                    <button onclick="switchCoachTab('coaches')" id="tab-btn-coaches" class="hidden w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-extrabold text-emerald-100 hover:bg-white/10 transition">
+                    <button onclick="switchCoachTab('coaches')" id="tab-btn-coaches" class="hidden w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-extrabold text-slate-300 hover:bg-slate-800/70 transition">
                         <i class="fa-solid fa-sliders text-sm"></i>
                         <span>الإدارة والطلبات</span>
                     </button>
                 </nav>
             </div>
 
-            <div class="space-y-2.5 pt-4 border-t border-white/10">
-                <a href="https://yalla-tennis-gallery.vercel.app/" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-xs font-bold text-white transition">
-                    <i class="fa-solid fa-images text-amber-300"></i> معرض الصور
+            <div class="space-y-2.5 pt-4 border-t border-slate-800/80">
+                <a href="https://yalla-tennis-gallery.vercel.app/" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl calm-surface hover:bg-slate-800/70 text-xs font-bold text-slate-200 transition">
+                    <i class="fa-solid fa-images text-amber-300/85"></i> معرض الصور
                 </a>
-                <button onclick="showChangeOwnPassModal()" class="w-full px-3 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-xs font-bold text-emerald-100 transition">
+                <button onclick="showChangeOwnPassModal()" class="w-full px-3 py-2.5 rounded-xl calm-surface hover:bg-slate-800/70 text-xs font-bold text-slate-200 transition">
                     تغيير كلمة المرور
                 </button>
-                <button onclick="logout()" class="w-full px-3 py-2.5 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-xs font-black text-rose-200 transition">
+                <button onclick="logout()" class="w-full px-3 py-2.5 rounded-xl bg-rose-950/60 hover:bg-rose-900/60 border border-rose-500/20 text-xs font-black text-rose-200 transition">
                     تسجيل خروج
                 </button>
                 <div class="pt-1 text-center">
-                    <span class="inline-flex items-center gap-1.5 text-[10px] font-black text-lime-300 bg-black/30 px-3 py-1 rounded-full">
+                    <span class="inline-flex items-center gap-1.5 text-[10px] font-black text-lime-300/90 bg-slate-900 px-3 py-1 rounded-full border border-lime-400/20">
                         <span>Powered by</span>
                         <span class="text-white">Y Creations</span>
                     </span>
@@ -352,42 +382,42 @@
         </aside>
 
         <div class="flex-1 flex flex-col min-w-0">
-            <div class="md:hidden bg-slate-950 text-white p-4 flex justify-between items-center no-print">
+            <div class="md:hidden bg-slate-950/90 border-b border-slate-800 text-white p-4 flex justify-between items-center no-print">
                 <div class="flex items-center gap-2.5">
                     <img src="logo.jpg" alt="Logo" class="w-9 h-9 rounded-xl object-cover">
                     <div>
                         <h2 id="coach-welcome-mobile" class="text-xs font-black">لوحة الكابتن</h2>
-                        <span class="text-[10px] text-lime-300 font-bold">Powered by Y Creations</span>
+                        <span class="text-[10px] text-lime-300/85 font-bold">Powered by Y Creations</span>
                     </div>
                 </div>
                 <div class="flex gap-1.5">
-                    <button onclick="showChangeOwnPassModal()" class="px-2.5 py-1.5 rounded-lg bg-white/10 text-[10px] font-bold">الباسورد</button>
-                    <button onclick="logout()" class="px-2.5 py-1.5 rounded-lg bg-rose-500/30 text-rose-100 text-[10px] font-bold">خروج</button>
+                    <button onclick="showChangeOwnPassModal()" class="px-2.5 py-1.5 rounded-lg bg-slate-800 text-[10px] font-bold">الباسورد</button>
+                    <button onclick="logout()" class="px-2.5 py-1.5 rounded-lg bg-rose-950 text-rose-200 text-[10px] font-bold">خروج</button>
                 </div>
             </div>
 
-            <div class="bg-white border-b border-slate-200 px-4 sm:px-8 py-3.5 flex flex-wrap items-center justify-between gap-3 no-print">
+            <div class="bg-slate-950/55 border-b border-slate-800/80 px-4 sm:px-8 py-3.5 flex flex-wrap items-center justify-between gap-3 no-print">
                 <div class="flex items-center gap-4 sm:gap-8">
                     <div class="flex items-center gap-2">
-                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
-                        <span class="text-xs text-slate-500 font-bold">اللاعبين النشطين:</span>
-                        <strong id="stat-total-players" class="text-sm font-black text-slate-900">0</strong>
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/90"></span>
+                        <span class="text-xs text-slate-400 font-bold">اللاعبين النشطين:</span>
+                        <strong id="stat-total-players" class="text-sm font-black text-white">0</strong>
                     </div>
                     <div class="flex items-center gap-2">
-                        <span class="w-2.5 h-2.5 rounded-full bg-orange-500"></span>
-                        <span class="text-xs text-slate-500 font-bold">مقيّمين بالتاريخ:</span>
-                        <strong id="stat-evaluated-today" class="text-sm font-black text-orange-600">0</strong>
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/90"></span>
+                        <span class="text-xs text-slate-400 font-bold">مقيّمين بالتاريخ:</span>
+                        <strong id="stat-evaluated-today" class="text-sm font-black text-amber-300">0</strong>
                     </div>
                     <div class="flex items-center gap-2">
-                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-                        <span class="text-xs text-slate-500 font-bold">طلبات جديدة:</span>
-                        <strong id="stat-pending-requests" class="text-sm font-black text-amber-600">0</strong>
+                        <span class="w-2.5 h-2.5 rounded-full bg-lime-400/90"></span>
+                        <span class="text-xs text-slate-400 font-bold">طلبات جديدة:</span>
+                        <strong id="stat-pending-requests" class="text-sm font-black text-lime-300">0</strong>
                     </div>
                 </div>
 
                 <div class="flex items-center gap-2">
-                    <span class="text-[11px] font-extrabold text-slate-500">تاريخ العمل:</span>
-                    <input type="date" id="coach-selected-date" onchange="onDateChange()" class="bg-slate-100 border border-slate-300 text-slate-900 text-xs rounded-xl px-3 py-1.5 font-extrabold focus:outline-none focus:border-emerald-600">
+                    <span class="text-[11px] font-extrabold text-slate-400">تاريخ العمل:</span>
+                    <input type="date" id="coach-selected-date" onchange="onDateChange()" class="calm-surface text-slate-100 text-xs rounded-xl px-3 py-1.5 font-extrabold focus:outline-none focus:border-lime-400/60">
                 </div>
             </div>
 
@@ -395,42 +425,42 @@
 
                 <!-- 1) شاشة التقييم اليومي بالسلايدرات + زر حالة التقييم السريعة -->
                 <div id="coach-tab-eval" class="space-y-5">
-                    <div id="eval-form-card" class="bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-slate-200/80 space-y-5">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+                    <div id="eval-form-card" class="calm-card rounded-3xl p-5 sm:p-7 space-y-5">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-800/80">
                             <div>
-                                <h3 class="text-base font-black text-slate-900">تقييم التمرين اليومي</h3>
-                                <p class="text-xs text-slate-500 font-semibold">اختر اللاعب أو افتح قائمة حالة التقييم للوصول السريع للي متقيّمش</p>
+                                <h3 class="text-base font-black text-white">تقييم التمرين اليومي</h3>
+                                <p class="text-xs text-slate-400 font-semibold">اختر اللاعب أو افتح قائمة حالة التقييم للوصول السريع للي لسه متقيّمش</p>
                             </div>
-                            <button type="button" onclick="toggleEvalRosterPanel()" id="btn-toggle-eval-roster" class="px-4 py-2.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-lime-300 text-xs font-black transition flex items-center justify-center gap-2 shadow-sm shrink-0">
+                            <button type="button" onclick="toggleEvalRosterPanel()" id="btn-toggle-eval-roster" class="px-4 py-2.5 rounded-2xl bg-slate-900 hover:bg-slate-800 border border-lime-400/25 text-lime-300 text-xs font-black transition flex items-center justify-center gap-2 shrink-0">
                                 <i class="fa-solid fa-list-check"></i>
                                 <span>حالة التقييم اليومي</span>
-                                <span id="eval-roster-badge" class="bg-lime-400 text-slate-950 px-2 py-0.5 rounded-full text-[10px] font-black">0 باقي</span>
+                                <span id="eval-roster-badge" class="bg-lime-400/90 text-slate-950 px-2 py-0.5 rounded-full text-[10px] font-black">0 باقي</span>
                             </button>
                         </div>
 
-                        <div id="eval-roster-panel" class="hidden p-4 rounded-2xl bg-slate-50 border border-slate-200/90 space-y-4">
+                        <div id="eval-roster-panel" class="hidden p-4 rounded-2xl calm-surface space-y-4">
                             <div class="flex flex-wrap items-center justify-between gap-2">
-                                <h4 class="text-xs font-black text-slate-900">اضغط على أي لاعب «لم يُقيّم» لتقييمه مباشرة:</h4>
-                                <button type="button" onclick="toggleEvalRosterPanel()" class="text-xs font-extrabold text-slate-500 hover:text-slate-800">إخفاء القائمة ×</button>
+                                <h4 class="text-xs font-black text-slate-200">اضغط على أي لاعب «لم يُقيّم» لتقييمه مباشرة:</h4>
+                                <button type="button" onclick="toggleEvalRosterPanel()" class="text-xs font-extrabold text-slate-400 hover:text-slate-200">إخفاء القائمة ×</button>
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="bg-white p-3.5 rounded-2xl border border-amber-200 space-y-2">
+                                <div class="calm-card p-3.5 rounded-2xl border-amber-400/25 space-y-2">
                                     <div class="flex items-center justify-between">
-                                        <span class="text-xs font-black text-amber-800 flex items-center gap-1.5">
-                                            <i class="fa-solid fa-clock text-amber-500"></i> لم يتم تقييمهم بعد
+                                        <span class="text-xs font-black text-amber-300 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-clock text-amber-400"></i> لم يتم تقييمهم بعد
                                         </span>
-                                        <span id="roster-pending-count" class="text-[10px] font-black bg-amber-100 text-amber-900 px-2 py-0.5 rounded-full">0</span>
+                                        <span id="roster-pending-count" class="text-[10px] font-black bg-amber-400/15 text-amber-300 px-2 py-0.5 rounded-full">0</span>
                                     </div>
                                     <div id="roster-pending-list" class="space-y-1.5 max-h-56 overflow-y-auto"></div>
                                 </div>
 
-                                <div class="bg-white p-3.5 rounded-2xl border border-emerald-200 space-y-2">
+                                <div class="calm-card p-3.5 rounded-2xl border-emerald-400/25 space-y-2">
                                     <div class="flex items-center justify-between">
-                                        <span class="text-xs font-black text-emerald-800 flex items-center gap-1.5">
-                                            <i class="fa-solid fa-circle-check text-emerald-600"></i> تم تقييمهم
+                                        <span class="text-xs font-black text-emerald-300 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-check text-emerald-400"></i> تم تقييمهم
                                         </span>
-                                        <span id="roster-done-count" class="text-[10px] font-black bg-emerald-100 text-emerald-900 px-2 py-0.5 rounded-full">0</span>
+                                        <span id="roster-done-count" class="text-[10px] font-black bg-emerald-400/15 text-emerald-300 px-2 py-0.5 rounded-full">0</span>
                                     </div>
                                     <div id="roster-done-list" class="space-y-1.5 max-h-56 overflow-y-auto"></div>
                                 </div>
@@ -439,62 +469,62 @@
 
                         <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
                             <div class="sm:col-span-5">
-                                <label class="block text-xs font-extrabold text-slate-700 mb-1.5">بحث بالاسم أو الكود</label>
-                                <input type="text" id="coach-player-search" oninput="filterCoachPlayerList()" placeholder="🔍 ابحث عن لاعب..." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold focus:outline-none focus:border-emerald-600">
+                                <label class="block text-xs font-extrabold text-slate-300 mb-1.5">بحث بالاسم أو الكود</label>
+                                <input type="text" id="coach-player-search" oninput="filterCoachPlayerList()" placeholder="🔍 ابحث عن لاعب..." class="w-full calm-surface rounded-xl p-3 text-xs text-white font-bold placeholder:text-slate-500 focus:outline-none focus:border-lime-400/60">
                             </div>
                             <div class="sm:col-span-7">
-                                <label class="block text-xs font-extrabold text-slate-700 mb-1.5">اختر اللاعب</label>
-                                <select id="coach-player-select" onchange="checkPlayerEvalStatusForSelectedDate()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 font-black focus:outline-none focus:border-emerald-600"></select>
+                                <label class="block text-xs font-extrabold text-slate-300 mb-1.5">اختر اللاعب</label>
+                                <select id="coach-player-select" onchange="checkPlayerEvalStatusForSelectedDate()" class="w-full calm-surface rounded-xl p-3 text-xs text-white font-black focus:outline-none focus:border-lime-400/60"></select>
                             </div>
                         </div>
 
-                        <div id="already-evaluated-alert" class="hidden p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold flex flex-wrap items-center justify-between gap-2">
-                            <span id="already-evaluated-text" class="flex items-center gap-2"><i class="fa-solid fa-lock text-amber-600"></i> تم تقييم هذا الطالب مسبقاً.</span>
-                            <button id="admin-override-btn" onclick="enableAdminEditOverride()" class="hidden px-3.5 py-1.5 bg-amber-400 hover:bg-amber-300 text-slate-950 rounded-xl text-xs font-black transition">فتح التعديل (أدمن)</button>
+                        <div id="already-evaluated-alert" class="hidden p-4 rounded-2xl bg-amber-950/50 border border-amber-400/25 text-amber-200 text-xs font-bold flex flex-wrap items-center justify-between gap-2">
+                            <span id="already-evaluated-text" class="flex items-center gap-2"><i class="fa-solid fa-lock text-amber-300"></i> تم تقييم هذا الطالب مسبقاً.</span>
+                            <button id="admin-override-btn" onclick="enableAdminEditOverride()" class="hidden px-3.5 py-1.5 bg-amber-400/90 hover:bg-amber-400 text-slate-950 rounded-xl text-xs font-black transition">فتح التعديل (أدمن)</button>
                         </div>
 
                         <div id="eval-inputs-container" class="space-y-5">
-                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/70 space-y-2.5">
-                                <label class="block text-xs font-extrabold text-slate-700">حالة الحضور</label>
+                            <div class="calm-surface p-4 rounded-2xl space-y-2.5">
+                                <label class="block text-xs font-extrabold text-slate-300">حالة الحضور</label>
                                 <div class="grid grid-cols-3 gap-2">
-                                    <button type="button" onclick="setAttendance('present')" id="btn-present" class="py-2.5 px-3 rounded-xl font-extrabold text-xs bg-emerald-700 text-white transition">حاضر</button>
-                                    <button type="button" onclick="setAttendance('late')" id="btn-late" class="py-2.5 px-3 rounded-xl font-extrabold text-xs bg-white text-slate-700 border border-slate-200 transition">متأخر (-1)</button>
-                                    <button type="button" onclick="setAttendance('absent')" id="btn-absent" class="py-2.5 px-3 rounded-xl font-extrabold text-xs bg-white text-slate-700 border border-slate-200 transition">غائب (0)</button>
+                                    <button type="button" onclick="setAttendance('present')" id="btn-present" class="py-2.5 px-3 rounded-xl font-extrabold text-xs bg-emerald-600/90 text-white transition">حاضر</button>
+                                    <button type="button" onclick="setAttendance('late')" id="btn-late" class="py-2.5 px-3 rounded-xl font-extrabold text-xs bg-slate-900 text-slate-300 border border-slate-700/70 transition">متأخر (-1)</button>
+                                    <button type="button" onclick="setAttendance('absent')" id="btn-absent" class="py-2.5 px-3 rounded-xl font-extrabold text-xs bg-slate-900 text-slate-300 border border-slate-700/70 transition">غائب (0)</button>
                                 </div>
                             </div>
 
-                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/70 space-y-4">
+                            <div class="calm-surface p-4 rounded-2xl space-y-4">
                                 <div>
                                     <div class="flex justify-between items-center mb-1.5">
-                                        <label class="text-xs font-extrabold text-slate-700">تمرين اللياقة البدنية (Fitness)</label>
-                                        <span id="val-fitness" class="text-xs font-black px-2.5 py-0.5 rounded-full text-white bg-emerald-700 transition-all duration-300">8</span>
+                                        <label class="text-xs font-extrabold text-slate-300">تمرين اللياقة البدنية (Fitness)</label>
+                                        <span id="val-fitness" class="text-xs font-black px-2.5 py-0.5 rounded-full text-white bg-emerald-600 transition-all duration-300">8</span>
                                     </div>
-                                    <input type="range" id="input-fitness" min="1" max="10" value="8" oninput="updateSliderUI('fitness')" class="w-full cursor-pointer accent-emerald-700">
+                                    <input type="range" id="input-fitness" min="1" max="10" value="8" oninput="updateSliderUI('fitness')" class="w-full cursor-pointer accent-lime-400">
                                 </div>
 
                                 <div>
                                     <div class="flex justify-between items-center mb-1.5">
-                                        <label class="text-xs font-extrabold text-slate-700">تمرين التنسيق (Coordination)</label>
-                                        <span id="val-tennis" class="text-xs font-black px-2.5 py-0.5 rounded-full text-white bg-emerald-700 transition-all duration-300">8</span>
+                                        <label class="text-xs font-extrabold text-slate-300">تمرين التنسيق (Coordination)</label>
+                                        <span id="val-tennis" class="text-xs font-black px-2.5 py-0.5 rounded-full text-white bg-emerald-600 transition-all duration-300">8</span>
                                     </div>
-                                    <input type="range" id="input-tennis" min="1" max="10" value="8" oninput="updateSliderUI('tennis')" class="w-full cursor-pointer accent-emerald-700">
+                                    <input type="range" id="input-tennis" min="1" max="10" value="8" oninput="updateSliderUI('tennis')" class="w-full cursor-pointer accent-lime-400">
                                 </div>
 
                                 <div>
                                     <div class="flex justify-between items-center mb-1.5">
-                                        <label class="text-xs font-extrabold text-slate-700">كفاءة التمرين (Training Efficiency)</label>
-                                        <span id="val-efficiency" class="text-xs font-black px-2.5 py-0.5 rounded-full text-white bg-emerald-700 transition-all duration-300">8</span>
+                                        <label class="text-xs font-extrabold text-slate-300">كفاءة التمرين (Training Efficiency)</label>
+                                        <span id="val-efficiency" class="text-xs font-black px-2.5 py-0.5 rounded-full text-white bg-emerald-600 transition-all duration-300">8</span>
                                     </div>
-                                    <input type="range" id="input-efficiency" min="1" max="10" value="8" oninput="updateSliderUI('efficiency')" class="w-full cursor-pointer accent-emerald-700">
+                                    <input type="range" id="input-efficiency" min="1" max="10" value="8" oninput="updateSliderUI('efficiency')" class="w-full cursor-pointer accent-lime-400">
                                 </div>
                             </div>
 
                             <div>
-                                <label class="block text-xs font-extrabold text-slate-700 mb-1.5">ملاحظات الكابتن</label>
-                                <input type="text" id="input-notes" placeholder="اكتب ملاحظة تشجيعية أو توجيه للاعب..." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 font-bold focus:outline-none focus:border-emerald-600">
+                                <label class="block text-xs font-extrabold text-slate-300 mb-1.5">ملاحظات الكابتن</label>
+                                <input type="text" id="input-notes" placeholder="اكتب ملاحظة تشجيعية أو توجيه للاعب..." class="w-full calm-surface rounded-xl p-3 text-xs text-white font-bold placeholder:text-slate-500 focus:outline-none focus:border-lime-400/60">
                             </div>
 
-                            <button id="btn-submit-eval" onclick="saveEvaluation()" class="w-full bg-emerald-700 hover:bg-emerald-800 font-black py-3.5 rounded-2xl text-xs sm:text-sm text-white transition shadow-md">
+                            <button id="btn-submit-eval" onclick="saveEvaluation()" class="w-full soft-cta font-black py-3.5 rounded-2xl text-xs sm:text-sm">
                                 اعتماد وحفظ التقييم للتاريخ المحدد
                             </button>
                         </div>
@@ -503,89 +533,89 @@
 
                 <!-- 2) شاشة لوحة الأوائل -->
                 <div id="coach-tab-leaderboard" class="hidden space-y-5">
-                    <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-slate-200/80 space-y-5">
+                    <div class="calm-card rounded-3xl p-5 sm:p-7 space-y-5">
                         <div class="flex flex-wrap justify-between items-center gap-3">
                             <div>
-                                <h3 class="text-base font-black text-slate-900 flex items-center gap-2">
-                                    <i class="fa-solid fa-crown text-amber-500"></i> لوحة شرف الأكاديمية
+                                <h3 class="text-base font-black text-white flex items-center gap-2">
+                                    <i class="fa-solid fa-crown text-amber-300"></i> لوحة شرف الأكاديمية
                                 </h3>
-                                <p class="text-xs text-emerald-700 font-bold mt-0.5" id="coach-lb-date">نتائج يوم: --</p>
+                                <p class="text-xs text-lime-300/85 font-bold mt-0.5" id="coach-lb-date">نتائج يوم: --</p>
                             </div>
                             <div class="flex items-center gap-1.5 no-print">
-                                <button onclick="setCoachLeaderboardMode('daily')" id="btn-lb-daily" class="px-3.5 py-2 rounded-xl text-xs font-black bg-emerald-700 text-white transition">الترتيب اليومي</button>
-                                <button onclick="setCoachLeaderboardMode('monthly')" id="btn-lb-monthly" class="px-3.5 py-2 rounded-xl text-xs font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">الترتيب الشهري</button>
-                                <button onclick="window.print()" class="px-3.5 py-2 rounded-xl text-xs font-extrabold bg-slate-900 text-white hover:bg-slate-800 transition flex items-center gap-1.5">
+                                <button onclick="setCoachLeaderboardMode('daily')" id="btn-lb-daily" class="px-3.5 py-2 rounded-xl text-xs font-black bg-lime-400/90 text-slate-950 transition">الترتيب اليومي</button>
+                                <button onclick="setCoachLeaderboardMode('monthly')" id="btn-lb-monthly" class="px-3.5 py-2 rounded-xl text-xs font-extrabold calm-surface text-slate-300 hover:bg-slate-800 transition">الترتيب الشهري</button>
+                                <button onclick="window.print()" class="px-3.5 py-2 rounded-xl text-xs font-extrabold calm-surface text-slate-200 hover:bg-slate-800 transition flex items-center gap-1.5">
                                     <i class="fa-solid fa-print"></i> طباعة
                                 </button>
                             </div>
                         </div>
 
                         <div id="coach-podium" class="grid grid-cols-3 gap-2 sm:gap-4 items-end pt-3"></div>
-                        <div id="coach-leaderboard" class="divide-y divide-slate-100 border border-slate-200/80 rounded-2xl overflow-hidden"></div>
+                        <div id="coach-leaderboard" class="divide-y divide-slate-800/80 calm-surface rounded-2xl overflow-hidden"></div>
                     </div>
                 </div>
 
                 <!-- 3) شاشة إدارة اللاعبين -->
                 <div id="coach-tab-players" class="hidden space-y-5">
-                    <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-slate-200/80 space-y-4">
-                        <h3 class="text-sm font-black text-slate-900">إضافة لاعب جديد مباشرة</h3>
+                    <div class="calm-card rounded-3xl p-5 sm:p-7 space-y-4">
+                        <h3 class="text-sm font-black text-white">إضافة لاعب جديد مباشرة</h3>
                         <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
-                            <input type="text" id="admin-p-name" placeholder="اسم اللاعب الكامل" class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold">
-                            <input type="number" id="admin-p-age" placeholder="العمر" class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold">
-                            <input type="tel" id="admin-p-phone" placeholder="هاتف ولي الأمر (إجباري)" class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold">
-                            <select id="admin-p-level" class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold">
+                            <input type="text" id="admin-p-name" placeholder="اسم اللاعب الكامل" class="calm-surface rounded-xl p-3 text-xs text-white font-bold placeholder:text-slate-500">
+                            <input type="number" id="admin-p-age" placeholder="العمر" class="calm-surface rounded-xl p-3 text-xs text-white font-bold placeholder:text-slate-500">
+                            <input type="tel" id="admin-p-phone" placeholder="هاتف ولي الأمر (إجباري)" class="calm-surface rounded-xl p-3 text-xs text-white font-bold placeholder:text-slate-500">
+                            <select id="admin-p-level" class="calm-surface rounded-xl p-3 text-xs text-white font-bold">
                                 <option value="مبتدئ">مبتدئ</option><option value="متوسط">متوسط</option><option value="متقدم">متقدم</option><option value="محترف">محترف</option>
                             </select>
                         </div>
-                        <button onclick="adminAddPlayer()" class="w-full bg-emerald-700 hover:bg-emerald-800 py-3 rounded-xl text-xs font-black text-white transition">إضافة وتوليد الكود</button>
+                        <button onclick="adminAddPlayer()" class="w-full soft-cta py-3 rounded-xl text-xs font-black">إضافة وتوليد الكود</button>
                     </div>
 
-                    <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-slate-200/80 space-y-4">
+                    <div class="calm-card rounded-3xl p-5 sm:p-7 space-y-4">
                         <div class="flex flex-wrap justify-between items-center gap-3">
-                            <h3 class="text-sm font-black text-slate-900">سجل اللاعبين</h3>
+                            <h3 class="text-sm font-black text-white">سجل اللاعبين</h3>
                             <div class="flex flex-wrap gap-1.5">
-                                <button onclick="setPlayerFilter('all')" id="pf-btn-all" class="px-3 py-1.5 rounded-xl font-black text-[11px] bg-slate-900 text-white transition">الكل</button>
-                                <button onclick="setPlayerFilter('active')" id="pf-btn-active" class="px-3 py-1.5 rounded-xl font-extrabold text-[11px] bg-slate-100 text-slate-700 transition">🟢 شغال</button>
-                                <button onclick="setPlayerFilter('blocked')" id="pf-btn-blocked" class="px-3 py-1.5 rounded-xl font-extrabold text-[11px] bg-slate-100 text-slate-700 transition">🔴 موقوف</button>
-                                <button onclick="setPlayerFilter('star')" id="pf-btn-star" class="px-3 py-1.5 rounded-xl font-extrabold text-[11px] bg-slate-100 text-slate-700 transition">🌟 الطلاب الحلوين</button>
+                                <button onclick="setPlayerFilter('all')" id="pf-btn-all" class="px-3 py-1.5 rounded-xl font-black text-[11px] bg-lime-400/90 text-slate-950 transition">الكل</button>
+                                <button onclick="setPlayerFilter('active')" id="pf-btn-active" class="px-3 py-1.5 rounded-xl font-extrabold text-[11px] calm-surface text-slate-300 transition">🟢 شغال</button>
+                                <button onclick="setPlayerFilter('blocked')" id="pf-btn-blocked" class="px-3 py-1.5 rounded-xl font-extrabold text-[11px] calm-surface text-slate-300 transition">🔴 موقوف</button>
+                                <button onclick="setPlayerFilter('star')" id="pf-btn-star" class="px-3 py-1.5 rounded-xl font-extrabold text-[11px] calm-surface text-slate-300 transition">🌟 الطلاب الحلوين</button>
                             </div>
                         </div>
 
-                        <div id="admin-players-list" class="divide-y divide-slate-100 border border-slate-200/80 rounded-2xl overflow-hidden"></div>
+                        <div id="admin-players-list" class="divide-y divide-slate-800/80 calm-surface rounded-2xl overflow-hidden"></div>
                     </div>
                 </div>
 
                 <!-- 4) شاشة الإدارة والطلبات والنسخة الاحتياطية -->
                 <div id="coach-tab-coaches" class="hidden space-y-5">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80 space-y-3">
-                            <h3 class="text-sm font-black text-slate-900">إضافة كابتن مساعد</h3>
-                            <input type="text" id="new-coach-name" placeholder="اسم الكابتن الجديد" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold">
-                            <input type="password" id="new-coach-pass" placeholder="كلمة المرور" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold">
-                            <button onclick="addNewCoach()" class="w-full bg-emerald-700 hover:bg-emerald-800 py-3 rounded-xl text-xs font-black text-white transition">إضافة كابتن</button>
+                        <div class="calm-card rounded-3xl p-5 sm:p-6 space-y-3">
+                            <h3 class="text-sm font-black text-white">إضافة كابتن مساعد</h3>
+                            <input type="text" id="new-coach-name" placeholder="اسم الكابتن الجديد" class="w-full calm-surface rounded-xl p-3 text-xs text-white font-bold placeholder:text-slate-500">
+                            <input type="password" id="new-coach-pass" placeholder="كلمة المرور" class="w-full calm-surface rounded-xl p-3 text-xs text-white font-bold placeholder:text-slate-500">
+                            <button onclick="addNewCoach()" class="w-full soft-cta py-3 rounded-xl text-xs font-black">إضافة كابتن</button>
                         </div>
 
-                        <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80 space-y-3">
-                            <h3 class="text-sm font-black text-slate-900">طلبات الانضمام المعلقة</h3>
+                        <div class="calm-card rounded-3xl p-5 sm:p-6 space-y-3">
+                            <h3 class="text-sm font-black text-white">طلبات الانضمام المعلقة</h3>
                             <div id="requests-list" class="space-y-2 max-h-[200px] overflow-y-auto"></div>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80 space-y-3">
-                        <h3 class="text-sm font-black text-slate-900">الكباتن المساعدون</h3>
-                        <div id="admin-coaches-list" class="divide-y divide-slate-100 border border-slate-200/80 rounded-2xl overflow-hidden"></div>
+                    <div class="calm-card rounded-3xl p-5 sm:p-6 space-y-3">
+                        <h3 class="text-sm font-black text-white">الكباتن المساعدون</h3>
+                        <div id="admin-coaches-list" class="divide-y divide-slate-800/80 calm-surface rounded-2xl overflow-hidden"></div>
                     </div>
 
-                    <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="calm-card rounded-3xl p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div class="space-y-1">
                             <div class="flex items-center gap-2">
-                                <h3 class="text-sm font-black text-slate-900">النسخ الاحتياطي التلقائي</h3>
-                                <span id="auto-backup-status" class="text-[11px] font-black text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full">نسخة احتياطي كل 12 ساعة</span>
+                                <h3 class="text-sm font-black text-white">النسخ الاحتياطي التلقائي</h3>
+                                <span id="auto-backup-status" class="text-[11px] font-black text-emerald-300 bg-emerald-950/80 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">نسخة احتياطي كل 12 ساعة</span>
                             </div>
-                            <p class="text-xs text-slate-500 font-semibold">يتم حفظ نسخة احتياطية كل 12 ساعة تلقائياً لحماية بيانات الأكاديمية.</p>
+                            <p class="text-xs text-slate-400 font-semibold">يتم حفظ نسخة احتياطية كل 12 ساعة تلقائياً لحماية بيانات الأكاديمية.</p>
                         </div>
-                        <button onclick="restoreLatestAutomaticBackup()" class="px-4 py-3 rounded-2xl text-xs font-black bg-slate-900 hover:bg-slate-800 text-white transition shrink-0 flex items-center gap-2">
-                            <i class="fa-solid fa-rotate-left text-lime-400"></i> استرجاع آخر نسخة احتياطية
+                        <button onclick="restoreLatestAutomaticBackup()" class="px-4 py-3 rounded-2xl text-xs font-black calm-surface hover:bg-slate-800 text-white transition shrink-0 flex items-center gap-2">
+                            <i class="fa-solid fa-rotate-left text-lime-300"></i> استرجاع آخر نسخة احتياطية
                         </button>
                     </div>
                 </div>
@@ -594,9 +624,9 @@
         </div>
     </div>
 
-    <div id="mobile-bottom-nav" class="hidden fixed bottom-0 left-0 right-0 bg-slate-950 text-white border-t border-slate-800 py-2 px-3 z-40 no-print">
+    <div id="mobile-bottom-nav" class="hidden fixed bottom-0 left-0 right-0 bg-slate-950/95 backdrop-blur-md text-white border-t border-slate-800 py-2 px-3 z-40 no-print">
         <div class="flex justify-around items-center">
-            <button onclick="switchCoachTab('eval')" id="mnav-eval" class="flex flex-col items-center gap-1 text-[10px] font-black text-lime-400">
+            <button onclick="switchCoachTab('eval')" id="mnav-eval" class="flex flex-col items-center gap-1 text-[10px] font-black text-lime-300">
                 <i class="fa-solid fa-clipboard-check text-sm"></i>
                 <span>التقييم</span>
             </button>
@@ -616,176 +646,176 @@
     </div>
 
     <!-- =========================================================
-         4. لوحة الطالب
+         4. لوحة الطالب والأوائل (هادئة ومريحة للعين)
          ========================================================= -->
-    <div id="page-player" class="hidden min-h-screen bg-slate-100 text-slate-900">
-        <div class="bg-gradient-to-br from-emerald-950 via-emerald-900 to-slate-900 text-white px-4 sm:px-8 pt-6 pb-16">
+    <div id="page-player" class="hidden min-h-screen">
+        <div class="bg-slate-950/75 border-b border-slate-800/80 text-white px-4 sm:px-8 pt-6 pb-16">
             <div class="max-w-4xl mx-auto flex justify-between items-center">
                 <div class="flex items-center gap-3.5">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-lime-400 text-slate-950 flex items-center justify-center text-xl font-black shrink-0" id="player-avatar">م</div>
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-lime-400/90 text-slate-950 flex items-center justify-center text-xl font-black shrink-0" id="player-avatar">م</div>
                     <div>
                         <h2 id="p-display-name" class="text-base sm:text-lg font-black">اسم الطالب</h2>
-                        <p id="p-display-meta" class="text-xs text-emerald-200 font-bold">يلا تنس أكاديمي</p>
+                        <p id="p-display-meta" class="text-xs text-emerald-300/85 font-bold">يلا تنس أكاديمي</p>
                     </div>
                 </div>
-                <button onclick="logout()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-extrabold transition">خروج</button>
+                <button onclick="logout()" class="px-4 py-2 rounded-xl calm-surface hover:bg-slate-800 text-xs font-extrabold transition">خروج</button>
             </div>
         </div>
 
         <div class="max-w-4xl mx-auto px-4 sm:px-8 -mt-10 pb-10 space-y-5">
-            <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-md border border-slate-200/80 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+            <div class="calm-card rounded-3xl p-5 sm:p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                 <div>
-                    <span id="player-my-rank-badge" class="inline-block bg-emerald-100 text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-xl">ترتيبك في هذا اليوم: --</span>
-                    <p class="text-[11px] text-slate-500 font-bold mt-1" id="player-lb-date">تاريخ النتائج: --</p>
+                    <span id="player-my-rank-badge" class="inline-block bg-emerald-950/80 border border-emerald-500/25 text-emerald-300 text-xs font-black px-3.5 py-1.5 rounded-xl">ترتيبك في هذا اليوم: --</span>
+                    <p class="text-[11px] text-slate-400 font-bold mt-1" id="player-lb-date">تاريخ النتائج: --</p>
                 </div>
                 <div class="flex items-center gap-2 w-full sm:w-auto">
-                    <label class="text-xs font-extrabold text-slate-600 whitespace-nowrap">اختر التاريخ:</label>
-                    <input type="date" id="player-selected-date" onchange="renderLeaderboards()" class="w-full sm:w-auto bg-slate-50 border border-slate-200 text-slate-900 text-xs rounded-xl p-2.5 font-extrabold focus:outline-none focus:border-emerald-600">
+                    <label class="text-xs font-extrabold text-slate-400 whitespace-nowrap">اختر التاريخ:</label>
+                    <input type="date" id="player-selected-date" onchange="renderLeaderboards()" class="w-full sm:w-auto calm-surface text-slate-100 text-xs rounded-xl p-2.5 font-extrabold focus:outline-none focus:border-lime-400/60">
                 </div>
             </div>
 
-            <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-slate-200/80 space-y-5">
-                <h3 class="text-sm font-black text-slate-900 flex items-center gap-2">
-                    <i class="fa-solid fa-medal text-amber-500"></i> ترتيب اللاعبين وتوجيهات الكابتن
+            <div class="calm-card rounded-3xl p-5 sm:p-7 space-y-5">
+                <h3 class="text-sm font-black text-white flex items-center gap-2">
+                    <i class="fa-solid fa-medal text-amber-300"></i> لوحة الأوائل وتوجيهات الكابتن
                 </h3>
                 <div id="player-podium" class="grid grid-cols-3 gap-2 sm:gap-4 items-end"></div>
-                <div id="player-leaderboard" class="divide-y divide-slate-100 border border-slate-200/80 rounded-2xl overflow-hidden"></div>
+                <div id="player-leaderboard" class="divide-y divide-slate-800/80 calm-surface rounded-2xl overflow-hidden"></div>
             </div>
         </div>
     </div>
 
     <!-- =========================================================
-         المودالات
+         المودالات (بنمط داكن هادئ ومريح)
          ========================================================= -->
-    <div id="modal-delete-confirm" class="fixed inset-0 bg-slate-950/60 backdrop-blur-md z-[70] hidden flex items-center justify-center p-4 text-slate-900">
-        <div class="bg-white border border-rose-200 p-6 sm:p-7 rounded-3xl max-w-sm w-full space-y-5 shadow-2xl text-center">
-            <div class="w-16 h-16 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto text-2xl">
+    <div id="modal-delete-confirm" class="fixed inset-0 bg-slate-950/75 backdrop-blur-md z-[70] hidden flex items-center justify-center p-4">
+        <div class="calm-card border-rose-500/25 p-6 sm:p-7 rounded-3xl max-w-sm w-full space-y-5 text-center">
+            <div class="w-16 h-16 rounded-full bg-rose-950/80 border border-rose-500/25 text-rose-300 flex items-center justify-center mx-auto text-2xl">
                 <i class="fa-solid fa-trash-can"></i>
             </div>
             <div class="space-y-1.5">
-                <h3 class="text-base sm:text-lg font-black text-slate-900">تأكيد حذف الطالب نهائياً</h3>
-                <p class="text-xs text-slate-500 font-semibold">هل أنت متأكد من مسح هذا الطالب وجميع تقييماته؟</p>
+                <h3 class="text-base sm:text-lg font-black text-white">تأكيد حذف الطالب نهائياً</h3>
+                <p class="text-xs text-slate-400 font-semibold">هل أنت متأكد من مسح هذا الطالب وجميع تقييماته؟</p>
             </div>
-            <div class="bg-rose-50 border border-rose-200 p-3.5 rounded-2xl flex items-center justify-between text-right">
+            <div class="bg-rose-950/50 border border-rose-500/20 p-3.5 rounded-2xl flex items-center justify-between text-right">
                 <div class="flex items-center gap-2.5">
-                    <div class="w-9 h-9 rounded-xl bg-rose-600 text-white font-black flex items-center justify-center text-xs" id="del-modal-avatar">م</div>
+                    <div class="w-9 h-9 rounded-xl bg-rose-600/90 text-white font-black flex items-center justify-center text-xs" id="del-modal-avatar">م</div>
                     <div>
-                        <h4 class="text-xs font-black text-slate-900" id="del-modal-name">اسم الطالب</h4>
-                        <p class="text-[10px] text-rose-700 font-bold font-mono" id="del-modal-code">P-101</p>
+                        <h4 class="text-xs font-black text-white" id="del-modal-name">اسم الطالب</h4>
+                        <p class="text-[10px] text-rose-300 font-bold font-mono" id="del-modal-code">P-101</p>
                     </div>
                 </div>
-                <span class="text-[10px] bg-rose-200 text-rose-900 px-2 py-1 rounded-md font-bold">حذف دائم</span>
+                <span class="text-[10px] bg-rose-900/80 text-rose-200 px-2 py-1 rounded-md font-bold">حذف دائم</span>
             </div>
             <div class="flex gap-2.5">
                 <button onclick="confirmExecuteDeletePlayer()" class="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-black py-3 rounded-xl text-xs transition">نعم، احذف نهائياً</button>
-                <button onclick="closeModals()" class="px-5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold py-3 rounded-xl text-xs transition">إلغاء</button>
+                <button onclick="closeModals()" class="px-5 calm-surface hover:bg-slate-800 text-slate-200 font-extrabold py-3 rounded-xl text-xs transition">إلغاء</button>
             </div>
         </div>
     </div>
 
-    <div id="modal-player-details" class="fixed inset-0 bg-slate-950/50 backdrop-blur-md z-[60] hidden flex items-center justify-center p-4 text-slate-900">
-        <div class="bg-white border border-slate-200 p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl">
-            <div class="text-center space-y-2 border-b border-slate-100 pb-4">
-                <div class="w-14 h-14 rounded-2xl bg-emerald-700 text-white font-black text-2xl flex items-center justify-center mx-auto" id="pd-avatar">م</div>
+    <div id="modal-player-details" class="fixed inset-0 bg-slate-950/75 backdrop-blur-md z-[60] hidden flex items-center justify-center p-4">
+        <div class="calm-card p-6 rounded-3xl max-w-sm w-full space-y-4">
+            <div class="text-center space-y-2 border-b border-slate-800 pb-4">
+                <div class="w-14 h-14 rounded-2xl bg-emerald-600/90 text-white font-black text-2xl flex items-center justify-center mx-auto" id="pd-avatar">م</div>
                 <div>
-                    <h3 class="text-base font-black text-slate-900" id="pd-name">اسم الطالب</h3>
-                    <span class="inline-block bg-slate-100 text-slate-800 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-md mt-1" id="pd-code">P-101</span>
+                    <h3 class="text-base font-black text-white" id="pd-name">اسم الطالب</h3>
+                    <span class="inline-block calm-surface text-slate-200 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-md mt-1" id="pd-code">P-101</span>
                 </div>
             </div>
 
-            <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-2xl text-center space-y-1">
-                <p class="text-[10px] text-emerald-900 font-bold">رقم هاتف ولي الأمر</p>
-                <a id="pd-phone-link" href="#" class="inline-flex items-center justify-center gap-2 text-sm font-black text-emerald-900 bg-white px-3 py-1.5 rounded-xl border border-emerald-200">
-                    <i class="fa-solid fa-phone text-emerald-600"></i>
+            <div class="calm-surface border-emerald-500/20 p-3 rounded-2xl text-center space-y-1">
+                <p class="text-[10px] text-emerald-300/85 font-bold">رقم هاتف ولي الأمر</p>
+                <a id="pd-phone-link" href="#" class="inline-flex items-center justify-center gap-2 text-sm font-black text-white bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-700/70">
+                    <i class="fa-solid fa-phone text-emerald-400"></i>
                     <span id="pd-phone">--</span>
                 </a>
             </div>
 
             <div class="grid grid-cols-2 gap-2.5 text-xs">
-                <div class="bg-slate-50 p-3 rounded-2xl text-center">
-                    <p class="text-[10px] text-slate-500 font-bold">العمر</p>
-                    <p class="text-sm font-black text-slate-800 mt-0.5"><span id="pd-age">--</span> سنة</p>
+                <div class="calm-surface p-3 rounded-2xl text-center">
+                    <p class="text-[10px] text-slate-400 font-bold">العمر</p>
+                    <p class="text-sm font-black text-white mt-0.5"><span id="pd-age">--</span> سنة</p>
                 </div>
-                <div class="bg-slate-50 p-3 rounded-2xl text-center">
-                    <p class="text-[10px] text-slate-500 font-bold">المستوى الفني</p>
-                    <p class="text-xs font-black text-emerald-800 mt-0.5" id="pd-level">--</p>
+                <div class="calm-surface p-3 rounded-2xl text-center">
+                    <p class="text-[10px] text-slate-400 font-bold">المستوى الفني</p>
+                    <p class="text-xs font-black text-emerald-300 mt-0.5" id="pd-level">--</p>
                 </div>
-                <div class="bg-amber-50 p-3 rounded-2xl text-center">
-                    <p class="text-[10px] text-amber-800 font-bold">المتوسط العام</p>
-                    <p class="text-sm font-black text-amber-700 mt-0.5" id="pd-avg-grade">-- / 10</p>
+                <div class="calm-surface p-3 rounded-2xl text-center">
+                    <p class="text-[10px] text-amber-300/85 font-bold">المتوسط العام</p>
+                    <p class="text-sm font-black text-amber-300 mt-0.5" id="pd-avg-grade">-- / 10</p>
                 </div>
-                <div class="bg-emerald-50 p-3 rounded-2xl text-center">
-                    <p class="text-[10px] text-emerald-900 font-bold">تمارين مقيّمة</p>
-                    <p class="text-sm font-black text-emerald-800 mt-0.5" id="pd-eval-count">-- تمرين</p>
+                <div class="calm-surface p-3 rounded-2xl text-center">
+                    <p class="text-[10px] text-lime-300/85 font-bold">تمارين مقيّمة</p>
+                    <p class="text-sm font-black text-lime-300 mt-0.5" id="pd-eval-count">-- تمرين</p>
                 </div>
             </div>
 
-            <button onclick="closeModals()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold py-2.5 rounded-xl text-xs transition">إغلاق</button>
+            <button onclick="closeModals()" class="w-full calm-surface hover:bg-slate-800 text-slate-200 font-extrabold py-2.5 rounded-xl text-xs transition">إغلاق</button>
         </div>
     </div>
 
-    <div id="modal-coach-login" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 text-slate-900">
-        <div class="bg-white p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl">
+    <div id="modal-coach-login" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="calm-card p-6 rounded-3xl max-w-sm w-full space-y-4">
             <div class="text-center">
-                <img src="logo.jpg" alt="Logo" class="w-12 h-12 rounded-2xl object-cover mx-auto mb-2 border border-slate-200">
-                <h3 class="text-base font-black text-slate-900">تسجيل دخول الكابتن</h3>
+                <img src="logo.jpg" alt="Logo" class="w-12 h-12 rounded-2xl object-cover mx-auto mb-2 border border-slate-700">
+                <h3 class="text-base font-black text-white">تسجيل دخول الكابتن</h3>
             </div>
             <div>
-                <label class="block text-xs text-slate-600 mb-1 font-bold">اختر اسم الكابتن:</label>
-                <select id="coach-login-name" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold"></select>
+                <label class="block text-xs text-slate-400 mb-1 font-bold">اختر اسم الكابتن:</label>
+                <select id="coach-login-name" class="w-full calm-surface text-white rounded-xl p-3 text-xs font-bold"></select>
             </div>
             <div>
-                <label class="block text-xs text-slate-600 mb-1 font-bold">كلمة المرور:</label>
-                <input type="password" id="coach-pass" placeholder="أدخل كلمة المرور" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold">
+                <label class="block text-xs text-slate-400 mb-1 font-bold">كلمة المرور:</label>
+                <input type="password" id="coach-pass" placeholder="أدخل كلمة المرور" class="w-full calm-surface text-white rounded-xl p-3 text-xs font-bold placeholder:text-slate-500">
             </div>
             <div class="flex gap-2">
-                <button onclick="loginCoach()" class="flex-1 bg-emerald-700 hover:bg-emerald-800 py-3 rounded-xl font-black text-xs text-white">دخول</button>
-                <button onclick="closeModals()" class="px-4 bg-slate-100 hover:bg-slate-200 py-3 rounded-xl font-extrabold text-xs text-slate-700">إلغاء</button>
+                <button onclick="loginCoach()" class="flex-1 soft-cta py-3 rounded-xl font-black text-xs">دخول</button>
+                <button onclick="closeModals()" class="px-4 calm-surface hover:bg-slate-800 py-3 rounded-xl font-extrabold text-xs text-slate-300">إلغاء</button>
             </div>
         </div>
     </div>
 
-    <div id="modal-change-own-pass" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 text-slate-900">
-        <div class="bg-white p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl">
-            <h3 class="text-base font-black text-slate-900">تغيير كلمة المرور الخاصة بك</h3>
-            <input type="password" id="own-new-pass" placeholder="أدخل كلمة المرور الجديدة" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold">
+    <div id="modal-change-own-pass" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="calm-card p-6 rounded-3xl max-w-sm w-full space-y-4">
+            <h3 class="text-base font-black text-white">تغيير كلمة المرور الخاصة بك</h3>
+            <input type="password" id="own-new-pass" placeholder="أدخل كلمة المرور الجديدة" class="w-full calm-surface text-white rounded-xl p-3 text-xs font-bold placeholder:text-slate-500">
             <div class="flex gap-2">
-                <button onclick="saveOwnNewPass()" class="flex-1 bg-emerald-700 hover:bg-emerald-800 py-3 rounded-xl font-black text-xs text-white">حفظ</button>
-                <button onclick="closeModals()" class="px-4 bg-slate-100 hover:bg-slate-200 py-3 rounded-xl font-extrabold text-xs text-slate-700">إلغاء</button>
+                <button onclick="saveOwnNewPass()" class="flex-1 soft-cta py-3 rounded-xl font-black text-xs">حفظ</button>
+                <button onclick="closeModals()" class="px-4 calm-surface hover:bg-slate-800 py-3 rounded-xl font-extrabold text-xs text-slate-300">إلغاء</button>
             </div>
         </div>
     </div>
 
-    <div id="modal-admin-coach-pass" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 text-slate-900">
-        <div class="bg-white p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl">
+    <div id="modal-admin-coach-pass" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="calm-card p-6 rounded-3xl max-w-sm w-full space-y-4">
             <div class="text-center">
-                <h3 class="text-base font-black text-slate-900">تغيير كلمة مرور الكابتن</h3>
-                <p id="target-coach-name-display" class="text-xs text-emerald-700 font-bold mt-1">كابتن: --</p>
+                <h3 class="text-base font-black text-white">تغيير كلمة مرور الكابتن</h3>
+                <p id="target-coach-name-display" class="text-xs text-lime-300 font-bold mt-1">كابتن: --</p>
             </div>
-            <input type="password" id="target-coach-new-pass-input" placeholder="كلمة المرور الجديدة" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold">
+            <input type="password" id="target-coach-new-pass-input" placeholder="كلمة المرور الجديدة" class="w-full calm-surface text-white rounded-xl p-3 text-xs font-bold placeholder:text-slate-500">
             <div class="flex gap-2">
-                <button onclick="submitAdminCoachPassChange()" class="flex-1 bg-amber-400 hover:bg-amber-300 py-3 rounded-xl font-black text-xs text-slate-950">اعتماد</button>
-                <button onclick="closeModals()" class="px-4 bg-slate-100 hover:bg-slate-200 py-3 rounded-xl font-extrabold text-xs text-slate-700">إلغاء</button>
+                <button onclick="submitAdminCoachPassChange()" class="flex-1 bg-amber-400/90 hover:bg-amber-400 py-3 rounded-xl font-black text-xs text-slate-950">اعتماد</button>
+                <button onclick="closeModals()" class="px-4 calm-surface hover:bg-slate-800 py-3 rounded-xl font-extrabold text-xs text-slate-300">إلغاء</button>
             </div>
         </div>
     </div>
 
-    <div id="modal-player-login" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 text-slate-900">
-        <div class="bg-white p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl">
+    <div id="modal-player-login" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="calm-card p-6 rounded-3xl max-w-sm w-full space-y-4">
             <div class="text-center">
-                <img src="logo.jpg" alt="Logo" class="w-12 h-12 rounded-2xl object-cover mx-auto mb-2 border border-slate-200">
-                <h3 class="text-base font-black text-slate-900">دخول لوحة الأوائل 🎾</h3>
-                <p class="text-[11px] text-slate-500 mt-0.5">أدخل كود اللاعب الخاص بك</p>
+                <img src="logo.jpg" alt="Logo" class="w-12 h-12 rounded-2xl object-cover mx-auto mb-2 border border-slate-700">
+                <h3 class="text-base font-black text-white">دخول لوحة الأوائل 🎾</h3>
+                <p class="text-[11px] text-slate-400 mt-0.5">أدخل كود اللاعب الخاص بك</p>
             </div>
             <div>
-                <input type="text" id="login-player-code-input" placeholder="مثال: P-101" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-center font-black tracking-widest uppercase focus:outline-none focus:border-emerald-600">
-                <button onclick="closeModals(); showPage('register');" class="w-full text-center text-xs font-bold text-slate-600 hover:text-emerald-700 mt-2.5 flex items-center justify-center gap-1.5">
-                    <i class="fa-solid fa-user-plus text-emerald-600"></i> ليس لديك كود؟ انضم إلينا الآن
+                <input type="text" id="login-player-code-input" placeholder="مثال: P-101" class="w-full calm-surface text-white rounded-xl p-3 text-xs text-center font-black tracking-widest uppercase placeholder:text-slate-500 focus:outline-none focus:border-lime-400/60">
+                <button onclick="closeModals(); showPage('register');" class="w-full text-center text-xs font-bold text-slate-400 hover:text-lime-300 mt-2.5 flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-user-plus text-lime-300/85"></i> ليس لديك كود؟ انضم إلينا الآن
                 </button>
             </div>
             <div class="flex gap-2">
-                <button onclick="loginPlayerWithCode()" class="flex-1 bg-slate-900 hover:bg-slate-800 py-3 rounded-xl font-black text-xs text-white">دخول</button>
-                <button onclick="closeModals()" class="px-4 bg-slate-100 hover:bg-slate-200 py-3 rounded-xl font-extrabold text-xs text-slate-700">إلغاء</button>
+                <button onclick="loginPlayerWithCode()" class="flex-1 soft-cta py-3 rounded-xl font-black text-xs">دخول</button>
+                <button onclick="closeModals()" class="px-4 calm-surface hover:bg-slate-800 py-3 rounded-xl font-extrabold text-xs text-slate-300">إلغاء</button>
             </div>
         </div>
     </div>
@@ -815,21 +845,21 @@
             let icon = '<i class="fa-solid fa-circle-check text-lime-400 text-lg"></i>';
 
             if (type === 'success') {
-                bgStyle = 'bg-white text-slate-800 border-emerald-200 shadow-xl';
-                icon = '<i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>';
+                bgStyle = 'bg-slate-900/95 text-slate-100 border-emerald-500/35';
+                icon = '<i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>';
             } else if (type === 'error') {
-                bgStyle = 'bg-white text-slate-800 border-rose-200 shadow-xl';
-                icon = '<i class="fa-solid fa-circle-xmark text-rose-500 text-lg"></i>';
+                bgStyle = 'bg-slate-900/95 text-slate-100 border-rose-500/35';
+                icon = '<i class="fa-solid fa-circle-xmark text-rose-400 text-lg"></i>';
             } else if (type === 'info') {
-                bgStyle = 'bg-white text-slate-800 border-amber-200 shadow-xl';
-                icon = '<i class="fa-solid fa-circle-info text-amber-500 text-lg"></i>';
+                bgStyle = 'bg-slate-900/95 text-slate-100 border-amber-400/35';
+                icon = '<i class="fa-solid fa-circle-info text-amber-300 text-lg"></i>';
             }
 
-            toast.className = `toast-enter flex items-center gap-3 p-3.5 rounded-2xl border text-xs font-bold pointer-events-auto shadow-lg ${bgStyle}`;
+            toast.className = `toast-enter flex items-center gap-3 p-3.5 rounded-2xl border text-xs font-bold pointer-events-auto shadow-xl ${bgStyle}`;
             toast.innerHTML = `
                 ${icon}
                 <div class="flex-1 leading-snug">${message}</div>
-                <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-slate-600 px-1"><i class="fa-solid fa-xmark"></i></button>
+                <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-slate-200 px-1"><i class="fa-solid fa-xmark"></i></button>
             `;
 
             container.appendChild(toast);
@@ -1060,13 +1090,13 @@
             badge.innerText = val;
 
             if (val <= 3) {
-                badge.className = "text-xs font-black px-2.5 py-0.5 rounded-full text-white bg-rose-600 transition-all duration-300";
+                badge.className = "text-xs font-black px-2.5 py-0.5 rounded-full text-white bg-rose-600/90 transition-all duration-300";
             } else if (val <= 6) {
-                badge.className = "text-xs font-black px-2.5 py-0.5 rounded-full text-slate-950 bg-amber-400 transition-all duration-300";
+                badge.className = "text-xs font-black px-2.5 py-0.5 rounded-full text-slate-950 bg-amber-400/90 transition-all duration-300";
             } else if (val <= 8) {
-                badge.className = "text-xs font-black px-2.5 py-0.5 rounded-full text-white bg-emerald-700 transition-all duration-300";
+                badge.className = "text-xs font-black px-2.5 py-0.5 rounded-full text-white bg-emerald-600/90 transition-all duration-300";
             } else {
-                badge.className = "text-xs font-black px-2.5 py-0.5 rounded-full text-slate-950 bg-lime-400 transition-all duration-300";
+                badge.className = "text-xs font-black px-2.5 py-0.5 rounded-full text-slate-950 bg-lime-400/90 transition-all duration-300";
             }
         }
 
@@ -1119,18 +1149,18 @@
             const pendListEl = document.getElementById('roster-pending-list');
             if (pendListEl) {
                 if (pendingPlayers.length === 0) {
-                    pendListEl.innerHTML = `<p class="text-[11px] text-emerald-700 font-bold py-3 text-center">ممتاز! تم تقييم كل اللاعبين النشطين في هذا التاريخ.</p>`;
+                    pendListEl.innerHTML = `<p class="text-[11px] text-emerald-300 font-bold py-3 text-center">ممتاز! تم تقييم كل اللاعبين النشطين في هذا التاريخ.</p>`;
                 } else {
                     pendListEl.innerHTML = pendingPlayers.map(p => `
-                        <button type="button" onclick="quickSelectPlayerForEval(${p.id})" class="w-full flex items-center justify-between gap-2 p-2.5 rounded-xl bg-amber-50/70 hover:bg-amber-100 border border-amber-200/80 text-right transition group">
+                        <button type="button" onclick="quickSelectPlayerForEval(${p.id})" class="w-full flex items-center justify-between gap-2 p-2.5 rounded-xl calm-surface hover:border-amber-400/40 text-right transition group">
                             <div class="flex items-center gap-2 min-w-0">
-                                <span class="w-7 h-7 rounded-lg bg-amber-400 text-slate-950 font-black text-xs flex items-center justify-center shrink-0">${p.avatar || p.name.charAt(0)}</span>
+                                <span class="w-7 h-7 rounded-lg bg-amber-400/90 text-slate-950 font-black text-xs flex items-center justify-center shrink-0">${p.avatar || p.name.charAt(0)}</span>
                                 <div class="truncate">
-                                    <span class="block text-xs font-black text-slate-900 truncate">${p.name}</span>
-                                    <span class="block text-[10px] text-slate-500 font-mono font-bold">${p.code} • ${p.level}</span>
+                                    <span class="block text-xs font-black text-white truncate">${p.name}</span>
+                                    <span class="block text-[10px] text-slate-400 font-mono font-bold">${p.code} • ${p.level}</span>
                                 </div>
                             </div>
-                            <span class="text-[10px] font-black bg-slate-900 group-hover:bg-emerald-700 text-lime-300 group-hover:text-white px-2.5 py-1 rounded-lg shrink-0 transition">
+                            <span class="text-[10px] font-black bg-slate-800 group-hover:bg-lime-400 text-lime-300 group-hover:text-slate-950 px-2.5 py-1 rounded-lg shrink-0 transition">
                                 قيّم الآن ←
                             </span>
                         </button>
@@ -1146,15 +1176,15 @@
                     doneListEl.innerHTML = donePlayers.map(p => {
                         const ev = dateEvals[p.id];
                         return `
-                            <button type="button" onclick="quickSelectPlayerForEval(${p.id})" class="w-full flex items-center justify-between gap-2 p-2.5 rounded-xl bg-emerald-50/60 hover:bg-emerald-100/70 border border-emerald-200/70 text-right transition">
+                            <button type="button" onclick="quickSelectPlayerForEval(${p.id})" class="w-full flex items-center justify-between gap-2 p-2.5 rounded-xl calm-surface hover:border-emerald-400/40 text-right transition">
                                 <div class="flex items-center gap-2 min-w-0">
-                                    <span class="w-7 h-7 rounded-lg bg-emerald-700 text-white font-black text-xs flex items-center justify-center shrink-0">${p.avatar || p.name.charAt(0)}</span>
+                                    <span class="w-7 h-7 rounded-lg bg-emerald-600/90 text-white font-black text-xs flex items-center justify-center shrink-0">${p.avatar || p.name.charAt(0)}</span>
                                     <div class="truncate">
-                                        <span class="block text-xs font-bold text-slate-900 truncate">${p.name}</span>
-                                        <span class="block text-[10px] text-slate-500 font-mono font-bold">${p.code}</span>
+                                        <span class="block text-xs font-bold text-slate-200 truncate">${p.name}</span>
+                                        <span class="block text-[10px] text-slate-400 font-mono font-bold">${p.code}</span>
                                     </div>
                                 </div>
-                                <span class="text-[11px] font-black text-emerald-800 bg-white px-2.5 py-1 rounded-lg border border-emerald-200 shrink-0">
+                                <span class="text-[11px] font-black text-emerald-300 bg-slate-900 px-2.5 py-1 rounded-lg border border-emerald-500/20 shrink-0">
                                     ${ev.grade}
                                 </span>
                             </button>
@@ -1171,13 +1201,13 @@
 
             if (btnDaily) {
                 btnDaily.className = mode === 'daily'
-                    ? "px-3.5 py-2 rounded-xl text-xs font-black bg-emerald-700 text-white transition"
-                    : "px-3.5 py-2 rounded-xl text-xs font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 transition";
+                    ? "px-3.5 py-2 rounded-xl text-xs font-black bg-lime-400/90 text-slate-950 transition"
+                    : "px-3.5 py-2 rounded-xl text-xs font-extrabold calm-surface text-slate-300 hover:bg-slate-800 transition";
             }
             if (btnMonthly) {
                 btnMonthly.className = mode === 'monthly'
-                    ? "px-3.5 py-2 rounded-xl text-xs font-black bg-emerald-700 text-white transition"
-                    : "px-3.5 py-2 rounded-xl text-xs font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 transition";
+                    ? "px-3.5 py-2 rounded-xl text-xs font-black bg-lime-400/90 text-slate-950 transition"
+                    : "px-3.5 py-2 rounded-xl text-xs font-extrabold calm-surface text-slate-300 hover:bg-slate-800 transition";
             }
 
             refreshUI();
@@ -1193,7 +1223,7 @@
                 const btnEl = document.getElementById(`tab-btn-${t}`);
                 const mBtnEl = document.getElementById(`mnav-${t}`);
                 if (tabEl) tabEl.classList.add('hidden');
-                if (btnEl) btnEl.className = "w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-extrabold text-emerald-100 hover:bg-white/10 transition";
+                if (btnEl) btnEl.className = "w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-extrabold text-slate-300 hover:bg-slate-800/70 transition";
                 if (mBtnEl) mBtnEl.className = "flex flex-col items-center gap-1 text-[10px] font-extrabold text-slate-400";
             });
 
@@ -1201,8 +1231,8 @@
             const targetBtn = document.getElementById(`tab-btn-${tabName}`);
             const targetMBtn = document.getElementById(`mnav-${tabName}`);
             if (targetTab) targetTab.classList.remove('hidden');
-            if (targetBtn) targetBtn.className = "w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-black bg-lime-400 text-slate-950 transition";
-            if (targetMBtn) targetMBtn.className = "flex flex-col items-center gap-1 text-[10px] font-black text-lime-400";
+            if (targetBtn) targetBtn.className = "w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-black bg-lime-400/90 text-slate-950 transition";
+            if (targetMBtn) targetMBtn.className = "flex flex-col items-center gap-1 text-[10px] font-black text-lime-300";
         }
 
         function setPlayerFilter(filter) {
@@ -1211,8 +1241,8 @@
                 const btn = document.getElementById(`pf-btn-${f}`);
                 if (btn) {
                     btn.className = (f === filter)
-                        ? "px-3 py-1.5 rounded-xl font-black text-[11px] bg-slate-900 text-white transition"
-                        : "px-3 py-1.5 rounded-xl font-extrabold text-[11px] bg-slate-100 text-slate-700 transition";
+                        ? "px-3 py-1.5 rounded-xl font-black text-[11px] bg-lime-400/90 text-slate-950 transition"
+                        : "px-3 py-1.5 rounded-xl font-extrabold text-[11px] calm-surface text-slate-300 transition";
                 }
             });
             refreshUI();
@@ -1255,13 +1285,13 @@
             const btnL = document.getElementById('btn-late');
             const btnA = document.getElementById('btn-absent');
 
-            if (btnP) btnP.className = "py-2.5 px-3 rounded-xl font-extrabold text-xs bg-white text-slate-700 border border-slate-200 transition";
-            if (btnL) btnL.className = "py-2.5 px-3 rounded-xl font-extrabold text-xs bg-white text-slate-700 border border-slate-200 transition";
-            if (btnA) btnA.className = "py-2.5 px-3 rounded-xl font-extrabold text-xs bg-white text-slate-700 border border-slate-200 transition";
+            if (btnP) btnP.className = "py-2.5 px-3 rounded-xl font-extrabold text-xs bg-slate-900 text-slate-300 border border-slate-700/70 transition";
+            if (btnL) btnL.className = "py-2.5 px-3 rounded-xl font-extrabold text-xs bg-slate-900 text-slate-300 border border-slate-700/70 transition";
+            if (btnA) btnA.className = "py-2.5 px-3 rounded-xl font-extrabold text-xs bg-slate-900 text-slate-300 border border-slate-700/70 transition";
 
-            if (status === 'present' && btnP) btnP.className = "py-2.5 px-3 rounded-xl font-extrabold text-xs bg-emerald-700 text-white transition";
-            if (status === 'late' && btnL) btnL.className = "py-2.5 px-3 rounded-xl font-extrabold text-xs bg-amber-400 text-slate-950 transition";
-            if (status === 'absent' && btnA) btnA.className = "py-2.5 px-3 rounded-xl font-extrabold text-xs bg-rose-600 text-white transition";
+            if (status === 'present' && btnP) btnP.className = "py-2.5 px-3 rounded-xl font-extrabold text-xs bg-emerald-600/90 text-white transition";
+            if (status === 'late' && btnL) btnL.className = "py-2.5 px-3 rounded-xl font-extrabold text-xs bg-amber-400/90 text-slate-950 transition";
+            if (status === 'absent' && btnA) btnA.className = "py-2.5 px-3 rounded-xl font-extrabold text-xs bg-rose-600/90 text-white transition";
         }
 
         function getSelectedCoachDate() {
@@ -1329,7 +1359,7 @@
 
             if (existingEval) {
                 if (alertBox) alertBox.classList.remove('hidden');
-                if (alertText) alertText.innerHTML = `<i class="fa-solid fa-lock text-amber-600"></i> تم تقييم هذا الطالب في (${selectedDate}) بواسطة (${existingEval.coachName || 'الكابتن'}) بالدرجة: ${existingEval.grade}.`;
+                if (alertText) alertText.innerHTML = `<i class="fa-solid fa-lock text-amber-300"></i> تم تقييم هذا الطالب في (${selectedDate}) بواسطة (${existingEval.coachName || 'الكابتن'}) بالدرجة: ${existingEval.grade}.`;
 
                 if (loggedInCoach && loggedInCoach.isAdmin) {
                     if (overrideBtn) overrideBtn.classList.remove('hidden');
@@ -1632,16 +1662,20 @@
                 if (!p) return `<div></div>`;
                 const isFirst = rankIdx === 0;
                 const isSecond = rankIdx === 1;
-                const heightClass = isFirst ? 'h-28 bg-amber-100 border-amber-300' : (isSecond ? 'h-24 bg-slate-100 border-slate-300' : 'h-20 bg-orange-50 border-orange-200');
-                const badgeColor = isFirst ? 'bg-amber-400 text-slate-950' : (isSecond ? 'bg-slate-700 text-white' : 'bg-orange-600 text-white');
+                const heightClass = isFirst
+                    ? 'h-28 bg-amber-400/15 border-amber-400/35'
+                    : (isSecond ? 'h-24 bg-slate-800/75 border-slate-600/40' : 'h-20 bg-emerald-950/65 border-emerald-500/25');
+                const badgeColor = isFirst
+                    ? 'bg-amber-400/90 text-slate-950'
+                    : (isSecond ? 'bg-slate-600 text-white' : 'bg-emerald-600/90 text-white');
                 return `
                     <div class="flex flex-col items-center text-center">
-                        <div class="w-10 h-10 rounded-2xl ${badgeColor} font-black flex items-center justify-center text-xs mb-1.5 shadow-sm">
+                        <div class="w-10 h-10 rounded-2xl ${badgeColor} font-black flex items-center justify-center text-xs mb-1.5">
                             #${rankIdx + 1}
                         </div>
-                        <p class="text-[11px] sm:text-xs font-black text-slate-900 line-clamp-1 mb-1">${p.name}</p>
+                        <p class="text-[11px] sm:text-xs font-black text-white line-clamp-1 mb-1">${p.name}</p>
                         <div class="w-full ${heightClass} border rounded-t-2xl flex flex-col items-center justify-center px-1">
-                            <span class="text-xs sm:text-sm font-black text-slate-900">${p.grade}</span>
+                            <span class="text-xs sm:text-sm font-black text-lime-300">${p.grade}</span>
                         </div>
                     </div>
                 `;
@@ -1714,25 +1748,25 @@
                         let isStar = avgScore >= 8.0;
 
                         return `
-                            <div class="flex justify-between items-center bg-white p-3.5 text-xs hover:bg-slate-50 transition">
+                            <div class="flex justify-between items-center p-3.5 text-xs hover:bg-slate-800/40 transition">
                                 <div class="flex items-center gap-3 cursor-pointer" onclick="openPlayerDetailsModal(${p.id})">
-                                    <span class="w-9 h-9 rounded-xl bg-emerald-700 text-white font-black flex items-center justify-center text-xs shrink-0">${p.avatar || p.name.charAt(0)}</span>
+                                    <span class="w-9 h-9 rounded-xl bg-emerald-600/90 text-white font-black flex items-center justify-center text-xs shrink-0">${p.avatar || p.name.charAt(0)}</span>
                                     <div>
-                                        <span class="font-bold text-slate-900 flex items-center gap-1.5">
+                                        <span class="font-bold text-white flex items-center gap-1.5">
                                             ${p.name}
-                                            ${isStar ? '<i class="fa-solid fa-star text-amber-500 text-xs"></i>' : ''}
+                                            ${isStar ? '<i class="fa-solid fa-star text-amber-300 text-xs"></i>' : ''}
                                         </span>
                                         <div class="flex items-center gap-1.5 mt-0.5">
-                                            <span class="text-[10px] bg-slate-100 px-2 py-0.5 rounded-md text-slate-800 font-mono font-bold">${p.code}</span>
-                                            <span class="text-[10px] text-slate-500 font-semibold">(${p.level})</span>
-                                            ${p.isBlocked ? '<span class="text-rose-600 font-bold text-[10px]">(موقوف)</span>' : '<span class="text-emerald-700 font-bold text-[10px]">(شغال)</span>'}
+                                            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded-md text-slate-200 font-mono font-bold">${p.code}</span>
+                                            <span class="text-[10px] text-slate-400 font-semibold">(${p.level})</span>
+                                            ${p.isBlocked ? '<span class="text-rose-300 font-bold text-[10px]">(موقوف)</span>' : '<span class="text-emerald-300 font-bold text-[10px]">(شغال)</span>'}
                                         </div>
                                     </div>
                                 </div>
                                 ${isAdmin ? `
                                     <div class="flex items-center gap-1.5">
-                                        <button onclick="toggleBlockPlayer(${p.id})" class="px-2.5 py-1.5 rounded-xl text-[10px] font-bold ${p.isBlocked ? 'bg-emerald-700 text-white' : 'bg-amber-400 text-slate-950'}">${p.isBlocked ? 'تفعيل' : 'إيقاف'}</button>
-                                        <button onclick="promptDeletePlayerModal(${p.id})" class="px-2.5 py-1.5 rounded-xl text-[10px] font-bold bg-rose-600 text-white hover:bg-rose-700"><i class="fa-solid fa-trash"></i></button>
+                                        <button onclick="toggleBlockPlayer(${p.id})" class="px-2.5 py-1.5 rounded-xl text-[10px] font-bold ${p.isBlocked ? 'bg-emerald-600/90 text-white' : 'bg-amber-400/90 text-slate-950'}">${p.isBlocked ? 'تفعيل' : 'إيقاف'}</button>
+                                        <button onclick="promptDeletePlayerModal(${p.id})" class="px-2.5 py-1.5 rounded-xl text-[10px] font-bold bg-rose-600/90 text-white hover:bg-rose-600"><i class="fa-solid fa-trash"></i></button>
                                     </div>
                                 ` : ''}
                             </div>
@@ -1748,14 +1782,14 @@
                     adminCoachesList.innerHTML = `<p class="text-xs text-slate-400 p-4">لا يوجد كباتن مساعدين بعد.</p>`;
                 } else {
                     adminCoachesList.innerHTML = coaches.map(c => `
-                        <div class="flex justify-between items-center bg-white p-3.5 text-xs">
+                        <div class="flex justify-between items-center p-3.5 text-xs">
                             <div>
-                                <span class="font-bold text-slate-800">${c.name}</span>
-                                ${c.isBlocked ? '<span class="text-rose-600 font-bold text-[10px] mr-1">(موقوف)</span>' : ''}
+                                <span class="font-bold text-slate-200">${c.name}</span>
+                                ${c.isBlocked ? '<span class="text-rose-300 font-bold text-[10px] mr-1">(موقوف)</span>' : ''}
                             </div>
                             <div class="flex gap-1.5">
-                                <button onclick="openAdminCoachPassModal(${c.id})" class="px-2.5 py-1.5 rounded-lg text-[10px] font-bold bg-amber-400 text-slate-950">تغيير السر</button>
-                                <button onclick="toggleBlockCoach(${c.id})" class="px-2.5 py-1.5 rounded-lg text-[10px] font-bold ${c.isBlocked ? 'bg-emerald-700 text-white' : 'bg-rose-600 text-white'}">${c.isBlocked ? 'تفعيل' : 'إيقاف'}</button>
+                                <button onclick="openAdminCoachPassModal(${c.id})" class="px-2.5 py-1.5 rounded-lg text-[10px] font-bold bg-amber-400/90 text-slate-950">تغيير السر</button>
+                                <button onclick="toggleBlockCoach(${c.id})" class="px-2.5 py-1.5 rounded-lg text-[10px] font-bold ${c.isBlocked ? 'bg-emerald-600/90 text-white' : 'bg-rose-600/90 text-white'}">${c.isBlocked ? 'تفعيل' : 'إيقاف'}</button>
                             </div>
                         </div>
                     `).join('');
@@ -1768,11 +1802,11 @@
                     reqContainer.innerHTML = `<p class="text-xs text-slate-400">لا توجد طلبات معلقة.</p>`;
                 } else {
                     reqContainer.innerHTML = db.requests.map(r => `
-                        <div class="flex justify-between items-center bg-slate-50 p-3 rounded-xl border border-slate-200/80 text-xs">
-                            <span class="text-slate-800 font-bold">${r.name} (${r.age} سنة)</span>
+                        <div class="flex justify-between items-center calm-surface p-3 rounded-xl text-xs">
+                            <span class="text-slate-200 font-bold">${r.name} (${r.age} سنة)</span>
                             <div class="flex gap-1.5">
-                                <button onclick="approveReq(${r.id})" class="bg-emerald-700 px-2.5 py-1 rounded-lg text-white font-bold">قبول</button>
-                                <button onclick="rejectReq(${r.id})" class="bg-rose-600 px-2.5 py-1 rounded-lg text-white font-bold">رفض</button>
+                                <button onclick="approveReq(${r.id})" class="bg-emerald-600/90 px-2.5 py-1 rounded-lg text-white font-bold">قبول</button>
+                                <button onclick="rejectReq(${r.id})" class="bg-rose-600/90 px-2.5 py-1 rounded-lg text-white font-bold">رفض</button>
                             </div>
                         </div>
                     `).join('');
@@ -1814,13 +1848,13 @@
                 }).sort((a, b) => b.score - a.score);
 
                 htmlCoach = rankedCoachList.map((p, idx) => `
-                    <div class="p-3.5 bg-white flex justify-between items-center text-xs hover:bg-slate-50">
+                    <div class="p-3.5 flex justify-between items-center text-xs hover:bg-slate-800/40">
                         <div class="flex items-center gap-2.5">
-                            <span class="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center font-black text-[11px] text-slate-700">${idx + 1}</span>
-                            <span class="font-bold text-slate-800 cursor-pointer hover:text-emerald-700" onclick="openPlayerDetailsModal(${p.id})">${p.name} <span class="text-[10px] text-slate-400">(${p.code})</span></span>
-                            <span class="bg-slate-100 text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded-md">${p.count} تمرين</span>
+                            <span class="w-6 h-6 rounded-lg bg-slate-800 flex items-center justify-center font-black text-[11px] text-slate-300">${idx + 1}</span>
+                            <span class="font-bold text-slate-200 cursor-pointer hover:text-lime-300" onclick="openPlayerDetailsModal(${p.id})">${p.name} <span class="text-[10px] text-slate-400">(${p.code})</span></span>
+                            <span class="bg-slate-800 text-slate-300 text-[10px] font-bold px-2 py-0.5 rounded-md">${p.count} تمرين</span>
                         </div>
-                        <span class="text-emerald-800 font-black">${p.grade}</span>
+                        <span class="text-lime-300 font-black">${p.grade}</span>
                     </div>
                 `).join('');
             } else {
@@ -1833,20 +1867,20 @@
                 htmlCoach = rankedCoachList.map((p, idx) => {
                     let ev = p.evalData;
                     let statusBadge = '';
-                    if (ev.attendance === 'late') statusBadge = '<span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-md">متأخر</span>';
-                    else if (ev.attendance === 'absent') statusBadge = '<span class="bg-rose-100 text-rose-800 text-[10px] font-bold px-2 py-0.5 rounded-md">غائب</span>';
+                    if (ev.attendance === 'late') statusBadge = '<span class="bg-amber-400/15 text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded-md">متأخر</span>';
+                    else if (ev.attendance === 'absent') statusBadge = '<span class="bg-rose-500/15 text-rose-300 text-[10px] font-bold px-2 py-0.5 rounded-md">غائب</span>';
 
                     return `
-                        <div class="p-3.5 bg-white text-xs space-y-1.5 hover:bg-slate-50">
+                        <div class="p-3.5 text-xs space-y-1.5 hover:bg-slate-800/40">
                             <div class="flex justify-between items-center">
                                 <div class="flex items-center gap-2.5">
-                                    <span class="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center font-black text-[11px] text-slate-700">${idx + 1}</span>
-                                    <span class="font-bold text-slate-800 cursor-pointer hover:text-emerald-700" onclick="openPlayerDetailsModal(${p.id})">${p.name} <span class="text-[10px] text-slate-400">(${p.code})</span></span>
+                                    <span class="w-6 h-6 rounded-lg bg-slate-800 flex items-center justify-center font-black text-[11px] text-slate-300">${idx + 1}</span>
+                                    <span class="font-bold text-slate-200 cursor-pointer hover:text-lime-300" onclick="openPlayerDetailsModal(${p.id})">${p.name} <span class="text-[10px] text-slate-400">(${p.code})</span></span>
                                     ${statusBadge}
                                 </div>
-                                <span class="text-emerald-800 font-black">${p.grade}</span>
+                                <span class="text-lime-300 font-black">${p.grade}</span>
                             </div>
-                            ${ev.notes ? `<p class="text-[11px] text-slate-500 pr-8">💬 ${ev.notes}</p>` : ''}
+                            ${ev.notes ? `<p class="text-[11px] text-slate-400 pr-8">💬 ${ev.notes}</p>` : ''}
                         </div>
                     `;
                 }).join('');
@@ -1871,20 +1905,20 @@
                 let isMe = (p.id === loggedInPlayerId);
                 let ev = p.evalData;
                 let statusBadge = '';
-                if (ev.attendance === 'late') statusBadge = '<span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-md">متأخر</span>';
-                else if (ev.attendance === 'absent') statusBadge = '<span class="bg-rose-100 text-rose-800 text-[10px] font-bold px-2 py-0.5 rounded-md">غائب</span>';
+                if (ev.attendance === 'late') statusBadge = '<span class="bg-amber-400/15 text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded-md">متأخر</span>';
+                else if (ev.attendance === 'absent') statusBadge = '<span class="bg-rose-500/15 text-rose-300 text-[10px] font-bold px-2 py-0.5 rounded-md">غائب</span>';
 
                 return `
-                    <div class="p-3.5 ${isMe ? 'bg-emerald-50/90' : 'bg-white'} text-xs space-y-1.5">
+                    <div class="p-3.5 ${isMe ? 'bg-emerald-950/55' : ''} text-xs space-y-1.5">
                         <div class="flex justify-between items-center">
                             <div class="flex items-center gap-2.5">
-                                <span class="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center font-black text-[11px] text-slate-700">${idx + 1}</span>
-                                <span class="font-bold text-slate-900">${p.name} ${isMe ? '<span class="text-emerald-700 font-black">(أنت)</span>' : ''}</span>
+                                <span class="w-6 h-6 rounded-lg bg-slate-800 flex items-center justify-center font-black text-[11px] text-slate-300">${idx + 1}</span>
+                                <span class="font-bold text-white">${p.name} ${isMe ? '<span class="text-lime-300 font-black">(أنت)</span>' : ''}</span>
                                 ${statusBadge}
                             </div>
-                            <span class="text-emerald-800 font-black">${p.grade}</span>
+                            <span class="text-lime-300 font-black">${p.grade}</span>
                         </div>
-                        ${ev.notes ? `<p class="text-[11px] text-slate-600 pr-8">💬 ${ev.notes}</p>` : ''}
+                        ${ev.notes ? `<p class="text-[11px] text-slate-400 pr-8">💬 ${ev.notes}</p>` : ''}
                     </div>
                 `;
             }).join('');
