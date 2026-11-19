@@ -216,6 +216,13 @@
                                     </div>
                                     <input type="range" id="input-tennis" min="1" max="10" value="8" oninput="updateSliderUI('tennis')" class="w-full cursor-pointer">
                                 </div>
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <label class="text-xs font-bold text-slate-700">كفاءة التمرين (Training Efficiency):</label>
+                                        <span id="val-efficiency" class="text-xs font-bold px-2.5 py-0.5 rounded-lg text-white bg-lime-600 shadow-sm transition-all duration-300">8</span>
+                                    </div>
+                                    <input type="range" id="input-efficiency" min="1" max="10" value="8" oninput="updateSliderUI('efficiency')" class="w-full cursor-pointer">
+                                </div>
                             </div>
 
                             <div>
@@ -229,13 +236,17 @@
                 </div>
 
                 <div class="bg-white p-4 sm:p-6 rounded-2xl border border-lime-200 shadow-sm flex flex-col">
-                    <div class="flex justify-between items-center mb-2">
+                    <div class="flex justify-between items-center gap-2 mb-2">
                         <h3 class="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-2">
                             <i class="fa-solid fa-trophy text-amber-500"></i> لوحة الأوائل
                         </h3>
-                        <button onclick="window.print()" class="no-print text-xs font-bold text-lime-700 hover:text-lime-800 bg-lime-100 hover:bg-lime-200 px-2.5 py-1 rounded-lg border border-lime-200 transition flex items-center gap-1">
-                            <i class="fa-solid fa-print"></i> طباعة
-                        </button>
+                        <div class="flex items-center gap-1.5 no-print">
+                            <button onclick="setCoachLeaderboardMode('daily')" id="btn-lb-daily" class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-lime-600 text-white transition">يومي</button>
+                            <button onclick="setCoachLeaderboardMode('monthly')" id="btn-lb-monthly" class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-lime-50 text-lime-800 border border-lime-200 hover:bg-lime-100 transition">الترتيب الشهري</button>
+                            <button onclick="window.print()" class="text-xs font-bold text-lime-700 hover:text-lime-800 bg-lime-100 hover:bg-lime-200 px-2.5 py-1 rounded-lg border border-lime-200 transition flex items-center gap-1">
+                                <i class="fa-solid fa-print"></i> طباعة
+                            </button>
+                        </div>
                     </div>
                     <p class="text-[11px] text-lime-700 font-bold mb-3" id="coach-lb-date">نتائج يوم: --</p>
                     <div id="coach-leaderboard" class="space-y-3 flex-grow overflow-y-auto max-h-[380px] sm:max-h-[420px]"></div>
@@ -583,6 +594,7 @@
         let currentPlayerFilter = 'all';
         let playerToDeleteId = null;
         let isInitialSyncDone = false;
+        let coachLeaderboardMode = 'daily';
 
         function showToast(message, type = 'success') {
             const container = document.getElementById('toast-container');
@@ -682,6 +694,25 @@
             });
         }
 
+        function setCoachLeaderboardMode(mode) {
+            coachLeaderboardMode = mode;
+            const btnDaily = document.getElementById('btn-lb-daily');
+            const btnMonthly = document.getElementById('btn-lb-monthly');
+
+            if (btnDaily) {
+                btnDaily.className = mode === 'daily'
+                    ? "px-2.5 py-1 rounded-lg text-[11px] font-bold bg-lime-600 text-white transition"
+                    : "px-2.5 py-1 rounded-lg text-[11px] font-bold bg-lime-50 text-lime-800 border border-lime-200 hover:bg-lime-100 transition";
+            }
+            if (btnMonthly) {
+                btnMonthly.className = mode === 'monthly'
+                    ? "px-2.5 py-1 rounded-lg text-[11px] font-bold bg-lime-600 text-white transition"
+                    : "px-2.5 py-1 rounded-lg text-[11px] font-bold bg-lime-50 text-lime-800 border border-lime-200 hover:bg-lime-100 transition";
+            }
+
+            refreshUI();
+        }
+
         function switchCoachTab(tabName) {
             if (tabName === 'coaches' && (!loggedInCoach || !loggedInCoach.isAdmin)) {
                 tabName = 'eval';
@@ -730,6 +761,24 @@
                 }
             });
             return count > 0 ? (totalScore / count) : 0;
+        }
+
+        function getPlayerMonthlyStats(playerId, yearMonth) {
+            let totalScore = 0;
+            let count = 0;
+            Object.keys(db.dailyEvaluations || {}).forEach(date => {
+                if (date.startsWith(yearMonth) && db.dailyEvaluations[date] && db.dailyEvaluations[date][playerId]) {
+                    let ev = db.dailyEvaluations[date][playerId];
+                    totalScore += ev.rawScore || 0;
+                    count++;
+                }
+            });
+            const avg = count > 0 ? (totalScore / count) : 0;
+            return {
+                avgScore: avg,
+                count: count,
+                grade: count > 0 ? `${avg.toFixed(1)} / 10` : "لم يُقيّم"
+            };
         }
 
         function updateSliderUI(type) {
@@ -868,17 +917,21 @@
 
             const fit = parseFloat(document.getElementById('input-fitness').value);
             const ten = parseFloat(document.getElementById('input-tennis').value);
+            const effEl = document.getElementById('input-efficiency');
+            const eff = effEl ? parseFloat(effEl.value) : 8;
             const notes = document.getElementById('input-notes').value.trim() || "لا توجد ملاحظات إضافية.";
 
-            let rawAvg = (fit + ten) / 2;
+            let rawAvg = (fit + ten + eff) / 3;
             if (currentAttendance === 'late') rawAvg -= 1.0;
             if (currentAttendance === 'absent') rawAvg = 0;
+            if (rawAvg < 0) rawAvg = 0;
 
             let gradeStr = currentAttendance === 'absent' ? "غائب (0/10)" : `${rawAvg.toFixed(1)} / 10`;
 
             db.dailyEvaluations[selectedDate][pId] = {
                 fitness: fit,
                 tennis: ten,
+                efficiency: eff,
                 attendance: currentAttendance,
                 rawScore: rawAvg,
                 grade: gradeStr,
@@ -1123,6 +1176,7 @@
         function refreshUI() {
             const selectedCoachDate = getSelectedCoachDate();
             const selectedPlayerDate = getSelectedPlayerDate();
+            const selectedMonth = selectedCoachDate.slice(0, 7);
 
             const stTotal = document.getElementById('stat-total-players');
             const stEval = document.getElementById('stat-evaluated-today');
@@ -1139,7 +1193,11 @@
 
             const cLbDate = document.getElementById('coach-lb-date');
             const pLbDate = document.getElementById('player-lb-date');
-            if (cLbDate) cLbDate.innerText = `نتائج لوحة الأوائل ليوم: ${selectedCoachDate}`;
+            if (cLbDate) {
+                cLbDate.innerText = coachLeaderboardMode === 'monthly'
+                    ? `الترتيب الشهري للاعبين لشهر: ${selectedMonth}`
+                    : `نتائج لوحة الأوائل ليوم: ${selectedCoachDate}`;
+            }
             if (pLbDate) pLbDate.innerText = `تاريخ النتائج: ${selectedPlayerDate}`;
 
             filterCoachPlayerList();
@@ -1259,50 +1317,73 @@
 
             updateSliderUI('fitness');
             updateSliderUI('tennis');
+            updateSliderUI('efficiency');
         }
 
         function renderLeaderboards() {
             const coachDate = getSelectedCoachDate();
             const playerDate = getSelectedPlayerDate();
+            const coachMonth = coachDate.slice(0, 7);
 
             const activePlayers = db.players.filter(p => !p.isBlocked);
 
-            const coachDateEvals = (db.dailyEvaluations && db.dailyEvaluations[coachDate]) ? db.dailyEvaluations[coachDate] : {};
-            let rankedCoach = [...activePlayers].map(p => {
-                let evalData = coachDateEvals[p.id] || { rawScore: 0, grade: "لم يُقيّم", attendance: 'present', notes: '' };
-                return { ...p, score: evalData.rawScore || 0, grade: evalData.grade, evalData: evalData };
-            }).sort((a, b) => b.score - a.score);
+            let htmlCoach = '';
+            if (coachLeaderboardMode === 'monthly') {
+                let rankedMonthly = [...activePlayers].map(p => {
+                    const mStats = getPlayerMonthlyStats(p.id, coachMonth);
+                    return { ...p, score: mStats.avgScore, count: mStats.count, grade: mStats.grade };
+                }).sort((a, b) => b.score - a.score);
 
-            let htmlCoach = rankedCoach.map((p, idx) => {
-                let ev = p.evalData;
-                let statusBadge = '';
-                if (ev.attendance === 'late') {
-                    statusBadge = '<span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-md border border-amber-300"><i class="fa-solid fa-clock text-amber-600 mr-0.5"></i> متأخر (خُصِم 1.0)</span>';
-                } else if (ev.attendance === 'absent') {
-                    statusBadge = '<span class="bg-rose-100 text-rose-800 text-[10px] font-bold px-2 py-0.5 rounded-md border border-rose-300"><i class="fa-solid fa-user-xmark text-rose-600 mr-0.5"></i> غائب</span>';
-                }
-
-                let commentBox = ev.notes ? `
-                    <div class="mt-2 text-[11px] bg-white/80 p-2 rounded-lg border border-lime-200 text-slate-600 flex items-start gap-1.5">
-                        <i class="fa-solid fa-comment-dots text-lime-600 mt-0.5"></i>
-                        <span><strong class="text-slate-800">ملاحظة الكابتن:</strong> ${ev.notes}</span>
-                    </div>
-                ` : '';
-
-                return `
+                htmlCoach = rankedMonthly.map((p, idx) => `
                     <div class="p-3 sm:p-3.5 rounded-xl bg-lime-50/50 border border-lime-200 text-xs space-y-1">
                         <div class="flex justify-between items-center">
                             <div class="flex items-center gap-2">
                                 <span class="w-6 h-6 rounded-lg bg-white flex items-center justify-center font-bold text-[11px] text-slate-700 border border-lime-200 ${idx === 0 ? 'text-amber-600 border-amber-300 font-black' : ''}">${idx + 1}</span>
                                 <span class="font-bold text-slate-800 cursor-pointer hover:text-lime-700" onclick="openPlayerDetailsModal(${p.id})">${p.name} <span class="text-[10px] text-slate-400">(${p.code})</span></span>
-                                ${statusBadge}
+                                <span class="bg-white text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded-md border border-lime-200">${p.count} تمرين</span>
                             </div>
                             <span class="text-lime-700 font-bold bg-white px-2.5 py-1 rounded-lg border border-lime-200">${p.grade}</span>
                         </div>
-                        ${commentBox}
                     </div>
-                `;
-            }).join('');
+                `).join('');
+            } else {
+                const coachDateEvals = (db.dailyEvaluations && db.dailyEvaluations[coachDate]) ? db.dailyEvaluations[coachDate] : {};
+                let rankedCoach = [...activePlayers].map(p => {
+                    let evalData = coachDateEvals[p.id] || { rawScore: 0, grade: "لم يُقيّم", attendance: 'present', notes: '' };
+                    return { ...p, score: evalData.rawScore || 0, grade: evalData.grade, evalData: evalData };
+                }).sort((a, b) => b.score - a.score);
+
+                htmlCoach = rankedCoach.map((p, idx) => {
+                    let ev = p.evalData;
+                    let statusBadge = '';
+                    if (ev.attendance === 'late') {
+                        statusBadge = '<span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-md border border-amber-300"><i class="fa-solid fa-clock text-amber-600 mr-0.5"></i> متأخر (خُصِم 1.0)</span>';
+                    } else if (ev.attendance === 'absent') {
+                        statusBadge = '<span class="bg-rose-100 text-rose-800 text-[10px] font-bold px-2 py-0.5 rounded-md border border-rose-300"><i class="fa-solid fa-user-xmark text-rose-600 mr-0.5"></i> غائب</span>';
+                    }
+
+                    let commentBox = ev.notes ? `
+                        <div class="mt-2 text-[11px] bg-white/80 p-2 rounded-lg border border-lime-200 text-slate-600 flex items-start gap-1.5">
+                            <i class="fa-solid fa-comment-dots text-lime-600 mt-0.5"></i>
+                            <span><strong class="text-slate-800">ملاحظة الكابتن:</strong> ${ev.notes}</span>
+                        </div>
+                    ` : '';
+
+                    return `
+                        <div class="p-3 sm:p-3.5 rounded-xl bg-lime-50/50 border border-lime-200 text-xs space-y-1">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-6 h-6 rounded-lg bg-white flex items-center justify-center font-bold text-[11px] text-slate-700 border border-lime-200 ${idx === 0 ? 'text-amber-600 border-amber-300 font-black' : ''}">${idx + 1}</span>
+                                    <span class="font-bold text-slate-800 cursor-pointer hover:text-lime-700" onclick="openPlayerDetailsModal(${p.id})">${p.name} <span class="text-[10px] text-slate-400">(${p.code})</span></span>
+                                    ${statusBadge}
+                                </div>
+                                <span class="text-lime-700 font-bold bg-white px-2.5 py-1 rounded-lg border border-lime-200">${p.grade}</span>
+                            </div>
+                            ${commentBox}
+                        </div>
+                    `;
+                }).join('');
+            }
 
             let coachLb = document.getElementById('coach-leaderboard');
             if (coachLb) coachLb.innerHTML = htmlCoach;
