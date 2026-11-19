@@ -42,6 +42,12 @@
             background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
         }
 
+        .yc-badge {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border: 1px solid rgba(163, 230, 53, 0.35);
+            box-shadow: 0 10px 25px -12px rgba(15, 23, 42, 0.45);
+        }
+
         @keyframes toastIn {
             from { transform: translateY(-100%) scale(0.92); opacity: 0; }
             to { transform: translateY(0) scale(1); opacity: 1; }
@@ -69,108 +75,191 @@
     <div id="toast-container" class="fixed top-4 left-1/2 -translate-x-1/2 z-[100] w-full max-w-xs sm:max-w-sm px-3 pointer-events-none flex flex-col gap-2"></div>
 
     <!-- =========================================================
-         1. شاشة الانضمام (تخطيط مقسوم بالكامل Split-Screen)
+         1. شاشة انضم إلينا (تصميم محسّن بالكامل)
          ========================================================= -->
-    <div id="page-register" class="min-h-screen flex flex-col lg:flex-row">
-        <!-- النصف الأيمن: الهوية البصرية -->
-        <div class="lg:w-5/12 court-gradient text-white p-6 sm:p-10 lg:p-12 flex flex-col justify-between relative overflow-hidden">
-            <div class="flex items-center justify-between z-10">
+    <div id="page-register" class="min-h-screen flex flex-col justify-between bg-slate-50">
+        <!-- شريط علوي واضح لصفحة الانضمام -->
+        <header class="bg-white/95 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-40">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-2.5">
                 <div class="flex items-center gap-3">
-                    <img src="logo.jpg" alt="Yalla Tennis Logo" class="w-12 h-12 rounded-2xl object-cover border-2 border-emerald-400/50 shadow-lg">
+                    <img src="logo.jpg" alt="Yalla Tennis Logo" class="w-11 h-11 rounded-2xl object-cover border-2 border-emerald-600/30 shadow-sm">
                     <div>
-                        <span class="block text-base font-black tracking-tight">يلا تنس أكاديمي</span>
-                        <span class="block text-[11px] text-emerald-300 font-bold">Yalla Tennis Academy</span>
+                        <span class="block text-sm sm:text-base font-black text-slate-900">يلا تنس أكاديمي</span>
+                        <span class="block text-[10px] text-emerald-700 font-extrabold">Yalla Tennis Academy</span>
                     </div>
                 </div>
-                <button onclick="showCoachLoginModal()" class="text-[11px] font-extrabold bg-white/10 hover:bg-white/20 text-emerald-200 px-3 py-1.5 rounded-full backdrop-blur-sm transition">
-                    <i class="fa-solid fa-lock ml-1"></i> الإدارة
-                </button>
-            </div>
 
-            <div class="my-8 lg:my-0 space-y-5 z-10">
-                <div class="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/30 text-emerald-200 px-3 py-1 rounded-full text-xs font-extrabold">
-                    <span class="w-2 h-2 rounded-full bg-lime-400 animate-ping"></span>
-                    بوابة اللاعبين والأبطال
-                </div>
-                <h1 class="text-2xl sm:text-4xl font-black leading-snug">
-                    طوّر مستواك في كل تمرين وتابع ترتيبك لحظة بلحظة 🎾
-                </h1>
-                <p class="text-xs sm:text-sm text-emerald-100/80 leading-relaxed">
-                    نظام متابعة احترافي لقياس اللياقة البدنية، التنسيق الحركي، وكفاءة التمرين اليومية مع لوحة شرف للأوائل.
-                </p>
-
-                <div class="pt-2 flex flex-wrap gap-2.5">
-                    <button onclick="showPlayerLoginModal()" class="flex-1 sm:flex-none bg-lime-400 hover:bg-lime-300 text-slate-950 font-black px-5 py-3 rounded-2xl text-xs transition flex items-center justify-center gap-2 shadow-lg">
-                        <i class="fa-solid fa-trophy"></i> دخول لوحة الأوائل بالكود
+                <div class="flex items-center gap-1.5 sm:gap-2">
+                    <button onclick="showPlayerLoginModal()" class="px-3.5 py-2 rounded-xl text-xs font-black bg-emerald-700 hover:bg-emerald-800 text-white transition flex items-center gap-1.5 shadow-sm">
+                        <i class="fa-solid fa-trophy text-lime-300"></i>
+                        <span>لوحة الأوائل</span>
                     </button>
-                    <a href="https://yalla-tennis-gallery.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none bg-white/10 hover:bg-white/20 text-white font-extrabold px-5 py-3 rounded-2xl text-xs transition flex items-center justify-center gap-2 border border-white/15">
-                        <i class="fa-solid fa-camera-retro text-amber-300"></i> معرض الصور
+                    <a href="https://yalla-tennis-gallery.vercel.app/" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl text-xs font-extrabold bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-camera-retro text-amber-600"></i>
+                        <span>معرض الصور</span>
                     </a>
-                </div>
-            </div>
-
-            <div class="text-[11px] text-emerald-200/70 font-semibold z-10 flex items-center justify-between border-t border-white/10 pt-4">
-                <span>© 2026 يلا تنس أكاديمي</span>
-                <span>تطوير: <strong class="text-white">Y Creations</strong></span>
-            </div>
-        </div>
-
-        <!-- النصف الأيسر: فورم الانضمام المباشر -->
-        <div class="lg:w-7/12 bg-slate-50 p-6 sm:p-10 lg:p-16 flex items-center justify-center">
-            <div class="w-full max-w-lg space-y-6">
-                <div>
-                    <span class="text-xs font-black text-orange-600 uppercase tracking-wider">التسجيل الجديد</span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">انضم إلى عائلة يلا تنس</h2>
-                    <p class="text-xs sm:text-sm text-slate-500 font-semibold mt-1">سجّل بيانات اللاعب الآن وسيتم إرسال كود الدخول الخاص بك بعد اعتماد الإدارة.</p>
-                </div>
-
-                <form onsubmit="submitPublicRegistration(event)" class="space-y-4">
-                    <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm focus-within:border-emerald-600 transition">
-                        <label class="block text-[11px] font-extrabold text-slate-500 mb-1">اسم اللاعب الثلاثي</label>
-                        <input type="text" id="pub-name" required placeholder="اكتب الاسم بالكامل..." class="w-full text-sm text-slate-900 font-extrabold focus:outline-none bg-transparent">
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm focus-within:border-emerald-600 transition">
-                            <label class="block text-[11px] font-extrabold text-slate-500 mb-1">العمر (بالسنوات)</label>
-                            <input type="number" id="pub-age" required placeholder="مثال: 12" class="w-full text-sm text-slate-900 font-extrabold focus:outline-none bg-transparent">
-                        </div>
-
-                        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm focus-within:border-emerald-600 transition">
-                            <label class="block text-[11px] font-extrabold text-slate-500 mb-1">المستوى الحالي</label>
-                            <select id="pub-level" class="w-full text-sm text-slate-900 font-extrabold focus:outline-none bg-transparent">
-                                <option value="مبتدئ">مبتدئ</option>
-                                <option value="متوسط">متوسط</option>
-                                <option value="متقدم">متقدم</option>
-                                <option value="محترف">محترف</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm focus-within:border-emerald-600 transition">
-                        <label class="block text-[11px] font-extrabold text-slate-500 mb-1">رقم هاتف ولي الأمر (واتساب)</label>
-                        <input type="tel" id="pub-phone" required placeholder="012xxxxxxxx" class="w-full text-sm text-slate-900 font-extrabold focus:outline-none bg-transparent">
-                    </div>
-
-                    <button type="submit" class="w-full clay-accent hover:opacity-95 text-white font-black py-4 rounded-2xl text-sm transition shadow-lg flex items-center justify-center gap-2">
-                        <span>إرسال طلب الانضمام الآن</span>
-                        <i class="fa-solid fa-arrow-left"></i>
+                    <button onclick="showCoachLoginModal()" class="px-3 py-2 rounded-xl text-xs font-extrabold bg-slate-100 hover:bg-slate-200 text-slate-800 transition">
+                        <i class="fa-solid fa-shield-halved text-slate-600"></i>
                     </button>
-                </form>
-
-                <div class="flex items-center justify-between bg-white px-4 py-3 rounded-2xl border border-slate-200/80 text-xs">
-                    <span class="text-slate-600 font-bold">معاك كودك بالفعل؟</span>
-                    <button onclick="showPlayerLoginModal()" class="text-emerald-700 font-black hover:underline">افتح لوحة الأوائل من هنا ←</button>
                 </div>
             </div>
-        </div>
+        </header>
+
+        <main class="max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 flex-grow space-y-6">
+            <!-- بانر ترحيبي مع بطاقات مزايا واضحة -->
+            <div class="court-gradient text-white rounded-[2rem] p-6 sm:p-9 shadow-xl relative overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center relative z-10">
+                    <div class="lg:col-span-8 space-y-3">
+                        <span class="inline-flex items-center gap-2 bg-lime-400/15 border border-lime-300/30 text-lime-300 px-3 py-1 rounded-full text-[11px] font-black">
+                            <i class="fa-solid fa-tennis-ball"></i> سجل لاعبك الجديد الآن
+                        </span>
+                        <h1 class="text-2xl sm:text-4xl font-black leading-tight">
+                            أهلاً بك في يلا تنس أكاديمي 🎾
+                        </h1>
+                        <p class="text-xs sm:text-sm text-emerald-100/85 leading-relaxed max-w-2xl">
+                            متابعة يومية دقيقة للياقة البدنية، التنسيق الحركي، وكفاءة التمرين مع لوحة أوائل يومية وشهرية وملاحظات مباشرة من الكابتن.
+                        </p>
+                    </div>
+
+                    <div class="lg:col-span-4 grid grid-cols-3 lg:grid-cols-1 gap-2.5">
+                        <div class="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-3 flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-xl bg-lime-400 text-slate-950 flex items-center justify-center font-black shrink-0">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-black text-white">تقييم يومي</p>
+                                <p class="text-[10px] text-emerald-200 font-semibold">لياقة وتنسيق وكفاءة</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-3 flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-black shrink-0">
+                                <i class="fa-solid fa-ranking-star"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-black text-white">لوحة الأوائل</p>
+                                <p class="text-[10px] text-emerald-200 font-semibold">ترتيب يومي وشهري</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-3 flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-xl bg-orange-500 text-white flex items-center justify-center font-black shrink-0">
+                                <i class="fa-solid fa-key"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-black text-white">كود خاص</p>
+                                <p class="text-[10px] text-emerald-200 font-semibold">دخول سريع لكل لاعب</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- شبكة الفورم + بطاقة المساعدة السريعة -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <div class="lg:col-span-7 bg-white rounded-[2rem] p-6 sm:p-8 shadow-sm border border-slate-200/80">
+                    <div class="mb-6 pb-4 border-b border-slate-100">
+                        <span class="text-[11px] font-black text-orange-600">استمارة الانضمام</span>
+                        <h2 class="text-lg sm:text-xl font-black text-slate-900 mt-0.5">تسجيل بيانات لاعب جديد</h2>
+                        <p class="text-xs text-slate-500 font-semibold mt-1">بعد إرسال الطلب سيقوم الكابتن بمراجعته وتوليد كود خاص باللاعب.</p>
+                    </div>
+
+                    <form onsubmit="submitPublicRegistration(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-extrabold text-slate-700 mb-1.5">اسم اللاعب الثلاثي</label>
+                            <input type="text" id="pub-name" required placeholder="اكتب الاسم الكامل..." class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-xs sm:text-sm text-slate-900 font-bold focus:outline-none focus:border-emerald-600 focus:bg-white transition">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-extrabold text-slate-700 mb-1.5">العمر</label>
+                                <input type="number" id="pub-age" required placeholder="مثال: 11" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-xs sm:text-sm text-slate-900 font-bold focus:outline-none focus:border-emerald-600 focus:bg-white transition">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-extrabold text-slate-700 mb-1.5">المستوى</label>
+                                <select id="pub-level" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-xs sm:text-sm text-slate-900 font-bold focus:outline-none focus:border-emerald-600 focus:bg-white transition">
+                                    <option value="مبتدئ">مبتدئ</option>
+                                    <option value="متوسط">متوسط</option>
+                                    <option value="متقدم">متقدم</option>
+                                    <option value="محترف">محترف</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-extrabold text-slate-700 mb-1.5">رقم هاتف ولي الأمر</label>
+                            <input type="tel" id="pub-phone" required placeholder="012xxxxxxxx" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-xs sm:text-sm text-slate-900 font-bold focus:outline-none focus:border-emerald-600 focus:bg-white transition">
+                        </div>
+
+                        <button type="submit" class="w-full clay-accent hover:opacity-95 text-white font-black py-4 rounded-2xl text-xs sm:text-sm transition shadow-md flex items-center justify-center gap-2 mt-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>إرسال طلب الانضمام</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-slate-200/80 space-y-4">
+                        <h3 class="text-sm font-black text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-info text-emerald-700"></i> كيف تبدأ بعد التسجيل؟
+                        </h3>
+                        <div class="space-y-3 text-xs">
+                            <div class="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                                <span class="w-6 h-6 rounded-lg bg-emerald-700 text-white font-black flex items-center justify-center shrink-0">1</span>
+                                <p class="text-slate-700 font-bold leading-relaxed">أرسل طلب الانضمام بالبيانات الصحيحة للاعب وولي الأمر.</p>
+                            </div>
+                            <div class="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                                <span class="w-6 h-6 rounded-lg bg-slate-900 text-lime-300 font-black flex items-center justify-center shrink-0">2</span>
+                                <p class="text-slate-700 font-bold leading-relaxed">تواصل مع الكابتن على واتساب لاستلام الكود الخاص باللاعب.</p>
+                            </div>
+                            <div class="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                                <span class="w-6 h-6 rounded-lg bg-orange-600 text-white font-black flex items-center justify-center shrink-0">3</span>
+                                <p class="text-slate-700 font-bold leading-relaxed">ادخل بالكود من زر «لوحة الأوائل» لمتابعة التقييمات والترتيب.</p>
+                            </div>
+                        </div>
+                        <button onclick="showHowToGetCodeModal()" class="w-full py-3 rounded-2xl bg-emerald-50 hover:bg-emerald-100 text-emerald-900 font-black text-xs border border-emerald-200 transition">
+                            عرض خطوات الحصول على الكود بالتفصيل
+                        </button>
+                    </div>
+
+                    <!-- شارة احترافية Powered by Y Creations -->
+                    <div class="yc-badge text-white rounded-[1.75rem] p-5 flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-11 h-11 rounded-2xl bg-lime-400 text-slate-950 font-black text-base flex items-center justify-center shrink-0 shadow-md">
+                                YC
+                            </div>
+                            <div>
+                                <span class="block text-[10px] uppercase tracking-widest text-lime-300 font-extrabold">Powered by</span>
+                                <span class="block text-sm font-black text-white">Y Creations</span>
+                                <span class="block text-[10px] text-slate-300 font-semibold">Digital Systems &amp; Web Solutions</span>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-black bg-white/10 text-lime-300 px-2.5 py-1 rounded-full border border-white/10">
+                            PRO EDITION
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- فوتر صفحة الانضمام مع شارة Powered by Y Creations -->
+        <footer class="bg-white border-t border-slate-200 py-4 px-4">
+            <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+                <p class="text-slate-500 font-bold">© 2026 يلا تنس أكاديمي — جميع الحقوق محفوظة</p>
+                <div class="inline-flex items-center gap-2 bg-slate-900 text-white px-3.5 py-1.5 rounded-full shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-lime-400"></span>
+                    <span class="text-[11px] font-bold text-slate-300">Powered by</span>
+                    <span class="text-xs font-black text-lime-300 tracking-wide">Y Creations</span>
+                </div>
+            </div>
+        </footer>
     </div>
 
     <!-- =========================================================
-         2. لوحة تحكم الكابتن (هيكل App Shell بشريط جانبي Sidebar)
+         2. لوحة تحكم الكابتن (App Shell بشريط جانبي Sidebar)
          ========================================================= -->
     <div id="page-coach" class="hidden min-h-screen flex flex-col md:flex-row bg-slate-100 pb-20 md:pb-0">
-        <!-- الشريط الجانبي الثابت للديسكتوب -->
         <aside class="hidden md:flex md:w-64 lg:w-72 court-gradient text-white flex-col justify-between p-5 shrink-0 sticky top-0 h-screen no-print">
             <div class="space-y-6">
                 <div class="flex items-center gap-3 pb-4 border-b border-white/10">
@@ -201,7 +290,7 @@
                 </nav>
             </div>
 
-            <div class="space-y-2 pt-4 border-t border-white/10">
+            <div class="space-y-2.5 pt-4 border-t border-white/10">
                 <a href="https://yalla-tennis-gallery.vercel.app/" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-xs font-bold text-white transition">
                     <i class="fa-solid fa-images text-amber-300"></i> معرض الصور
                 </a>
@@ -211,18 +300,22 @@
                 <button onclick="logout()" class="w-full px-3 py-2.5 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-xs font-black text-rose-200 transition">
                     تسجيل خروج
                 </button>
+                <div class="pt-1 text-center">
+                    <span class="inline-flex items-center gap-1.5 text-[10px] font-black text-lime-300/90 bg-black/25 px-3 py-1 rounded-full">
+                        <span>Powered by</span>
+                        <span class="text-white">Y Creations</span>
+                    </span>
+                </div>
             </div>
         </aside>
 
-        <!-- المحتوى الرئيسي للكابتن -->
         <div class="flex-1 flex flex-col min-w-0">
-            <!-- شريط علوي للموبايل فقط -->
             <div class="md:hidden court-gradient text-white p-4 flex justify-between items-center no-print">
                 <div class="flex items-center gap-2.5">
                     <img src="logo.jpg" alt="Logo" class="w-9 h-9 rounded-xl object-cover">
                     <div>
                         <h2 id="coach-welcome-mobile" class="text-xs font-black">لوحة الكابتن</h2>
-                        <span class="text-[10px] text-lime-300 font-bold">يلا تنس أكاديمي</span>
+                        <span class="text-[10px] text-lime-300 font-bold">Powered by Y Creations</span>
                     </div>
                 </div>
                 <div class="flex gap-1.5">
@@ -231,7 +324,6 @@
                 </div>
             </div>
 
-            <!-- شريط إحصائيات مضغوط أعلى المحتوى -->
             <div class="bg-white border-b border-slate-200 px-4 sm:px-8 py-3.5 flex flex-wrap items-center justify-between gap-3 no-print">
                 <div class="flex items-center gap-4 sm:gap-8">
                     <div class="flex items-center gap-2">
@@ -259,20 +351,60 @@
 
             <main class="p-4 sm:p-8 max-w-5xl w-full mx-auto space-y-6">
 
-                <!-- 1) شاشة التقييم اليومي بأزرار أرقام 1-10 سريعة -->
+                <!-- 1) شاشة التقييم اليومي بالسلايدرات + زر حالة التقييم السريعة -->
                 <div id="coach-tab-eval" class="space-y-5">
-                    <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-slate-200/80 space-y-5">
+                    <div id="eval-form-card" class="bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-slate-200/80 space-y-5">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
                             <div>
                                 <h3 class="text-base font-black text-slate-900">تقييم التمرين اليومي</h3>
-                                <p class="text-xs text-slate-500 font-semibold">اختر اللاعب ثم حدد الحضور والدرجات بضغطة واحدة</p>
+                                <p class="text-xs text-slate-500 font-semibold">اختر اللاعب أو افتح قائمة حالة التقييم للوصول السريع للي متقيّمش</p>
                             </div>
-                            <input type="text" id="coach-player-search" oninput="filterCoachPlayerList()" placeholder="🔍 بحث سريع بالاسم أو الكود..." class="w-full sm:w-64 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs font-bold focus:outline-none focus:border-emerald-600">
+                            <button type="button" onclick="toggleEvalRosterPanel()" id="btn-toggle-eval-roster" class="px-4 py-2.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-lime-300 text-xs font-black transition flex items-center justify-center gap-2 shadow-sm shrink-0">
+                                <i class="fa-solid fa-list-check"></i>
+                                <span>حالة التقييم اليومي</span>
+                                <span id="eval-roster-badge" class="bg-lime-400 text-slate-950 px-2 py-0.5 rounded-full text-[10px] font-black">0 باقي</span>
+                            </button>
                         </div>
 
-                        <div>
-                            <label class="block text-xs font-extrabold text-slate-700 mb-1.5">اللاعب المحدد للتقييم</label>
-                            <select id="coach-player-select" onchange="checkPlayerEvalStatusForSelectedDate()" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-xs sm:text-sm text-slate-900 font-black focus:outline-none focus:border-emerald-600"></select>
+                        <!-- لوحة حالة التقييم (مين اتقيّم ومين لسه) -->
+                        <div id="eval-roster-panel" class="hidden p-4 rounded-2xl bg-slate-50 border border-slate-200/90 space-y-4">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <h4 class="text-xs font-black text-slate-900">اضغط على أي لاعب «لم يُقيّم» لتقييمه مباشرة:</h4>
+                                <button type="button" onclick="toggleEvalRosterPanel()" class="text-xs font-extrabold text-slate-500 hover:text-slate-800">إخفاء القائمة ×</button>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-white p-3.5 rounded-2xl border border-amber-200 space-y-2">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs font-black text-amber-800 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-clock text-amber-500"></i> لم يتم تقييمهم بعد
+                                        </span>
+                                        <span id="roster-pending-count" class="text-[10px] font-black bg-amber-100 text-amber-900 px-2 py-0.5 rounded-full">0</span>
+                                    </div>
+                                    <div id="roster-pending-list" class="space-y-1.5 max-h-56 overflow-y-auto"></div>
+                                </div>
+
+                                <div class="bg-white p-3.5 rounded-2xl border border-emerald-200 space-y-2">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs font-black text-emerald-800 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-check text-emerald-600"></i> تم تقييمهم
+                                        </span>
+                                        <span id="roster-done-count" class="text-[10px] font-black bg-emerald-100 text-emerald-900 px-2 py-0.5 rounded-full">0</span>
+                                    </div>
+                                    <div id="roster-done-list" class="space-y-1.5 max-h-56 overflow-y-auto"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+                            <div class="sm:col-span-5">
+                                <label class="block text-xs font-extrabold text-slate-700 mb-1.5">بحث بالاسم أو الكود</label>
+                                <input type="text" id="coach-player-search" oninput="filterCoachPlayerList()" placeholder="🔍 ابحث عن لاعب..." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold focus:outline-none focus:border-emerald-600">
+                            </div>
+                            <div class="sm:col-span-7">
+                                <label class="block text-xs font-extrabold text-slate-700 mb-1.5">اختر اللاعب</label>
+                                <select id="coach-player-select" onchange="checkPlayerEvalStatusForSelectedDate()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 font-black focus:outline-none focus:border-emerald-600"></select>
+                            </div>
                         </div>
 
                         <div id="already-evaluated-alert" class="hidden p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold flex flex-wrap items-center justify-between gap-2">
@@ -282,58 +414,55 @@
 
                         <div id="eval-inputs-container" class="space-y-5">
                             <!-- الحضور -->
-                            <div>
-                                <label class="block text-xs font-extrabold text-slate-700 mb-2">1. حالة الحضور</label>
-                                <div class="grid grid-cols-3 gap-2.5">
-                                    <button type="button" onclick="setAttendance('present')" id="btn-present" class="py-3 rounded-2xl font-black text-xs bg-emerald-700 text-white transition">حاضر</button>
-                                    <button type="button" onclick="setAttendance('late')" id="btn-late" class="py-3 rounded-2xl font-extrabold text-xs bg-slate-100 text-slate-700 transition">متأخر (-1)</button>
-                                    <button type="button" onclick="setAttendance('absent')" id="btn-absent" class="py-3 rounded-2xl font-extrabold text-xs bg-slate-100 text-slate-700 transition">غائب (0)</button>
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/70 space-y-2.5">
+                                <label class="block text-xs font-extrabold text-slate-700">حالة الحضور</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <button type="button" onclick="setAttendance('present')" id="btn-present" class="py-2.5 px-3 rounded-xl font-extrabold text-xs bg-emerald-700 text-white transition">حاضر</button>
+                                    <button type="button" onclick="setAttendance('late')" id="btn-late" class="py-2.5 px-3 rounded-xl font-extrabold text-xs bg-white text-slate-700 border border-slate-200 transition">متأخر (-1)</button>
+                                    <button type="button" onclick="setAttendance('absent')" id="btn-absent" class="py-2.5 px-3 rounded-xl font-extrabold text-xs bg-white text-slate-700 border border-slate-200 transition">غائب (0)</button>
                                 </div>
                             </div>
 
-                            <!-- أزرار تقييم 1 إلى 10 بدل السلايدر -->
-                            <div class="space-y-4">
-                                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/70">
-                                    <div class="flex justify-between items-center mb-2.5">
-                                        <span class="text-xs font-black text-slate-800">2. اللياقة البدنية (Fitness)</span>
-                                        <span id="val-fitness" class="text-xs font-black bg-emerald-700 text-white px-2.5 py-0.5 rounded-lg">8 / 10</span>
+                            <!-- سلايدرات التقييم الأصلية (1 - 10) -->
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/70 space-y-4">
+                                <div>
+                                    <div class="flex justify-between items-center mb-1.5">
+                                        <label class="text-xs font-extrabold text-slate-700">تمرين اللياقة البدنية (Fitness)</label>
+                                        <span id="val-fitness" class="text-xs font-black px-2.5 py-0.5 rounded-full text-white bg-emerald-700 transition-all duration-300">8</span>
                                     </div>
-                                    <input type="hidden" id="input-fitness" value="8">
-                                    <div id="pills-fitness" class="grid grid-cols-10 gap-1 sm:gap-1.5"></div>
+                                    <input type="range" id="input-fitness" min="1" max="10" value="8" oninput="updateSliderUI('fitness')" class="w-full cursor-pointer accent-emerald-700">
                                 </div>
 
-                                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/70">
-                                    <div class="flex justify-between items-center mb-2.5">
-                                        <span class="text-xs font-black text-slate-800">3. التنسيق الحركي (Coordination)</span>
-                                        <span id="val-tennis" class="text-xs font-black bg-emerald-700 text-white px-2.5 py-0.5 rounded-lg">8 / 10</span>
+                                <div>
+                                    <div class="flex justify-between items-center mb-1.5">
+                                        <label class="text-xs font-extrabold text-slate-700">تمرين التنسيق (Coordination)</label>
+                                        <span id="val-tennis" class="text-xs font-black px-2.5 py-0.5 rounded-full text-white bg-emerald-700 transition-all duration-300">8</span>
                                     </div>
-                                    <input type="hidden" id="input-tennis" value="8">
-                                    <div id="pills-tennis" class="grid grid-cols-10 gap-1 sm:gap-1.5"></div>
+                                    <input type="range" id="input-tennis" min="1" max="10" value="8" oninput="updateSliderUI('tennis')" class="w-full cursor-pointer accent-emerald-700">
                                 </div>
 
-                                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/70">
-                                    <div class="flex justify-between items-center mb-2.5">
-                                        <span class="text-xs font-black text-slate-800">4. كفاءة التمرين (Training Efficiency)</span>
-                                        <span id="val-efficiency" class="text-xs font-black bg-emerald-700 text-white px-2.5 py-0.5 rounded-lg">8 / 10</span>
+                                <div>
+                                    <div class="flex justify-between items-center mb-1.5">
+                                        <label class="text-xs font-extrabold text-slate-700">كفاءة التمرين (Training Efficiency)</label>
+                                        <span id="val-efficiency" class="text-xs font-black px-2.5 py-0.5 rounded-full text-white bg-emerald-700 transition-all duration-300">8</span>
                                     </div>
-                                    <input type="hidden" id="input-efficiency" value="8">
-                                    <div id="pills-efficiency" class="grid grid-cols-10 gap-1 sm:gap-1.5"></div>
+                                    <input type="range" id="input-efficiency" min="1" max="10" value="8" oninput="updateSliderUI('efficiency')" class="w-full cursor-pointer accent-emerald-700">
                                 </div>
                             </div>
 
                             <div>
-                                <label class="block text-xs font-extrabold text-slate-700 mb-1.5">5. ملاحظات الكابتن</label>
-                                <input type="text" id="input-notes" placeholder="اكتب ملاحظة أو توجيه للاعب..." class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-xs text-slate-900 font-bold focus:outline-none focus:border-emerald-600">
+                                <label class="block text-xs font-extrabold text-slate-700 mb-1.5">ملاحظات الكابتن</label>
+                                <input type="text" id="input-notes" placeholder="اكتب ملاحظة تشجيعية أو توجيه للاعب..." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 font-bold focus:outline-none focus:border-emerald-600">
                             </div>
 
-                            <button id="btn-submit-eval" onclick="saveEvaluation()" class="w-full clay-accent hover:opacity-95 font-black py-4 rounded-2xl text-xs sm:text-sm text-white transition shadow-md">
-                                حفظ واعتماد التقييم
+                            <button id="btn-submit-eval" onclick="saveEvaluation()" class="w-full bg-emerald-700 hover:bg-emerald-800 font-black py-3.5 rounded-2xl text-xs sm:text-sm text-white transition shadow-md">
+                                اعتماد وحفظ التقييم للتاريخ المحدد
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- 2) شاشة لوحة الأوائل المستقلة بمنصة تتويج Podium -->
+                <!-- 2) شاشة لوحة الأوائل -->
                 <div id="coach-tab-leaderboard" class="hidden space-y-5">
                     <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-slate-200/80 space-y-5">
                         <div class="flex flex-wrap justify-between items-center gap-3">
@@ -352,10 +481,7 @@
                             </div>
                         </div>
 
-                        <!-- منصة التتويج لأول 3 -->
                         <div id="coach-podium" class="grid grid-cols-3 gap-2 sm:gap-4 items-end pt-3"></div>
-
-                        <!-- باقي القائمة في جدول نظيف -->
                         <div id="coach-leaderboard" class="divide-y divide-slate-100 border border-slate-200/80 rounded-2xl overflow-hidden"></div>
                     </div>
                 </div>
@@ -452,7 +578,7 @@
     </div>
 
     <!-- =========================================================
-         3. لوحة الطالب (بطاقة لاعب + منصة تتويج + قائمة)
+         3. لوحة الطالب
          ========================================================= -->
     <div id="page-player" class="hidden min-h-screen bg-slate-100">
         <div class="court-gradient text-white px-4 sm:px-8 pt-6 pb-16">
@@ -653,6 +779,7 @@
         let isInitialSyncDone = false;
         let coachLeaderboardMode = 'daily';
         let isResetOperationInProgress = false;
+        let isEvalRosterOpen = false;
 
         const FULL_BACKUP_STORAGE_KEY = "yalla_tennis_full_backup_v1";
         const LAST_12H_BACKUP_TS_KEY = "yalla_tennis_last_12h_backup_ts";
@@ -896,35 +1023,117 @@
             });
         }
 
-        function renderRatingPills(type) {
-            const container = document.getElementById(`pills-${type}`);
-            const hiddenInput = document.getElementById(`input-${type}`);
+        function updateSliderUI(type) {
+            const el = document.getElementById(`input-${type}`);
+            if (!el) return;
+            const val = Number(el.value);
             const badge = document.getElementById(`val-${type}`);
-            if (!container || !hiddenInput) return;
+            if (!badge) return;
+            badge.innerText = val;
 
-            const currentVal = Number(hiddenInput.value || 8);
-            if (badge) badge.innerText = `${currentVal} / 10`;
-
-            let html = '';
-            for (let i = 1; i <= 10; i++) {
-                const active = i === currentVal;
-                let btnClass = 'py-2 rounded-xl text-xs font-black transition ';
-                if (active) {
-                    if (i <= 3) btnClass += 'bg-rose-600 text-white shadow-sm';
-                    else if (i <= 6) btnClass += 'bg-amber-400 text-slate-950 shadow-sm';
-                    else btnClass += 'bg-emerald-700 text-white shadow-sm';
-                } else {
-                    btnClass += 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100';
-                }
-                html += `<button type="button" onclick="selectMetricScore('${type}', ${i})" class="${btnClass}">${i}</button>`;
+            if (val <= 3) {
+                badge.className = "text-xs font-black px-2.5 py-0.5 rounded-full text-white bg-rose-600 transition-all duration-300";
+            } else if (val <= 6) {
+                badge.className = "text-xs font-black px-2.5 py-0.5 rounded-full text-slate-950 bg-amber-400 transition-all duration-300";
+            } else if (val <= 8) {
+                badge.className = "text-xs font-black px-2.5 py-0.5 rounded-full text-white bg-emerald-700 transition-all duration-300";
+            } else {
+                badge.className = "text-xs font-black px-2.5 py-0.5 rounded-full text-slate-950 bg-lime-400 transition-all duration-300";
             }
-            container.innerHTML = html;
         }
 
-        function selectMetricScore(type, score) {
-            const hiddenInput = document.getElementById(`input-${type}`);
-            if (hiddenInput) hiddenInput.value = score;
-            renderRatingPills(type);
+        function toggleEvalRosterPanel(forceState = null) {
+            isEvalRosterOpen = (typeof forceState === 'boolean') ? forceState : !isEvalRosterOpen;
+            const panel = document.getElementById('eval-roster-panel');
+            if (panel) {
+                if (isEvalRosterOpen) panel.classList.remove('hidden');
+                else panel.classList.add('hidden');
+            }
+            if (isEvalRosterOpen) {
+                renderEvalRosterPanel();
+            }
+        }
+
+        function quickSelectPlayerForEval(playerId) {
+            const searchInput = document.getElementById('coach-player-search');
+            if (searchInput) searchInput.value = '';
+            filterCoachPlayerList();
+
+            const selectEl = document.getElementById('coach-player-select');
+            if (selectEl) {
+                selectEl.value = String(playerId);
+                checkPlayerEvalStatusForSelectedDate();
+            }
+
+            toggleEvalRosterPanel(false);
+            const formCard = document.getElementById('eval-form-card');
+            if (formCard) {
+                formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function renderEvalRosterPanel() {
+            const selectedDate = getSelectedCoachDate();
+            const dateEvals = (db.dailyEvaluations && db.dailyEvaluations[selectedDate]) ? db.dailyEvaluations[selectedDate] : {};
+            const activePlayers = db.players.filter(p => !p.isBlocked);
+
+            const pendingPlayers = activePlayers.filter(p => !dateEvals[p.id]);
+            const donePlayers = activePlayers.filter(p => Boolean(dateEvals[p.id]));
+
+            const badgeEl = document.getElementById('eval-roster-badge');
+            if (badgeEl) badgeEl.innerText = `${pendingPlayers.length} باقي`;
+
+            const pendCountEl = document.getElementById('roster-pending-count');
+            const doneCountEl = document.getElementById('roster-done-count');
+            if (pendCountEl) pendCountEl.innerText = pendingPlayers.length;
+            if (doneCountEl) doneCountEl.innerText = donePlayers.length;
+
+            const pendListEl = document.getElementById('roster-pending-list');
+            if (pendListEl) {
+                if (pendingPlayers.length === 0) {
+                    pendListEl.innerHTML = `<p class="text-[11px] text-emerald-700 font-bold py-3 text-center">ممتاز! تم تقييم كل اللاعبين النشطين في هذا التاريخ.</p>`;
+                } else {
+                    pendListEl.innerHTML = pendingPlayers.map(p => `
+                        <button type="button" onclick="quickSelectPlayerForEval(${p.id})" class="w-full flex items-center justify-between gap-2 p-2.5 rounded-xl bg-amber-50/70 hover:bg-amber-100 border border-amber-200/80 text-right transition group">
+                            <div class="flex items-center gap-2 min-w-0">
+                                <span class="w-7 h-7 rounded-lg bg-amber-400 text-slate-950 font-black text-xs flex items-center justify-center shrink-0">${p.avatar || p.name.charAt(0)}</span>
+                                <div class="truncate">
+                                    <span class="block text-xs font-black text-slate-900 truncate">${p.name}</span>
+                                    <span class="block text-[10px] text-slate-500 font-mono font-bold">${p.code} • ${p.level}</span>
+                                </div>
+                            </div>
+                            <span class="text-[10px] font-black bg-slate-900 group-hover:bg-emerald-700 text-lime-300 group-hover:text-white px-2.5 py-1 rounded-lg shrink-0 transition">
+                                قيّم الآن ←
+                            </span>
+                        </button>
+                    `).join('');
+                }
+            }
+
+            const doneListEl = document.getElementById('roster-done-list');
+            if (doneListEl) {
+                if (donePlayers.length === 0) {
+                    doneListEl.innerHTML = `<p class="text-[11px] text-slate-400 font-bold py-3 text-center">لم يتم تقييم أي لاعب في هذا التاريخ بعد.</p>`;
+                } else {
+                    doneListEl.innerHTML = donePlayers.map(p => {
+                        const ev = dateEvals[p.id];
+                        return `
+                            <button type="button" onclick="quickSelectPlayerForEval(${p.id})" class="w-full flex items-center justify-between gap-2 p-2.5 rounded-xl bg-emerald-50/60 hover:bg-emerald-100/70 border border-emerald-200/70 text-right transition">
+                                <div class="flex items-center gap-2 min-w-0">
+                                    <span class="w-7 h-7 rounded-lg bg-emerald-700 text-white font-black text-xs flex items-center justify-center shrink-0">${p.avatar || p.name.charAt(0)}</span>
+                                    <div class="truncate">
+                                        <span class="block text-xs font-bold text-slate-900 truncate">${p.name}</span>
+                                        <span class="block text-[10px] text-slate-500 font-mono font-bold">${p.code}</span>
+                                    </div>
+                                </div>
+                                <span class="text-[11px] font-black text-emerald-800 bg-white px-2.5 py-1 rounded-lg border border-emerald-200 shrink-0">
+                                    ${ev.grade}
+                                </span>
+                            </button>
+                        `;
+                    }).join('');
+                }
+            }
         }
 
         function setCoachLeaderboardMode(mode) {
@@ -1018,13 +1227,13 @@
             const btnL = document.getElementById('btn-late');
             const btnA = document.getElementById('btn-absent');
 
-            if (btnP) btnP.className = "py-3 rounded-2xl font-extrabold text-xs bg-slate-100 text-slate-700 transition";
-            if (btnL) btnL.className = "py-3 rounded-2xl font-extrabold text-xs bg-slate-100 text-slate-700 transition";
-            if (btnA) btnA.className = "py-3 rounded-2xl font-extrabold text-xs bg-slate-100 text-slate-700 transition";
+            if (btnP) btnP.className = "py-2.5 px-3 rounded-xl font-extrabold text-xs bg-white text-slate-700 border border-slate-200 transition";
+            if (btnL) btnL.className = "py-2.5 px-3 rounded-xl font-extrabold text-xs bg-white text-slate-700 border border-slate-200 transition";
+            if (btnA) btnA.className = "py-2.5 px-3 rounded-xl font-extrabold text-xs bg-white text-slate-700 border border-slate-200 transition";
 
-            if (status === 'present' && btnP) btnP.className = "py-3 rounded-2xl font-black text-xs bg-emerald-700 text-white transition";
-            if (status === 'late' && btnL) btnL.className = "py-3 rounded-2xl font-black text-xs bg-amber-400 text-slate-950 transition";
-            if (status === 'absent' && btnA) btnA.className = "py-3 rounded-2xl font-black text-xs bg-rose-600 text-white transition";
+            if (status === 'present' && btnP) btnP.className = "py-2.5 px-3 rounded-xl font-extrabold text-xs bg-emerald-700 text-white transition";
+            if (status === 'late' && btnL) btnL.className = "py-2.5 px-3 rounded-xl font-extrabold text-xs bg-amber-400 text-slate-950 transition";
+            if (status === 'absent' && btnA) btnA.className = "py-2.5 px-3 rounded-xl font-extrabold text-xs bg-rose-600 text-white transition";
         }
 
         function getSelectedCoachDate() {
@@ -1039,6 +1248,7 @@
 
         function onDateChange() {
             checkPlayerEvalStatusForSelectedDate();
+            if (isEvalRosterOpen) renderEvalRosterPanel();
             renderLeaderboards();
         }
 
@@ -1389,7 +1599,7 @@
 
         function buildPodiumHTML(topThree) {
             if (!topThree || topThree.length === 0) return '';
-            const order = [1, 0, 2]; // الثاني، الأول، الثالث
+            const order = [1, 0, 2];
             return order.map(rankIdx => {
                 const p = topThree[rankIdx];
                 if (!p) return `<div></div>`;
@@ -1420,14 +1630,17 @@
             const stEval = document.getElementById('stat-evaluated-today');
             const stReq = document.getElementById('stat-pending-requests');
 
-            if (stTotal) stTotal.innerText = db.players.filter(p => !p.isBlocked).length;
-            if (stEval) {
-                const evalsToday = (db.dailyEvaluations && db.dailyEvaluations[selectedCoachDate])
-                    ? Object.keys(db.dailyEvaluations[selectedCoachDate]).length
-                    : 0;
-                stEval.innerText = evalsToday;
-            }
+            const activePlayers = db.players.filter(p => !p.isBlocked);
+            const dateEvals = (db.dailyEvaluations && db.dailyEvaluations[selectedCoachDate]) ? db.dailyEvaluations[selectedCoachDate] : {};
+            const evalsTodayCount = Object.keys(dateEvals).length;
+            const remainingToEval = activePlayers.filter(p => !dateEvals[p.id]).length;
+
+            if (stTotal) stTotal.innerText = activePlayers.length;
+            if (stEval) stEval.innerText = evalsTodayCount;
             if (stReq) stReq.innerText = db.requests.length;
+
+            const badgeEl = document.getElementById('eval-roster-badge');
+            if (badgeEl) badgeEl.innerText = `${remainingToEval} باقي`;
 
             const cLbDate = document.getElementById('coach-lb-date');
             const pLbDate = document.getElementById('player-lb-date');
@@ -1439,6 +1652,7 @@
             if (pLbDate) pLbDate.innerText = `تاريخ النتائج: ${selectedPlayerDate}`;
 
             filterCoachPlayerList();
+            if (isEvalRosterOpen) renderEvalRosterPanel();
 
             const tabCoachesBtn = document.getElementById('tab-btn-coaches');
             const mNavCoachesBtn = document.getElementById('mnav-coaches');
@@ -1552,9 +1766,9 @@
                 }
             }
 
-            renderRatingPills('fitness');
-            renderRatingPills('tennis');
-            renderRatingPills('efficiency');
+            updateSliderUI('fitness');
+            updateSliderUI('tennis');
+            updateSliderUI('efficiency');
         }
 
         function renderLeaderboards() {
