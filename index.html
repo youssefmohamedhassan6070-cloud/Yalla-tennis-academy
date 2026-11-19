@@ -29,23 +29,33 @@
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #f1f5f9;
-            color: #0f172a;
+            background-color: #090d16;
+            color: #f8fafc;
             -webkit-tap-highlight-color: transparent;
         }
 
-        .court-gradient {
-            background: linear-gradient(160deg, #064e3b 0%, #022c22 55%, #0f172a 100%);
+        .hero-arena {
+            background:
+                radial-gradient(circle at 82% 18%, rgba(163, 230, 53, 0.16), transparent 42%),
+                radial-gradient(circle at 15% 85%, rgba(16, 185, 129, 0.22), transparent 45%),
+                linear-gradient(145deg, #062e22 0%, #09131d 55%, #060911 100%);
         }
 
-        .clay-accent {
-            background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.72);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .lime-cta {
+            background: linear-gradient(135deg, #a3e635 0%, #65a30d 100%);
+            color: #061005;
         }
 
         .yc-badge {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.95) 100%);
             border: 1px solid rgba(163, 230, 53, 0.35);
-            box-shadow: 0 10px 25px -12px rgba(15, 23, 42, 0.45);
+            box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.65);
         }
 
         @keyframes toastIn {
@@ -60,8 +70,8 @@
         .toast-exit { animation: toastOut 0.3s cubic-bezier(0.7, 0, 0.84, 0) forwards; }
 
         ::-webkit-scrollbar { width: 5px; height: 5px; }
-        ::-webkit-scrollbar-track { background: #e2e8f0; }
-        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 999px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 999px; }
 
         @media print {
             aside, nav, footer, #toast-container, .no-print { display: none !important; }
@@ -70,115 +80,168 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col selection:bg-emerald-200">
+<body class="min-h-screen flex flex-col selection:bg-lime-300 selection:text-slate-950">
 
     <div id="toast-container" class="fixed top-4 left-1/2 -translate-x-1/2 z-[100] w-full max-w-xs sm:max-w-sm px-3 pointer-events-none flex flex-col gap-2"></div>
 
     <!-- =========================================================
-         1. شاشة انضم إلينا (تصميم محسّن بالكامل)
+         1. الهوم بيج الرئيسية (Homepage فخمة برسالة ترحيبية وزر انضم إلينا)
          ========================================================= -->
-    <div id="page-register" class="min-h-screen flex flex-col justify-between bg-slate-50">
-        <!-- شريط علوي واضح لصفحة الانضمام -->
-        <header class="bg-white/95 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-40">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-2.5">
+    <div id="page-home" class="min-h-screen flex flex-col justify-between hero-arena text-white">
+        <header class="border-b border-white/10 bg-slate-950/45 backdrop-blur-md sticky top-0 z-40">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
                 <div class="flex items-center gap-3">
-                    <img src="logo.jpg" alt="Yalla Tennis Logo" class="w-11 h-11 rounded-2xl object-cover border-2 border-emerald-600/30 shadow-sm">
+                    <img src="logo.jpg" alt="Yalla Tennis Academy" class="w-11 h-11 rounded-2xl object-cover border border-lime-400/40 shadow-md">
                     <div>
-                        <span class="block text-sm sm:text-base font-black text-slate-900">يلا تنس أكاديمي</span>
-                        <span class="block text-[10px] text-emerald-700 font-extrabold">Yalla Tennis Academy</span>
+                        <span class="block text-sm sm:text-base font-black text-white">يلا تنس أكاديمي</span>
+                        <span class="block text-[10px] text-lime-300 font-extrabold tracking-wide">YALLA TENNIS ACADEMY</span>
                     </div>
                 </div>
 
-                <div class="flex items-center gap-1.5 sm:gap-2">
-                    <button onclick="showPlayerLoginModal()" class="px-3.5 py-2 rounded-xl text-xs font-black bg-emerald-700 hover:bg-emerald-800 text-white transition flex items-center gap-1.5 shadow-sm">
-                        <i class="fa-solid fa-trophy text-lime-300"></i>
+                <div class="flex items-center gap-2">
+                    <button onclick="showPlayerLoginModal()" class="px-3.5 py-2 rounded-xl text-xs font-black bg-white/10 hover:bg-white/15 text-white border border-white/10 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-trophy text-amber-300"></i>
                         <span>لوحة الأوائل</span>
                     </button>
-                    <a href="https://yalla-tennis-gallery.vercel.app/" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl text-xs font-extrabold bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 transition flex items-center gap-1.5">
-                        <i class="fa-solid fa-camera-retro text-amber-600"></i>
+                    <a href="https://yalla-tennis-gallery.vercel.app/" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl text-xs font-extrabold bg-amber-400/15 hover:bg-amber-400/25 text-amber-200 border border-amber-300/25 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-camera-retro text-amber-300"></i>
                         <span>معرض الصور</span>
                     </a>
-                    <button onclick="showCoachLoginModal()" class="px-3 py-2 rounded-xl text-xs font-extrabold bg-slate-100 hover:bg-slate-200 text-slate-800 transition">
-                        <i class="fa-solid fa-shield-halved text-slate-600"></i>
+                    <button onclick="showCoachLoginModal()" class="px-3 py-2 rounded-xl text-xs font-extrabold bg-white/10 hover:bg-white/15 text-slate-200 border border-white/10 transition" title="دخول الكباتن">
+                        <i class="fa-solid fa-shield-halved text-lime-300"></i>
                     </button>
                 </div>
             </div>
         </header>
 
-        <main class="max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 flex-grow space-y-6">
-            <!-- بانر ترحيبي مع بطاقات مزايا واضحة -->
-            <div class="court-gradient text-white rounded-[2rem] p-6 sm:p-9 shadow-xl relative overflow-hidden">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center relative z-10">
-                    <div class="lg:col-span-8 space-y-3">
-                        <span class="inline-flex items-center gap-2 bg-lime-400/15 border border-lime-300/30 text-lime-300 px-3 py-1 rounded-full text-[11px] font-black">
-                            <i class="fa-solid fa-tennis-ball"></i> سجل لاعبك الجديد الآن
-                        </span>
-                        <h1 class="text-2xl sm:text-4xl font-black leading-tight">
-                            أهلاً بك في يلا تنس أكاديمي 🎾
-                        </h1>
-                        <p class="text-xs sm:text-sm text-emerald-100/85 leading-relaxed max-w-2xl">
-                            متابعة يومية دقيقة للياقة البدنية، التنسيق الحركي، وكفاءة التمرين مع لوحة أوائل يومية وشهرية وملاحظات مباشرة من الكابتن.
-                        </p>
+        <main class="max-w-6xl w-full mx-auto px-4 sm:px-6 py-10 sm:py-16 flex-grow flex flex-col justify-center">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-8 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-lime-400/15 border border-lime-300/30 text-lime-300 text-xs font-black">
+                        <span class="w-2 h-2 rounded-full bg-lime-400 animate-pulse"></span>
+                        <span>أكاديمية صناعة أبطال التنس</span>
                     </div>
 
-                    <div class="lg:col-span-4 grid grid-cols-3 lg:grid-cols-1 gap-2.5">
-                        <div class="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-3 flex items-center gap-3">
-                            <div class="w-9 h-9 rounded-xl bg-lime-400 text-slate-950 flex items-center justify-center font-black shrink-0">
-                                <i class="fa-solid fa-bolt"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs font-black text-white">تقييم يومي</p>
-                                <p class="text-[10px] text-emerald-200 font-semibold">لياقة وتنسيق وكفاءة</p>
-                            </div>
-                        </div>
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.18] tracking-tight text-white">
+                        أهلاً بك في عالم
+                        <span class="text-lime-300 block sm:inline">يلا تنس أكاديمي</span>
+                        <span class="block text-xl sm:text-3xl text-emerald-100/90 font-extrabold mt-3">
+                            حيث يُبنى الأداء الاحترافي خطوة بخطوة على أرض الملعب 🎾
+                        </span>
+                    </h1>
 
-                        <div class="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-3 flex items-center gap-3">
-                            <div class="w-9 h-9 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-black shrink-0">
-                                <i class="fa-solid fa-ranking-star"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs font-black text-white">لوحة الأوائل</p>
-                                <p class="text-[10px] text-emerald-200 font-semibold">ترتيب يومي وشهري</p>
-                            </div>
-                        </div>
+                    <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl font-semibold">
+                        نرحب بك في منصتنا الرياضية المتكاملة؛ تجربة تدريبية حديثة تجمع بين المتابعة الفنية الدقيقة، التقييم اليومي، وروح المنافسة الحقيقية لكل لاعب يسعى للتميز.
+                    </p>
 
-                        <div class="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-3 flex items-center gap-3">
-                            <div class="w-9 h-9 rounded-xl bg-orange-500 text-white flex items-center justify-center font-black shrink-0">
-                                <i class="fa-solid fa-key"></i>
+                    <div class="flex flex-wrap items-center gap-3.5 pt-2">
+                        <button onclick="showPage('register')" class="lime-cta hover:brightness-105 font-black px-7 py-4 rounded-2xl text-sm sm:text-base transition shadow-xl flex items-center gap-2.5">
+                            <span>انضم إلينا الآن</span>
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+
+                        <button onclick="showPlayerLoginModal()" class="glass-panel hover:bg-white/10 text-white font-extrabold px-5 py-4 rounded-2xl text-xs sm:text-sm transition flex items-center gap-2">
+                            <i class="fa-solid fa-key text-lime-300"></i>
+                            <span>معي كود اللاعب</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-4 space-y-4">
+                    <div class="glass-panel rounded-3xl p-6 space-y-4 shadow-2xl">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-3.5">
+                            <span class="text-xs font-black text-lime-300">نظام يلا تنس</span>
+                            <i class="fa-solid fa-award text-amber-300 text-lg"></i>
+                        </div>
+                        <div class="space-y-3 text-xs">
+                            <div class="flex items-center gap-3 p-3 rounded-2xl bg-white/5 border border-white/5">
+                                <i class="fa-solid fa-chart-line text-lime-300 text-base"></i>
+                                <span class="font-bold text-slate-100">تقييم يومي للياقة والتنسيق والكفاءة</span>
                             </div>
-                            <div>
-                                <p class="text-xs font-black text-white">كود خاص</p>
-                                <p class="text-[10px] text-emerald-200 font-semibold">دخول سريع لكل لاعب</p>
+                            <div class="flex items-center gap-3 p-3 rounded-2xl bg-white/5 border border-white/5">
+                                <i class="fa-solid fa-crown text-amber-300 text-base"></i>
+                                <span class="font-bold text-slate-100">لوحة أوائل وترتيب تنافسي مستمر</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 rounded-2xl bg-white/5 border border-white/5">
+                                <i class="fa-solid fa-user-check text-emerald-300 text-base"></i>
+                                <span class="font-bold text-slate-100">كود خاص لكل لاعب ومتابعة مباشرة</span>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="yc-badge text-white rounded-3xl p-4 flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-2xl bg-lime-400 text-slate-950 font-black text-sm flex items-center justify-center shrink-0">
+                                YC
+                            </div>
+                            <div>
+                                <span class="block text-[10px] uppercase tracking-widest text-lime-300 font-extrabold">Powered by</span>
+                                <span class="block text-sm font-black text-white">Y Creations</span>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-black bg-lime-400/15 text-lime-300 px-2.5 py-1 rounded-full border border-lime-300/25">
+                            OFFICIAL SYSTEM
+                        </span>
                     </div>
                 </div>
             </div>
+        </main>
 
-            <!-- شبكة الفورم + بطاقة المساعدة السريعة -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                <div class="lg:col-span-7 bg-white rounded-[2rem] p-6 sm:p-8 shadow-sm border border-slate-200/80">
-                    <div class="mb-6 pb-4 border-b border-slate-100">
-                        <span class="text-[11px] font-black text-orange-600">استمارة الانضمام</span>
-                        <h2 class="text-lg sm:text-xl font-black text-slate-900 mt-0.5">تسجيل بيانات لاعب جديد</h2>
-                        <p class="text-xs text-slate-500 font-semibold mt-1">بعد إرسال الطلب سيقوم الكابتن بمراجعته وتوليد كود خاص باللاعب.</p>
+        <footer class="border-t border-white/10 bg-slate-950/60 py-4 px-4">
+            <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+                <p class="text-slate-400 font-bold">© 2026 يلا تنس أكاديمي — جميع الحقوق محفوظة</p>
+                <div class="inline-flex items-center gap-2 bg-slate-900 border border-lime-400/30 text-white px-3.5 py-1.5 rounded-full">
+                    <span class="w-2 h-2 rounded-full bg-lime-400"></span>
+                    <span class="text-[11px] font-bold text-slate-300">Powered by</span>
+                    <span class="text-xs font-black text-lime-300">Y Creations</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- =========================================================
+         2. صفحة انضم إلينا (تُفتح بالضغط على زر انضم إلينا)
+         ========================================================= -->
+    <div id="page-register" class="hidden min-h-screen flex flex-col justify-between hero-arena text-white">
+        <header class="border-b border-white/10 bg-slate-950/45 backdrop-blur-md sticky top-0 z-40">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-3">
+                <button onclick="showPage('home')" class="px-3.5 py-2 rounded-xl text-xs font-black bg-white/10 hover:bg-white/15 text-white border border-white/10 transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-right text-lime-300"></i>
+                    <span>العودة للرئيسية</span>
+                </button>
+
+                <div class="flex items-center gap-2.5">
+                    <img src="logo.jpg" alt="Logo" class="w-9 h-9 rounded-xl object-cover border border-lime-400/30">
+                    <span class="text-xs sm:text-sm font-black text-white">انضم إلينا</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-xl w-full mx-auto px-4 py-8 sm:py-12 flex-grow flex items-center justify-center">
+            <div class="w-full glass-panel rounded-[2rem] p-6 sm:p-8 shadow-2xl">
+                <!-- فورم التسجيل -->
+                <div id="reg-form-box" class="space-y-5">
+                    <div class="text-center space-y-1.5 border-b border-white/10 pb-4">
+                        <span class="inline-block text-[11px] font-black text-lime-300 bg-lime-400/10 px-3 py-1 rounded-full">طلب التحاق جديد</span>
+                        <h2 class="text-xl sm:text-2xl font-black text-white">سجل بيانات اللاعب</h2>
+                        <p class="text-xs text-slate-300 font-semibold">أكمل البيانات التالية وسيتم مراجعة طلبك وإصدار الكود الخاص بك</p>
                     </div>
 
                     <form onsubmit="submitPublicRegistration(event)" class="space-y-4">
                         <div>
-                            <label class="block text-xs font-extrabold text-slate-700 mb-1.5">اسم اللاعب الثلاثي</label>
-                            <input type="text" id="pub-name" required placeholder="اكتب الاسم الكامل..." class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-xs sm:text-sm text-slate-900 font-bold focus:outline-none focus:border-emerald-600 focus:bg-white transition">
+                            <label class="block text-xs font-extrabold text-slate-200 mb-1.5">اسم اللاعب الثلاثي</label>
+                            <input type="text" id="pub-name" required placeholder="اكتب الاسم الكامل..." class="w-full bg-slate-950/75 border border-white/15 rounded-2xl p-3.5 text-xs sm:text-sm text-white font-bold placeholder:text-slate-500 focus:outline-none focus:border-lime-400 transition">
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-extrabold text-slate-700 mb-1.5">العمر</label>
-                                <input type="number" id="pub-age" required placeholder="مثال: 11" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-xs sm:text-sm text-slate-900 font-bold focus:outline-none focus:border-emerald-600 focus:bg-white transition">
+                                <label class="block text-xs font-extrabold text-slate-200 mb-1.5">العمر</label>
+                                <input type="number" id="pub-age" required placeholder="مثال: 11" class="w-full bg-slate-950/75 border border-white/15 rounded-2xl p-3.5 text-xs sm:text-sm text-white font-bold placeholder:text-slate-500 focus:outline-none focus:border-lime-400 transition">
                             </div>
 
                             <div>
-                                <label class="block text-xs font-extrabold text-slate-700 mb-1.5">المستوى</label>
-                                <select id="pub-level" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-xs sm:text-sm text-slate-900 font-bold focus:outline-none focus:border-emerald-600 focus:bg-white transition">
+                                <label class="block text-xs font-extrabold text-slate-200 mb-1.5">المستوى</label>
+                                <select id="pub-level" class="w-full bg-slate-950/75 border border-white/15 rounded-2xl p-3.5 text-xs sm:text-sm text-white font-bold focus:outline-none focus:border-lime-400 transition">
                                     <option value="مبتدئ">مبتدئ</option>
                                     <option value="متوسط">متوسط</option>
                                     <option value="متقدم">متقدم</option>
@@ -188,79 +251,58 @@
                         </div>
 
                         <div>
-                            <label class="block text-xs font-extrabold text-slate-700 mb-1.5">رقم هاتف ولي الأمر</label>
-                            <input type="tel" id="pub-phone" required placeholder="012xxxxxxxx" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-xs sm:text-sm text-slate-900 font-bold focus:outline-none focus:border-emerald-600 focus:bg-white transition">
+                            <label class="block text-xs font-extrabold text-slate-200 mb-1.5">رقم هاتف ولي الأمر</label>
+                            <input type="tel" id="pub-phone" required placeholder="012xxxxxxxx" class="w-full bg-slate-950/75 border border-white/15 rounded-2xl p-3.5 text-xs sm:text-sm text-white font-bold placeholder:text-slate-500 focus:outline-none focus:border-lime-400 transition">
                         </div>
 
-                        <button type="submit" class="w-full clay-accent hover:opacity-95 text-white font-black py-4 rounded-2xl text-xs sm:text-sm transition shadow-md flex items-center justify-center gap-2 mt-2">
-                            <i class="fa-solid fa-paper-plane"></i>
-                            <span>إرسال طلب الانضمام</span>
+                        <button type="submit" class="w-full lime-cta hover:brightness-105 font-black py-4 rounded-2xl text-xs sm:text-sm transition shadow-lg mt-2">
+                            إرسال طلب الانضمام
                         </button>
                     </form>
                 </div>
 
-                <div class="lg:col-span-5 space-y-4">
-                    <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-slate-200/80 space-y-4">
-                        <h3 class="text-sm font-black text-slate-900 flex items-center gap-2">
-                            <i class="fa-solid fa-circle-info text-emerald-700"></i> كيف تبدأ بعد التسجيل؟
-                        </h3>
-                        <div class="space-y-3 text-xs">
-                            <div class="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-100">
-                                <span class="w-6 h-6 rounded-lg bg-emerald-700 text-white font-black flex items-center justify-center shrink-0">1</span>
-                                <p class="text-slate-700 font-bold leading-relaxed">أرسل طلب الانضمام بالبيانات الصحيحة للاعب وولي الأمر.</p>
-                            </div>
-                            <div class="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-100">
-                                <span class="w-6 h-6 rounded-lg bg-slate-900 text-lime-300 font-black flex items-center justify-center shrink-0">2</span>
-                                <p class="text-slate-700 font-bold leading-relaxed">تواصل مع الكابتن على واتساب لاستلام الكود الخاص باللاعب.</p>
-                            </div>
-                            <div class="flex items-start gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-100">
-                                <span class="w-6 h-6 rounded-lg bg-orange-600 text-white font-black flex items-center justify-center shrink-0">3</span>
-                                <p class="text-slate-700 font-bold leading-relaxed">ادخل بالكود من زر «لوحة الأوائل» لمتابعة التقييمات والترتيب.</p>
-                            </div>
-                        </div>
-                        <button onclick="showHowToGetCodeModal()" class="w-full py-3 rounded-2xl bg-emerald-50 hover:bg-emerald-100 text-emerald-900 font-black text-xs border border-emerald-200 transition">
-                            عرض خطوات الحصول على الكود بالتفصيل
-                        </button>
+                <!-- شاشة تأكيد ما بعد الإرسال: انتظر كودك -->
+                <div id="reg-waiting-code-box" class="hidden text-center space-y-5 py-3">
+                    <div class="w-16 h-16 rounded-2xl bg-lime-400/15 border border-lime-300/35 text-lime-300 flex items-center justify-center mx-auto text-2xl">
+                        <i class="fa-solid fa-hourglass-half"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-xl sm:text-2xl font-black text-white">تم استلام طلبك بنجاح!</h3>
+                        <p class="text-sm text-lime-300 font-black">انتظر كودك الخاص</p>
+                        <p class="text-xs text-slate-300 leading-relaxed max-w-sm mx-auto font-semibold">
+                            طلبك الآن قيد المراجعة لدى الكابتن. بمجرد اعتماد طلبك سيتم إرسال كود الدخول الخاص باللاعب لتتمكن من متابعة لوحة الأوائل والتقييمات.
+                        </p>
                     </div>
 
-                    <!-- شارة احترافية Powered by Y Creations -->
-                    <div class="yc-badge text-white rounded-[1.75rem] p-5 flex items-center justify-between gap-3">
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-2xl bg-lime-400 text-slate-950 font-black text-base flex items-center justify-center shrink-0 shadow-md">
-                                YC
-                            </div>
-                            <div>
-                                <span class="block text-[10px] uppercase tracking-widest text-lime-300 font-extrabold">Powered by</span>
-                                <span class="block text-sm font-black text-white">Y Creations</span>
-                                <span class="block text-[10px] text-slate-300 font-semibold">Digital Systems &amp; Web Solutions</span>
-                            </div>
-                        </div>
-                        <span class="text-[10px] font-black bg-white/10 text-lime-300 px-2.5 py-1 rounded-full border border-white/10">
-                            PRO EDITION
-                        </span>
+                    <div class="flex flex-col sm:flex-row gap-2.5 pt-2">
+                        <button onclick="resetRegistrationFormView()" class="flex-1 py-3 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-extrabold text-xs border border-white/10 transition">
+                            تسجيل لاعب آخر
+                        </button>
+                        <button onclick="showPage('home')" class="flex-1 lime-cta hover:brightness-105 font-black py-3 rounded-2xl text-xs transition">
+                            العودة للصفحة الرئيسية
+                        </button>
                     </div>
                 </div>
             </div>
         </main>
 
-        <!-- فوتر صفحة الانضمام مع شارة Powered by Y Creations -->
-        <footer class="bg-white border-t border-slate-200 py-4 px-4">
-            <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-                <p class="text-slate-500 font-bold">© 2026 يلا تنس أكاديمي — جميع الحقوق محفوظة</p>
-                <div class="inline-flex items-center gap-2 bg-slate-900 text-white px-3.5 py-1.5 rounded-full shadow-sm">
+        <footer class="border-t border-white/10 bg-slate-950/60 py-4 px-4">
+            <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+                <p class="text-slate-400 font-bold">يلا تنس أكاديمي</p>
+                <div class="inline-flex items-center gap-2 bg-slate-900 border border-lime-400/30 text-white px-3.5 py-1.5 rounded-full">
                     <span class="w-2 h-2 rounded-full bg-lime-400"></span>
                     <span class="text-[11px] font-bold text-slate-300">Powered by</span>
-                    <span class="text-xs font-black text-lime-300 tracking-wide">Y Creations</span>
+                    <span class="text-xs font-black text-lime-300">Y Creations</span>
                 </div>
             </div>
         </footer>
     </div>
 
     <!-- =========================================================
-         2. لوحة تحكم الكابتن (App Shell بشريط جانبي Sidebar)
+         3. لوحة تحكم الكابتن (App Shell بشريط جانبي Sidebar)
          ========================================================= -->
-    <div id="page-coach" class="hidden min-h-screen flex flex-col md:flex-row bg-slate-100 pb-20 md:pb-0">
-        <aside class="hidden md:flex md:w-64 lg:w-72 court-gradient text-white flex-col justify-between p-5 shrink-0 sticky top-0 h-screen no-print">
+    <div id="page-coach" class="hidden min-h-screen flex flex-col md:flex-row bg-slate-100 text-slate-900 pb-20 md:pb-0">
+        <aside class="hidden md:flex md:w-64 lg:w-72 bg-gradient-to-b from-emerald-950 via-slate-900 to-slate-950 text-white flex-col justify-between p-5 shrink-0 sticky top-0 h-screen no-print">
             <div class="space-y-6">
                 <div class="flex items-center gap-3 pb-4 border-b border-white/10">
                     <img src="logo.jpg" alt="Logo" class="w-11 h-11 rounded-2xl object-cover border border-emerald-400/40">
@@ -301,7 +343,7 @@
                     تسجيل خروج
                 </button>
                 <div class="pt-1 text-center">
-                    <span class="inline-flex items-center gap-1.5 text-[10px] font-black text-lime-300/90 bg-black/25 px-3 py-1 rounded-full">
+                    <span class="inline-flex items-center gap-1.5 text-[10px] font-black text-lime-300 bg-black/30 px-3 py-1 rounded-full">
                         <span>Powered by</span>
                         <span class="text-white">Y Creations</span>
                     </span>
@@ -310,7 +352,7 @@
         </aside>
 
         <div class="flex-1 flex flex-col min-w-0">
-            <div class="md:hidden court-gradient text-white p-4 flex justify-between items-center no-print">
+            <div class="md:hidden bg-slate-950 text-white p-4 flex justify-between items-center no-print">
                 <div class="flex items-center gap-2.5">
                     <img src="logo.jpg" alt="Logo" class="w-9 h-9 rounded-xl object-cover">
                     <div>
@@ -366,7 +408,6 @@
                             </button>
                         </div>
 
-                        <!-- لوحة حالة التقييم (مين اتقيّم ومين لسه) -->
                         <div id="eval-roster-panel" class="hidden p-4 rounded-2xl bg-slate-50 border border-slate-200/90 space-y-4">
                             <div class="flex flex-wrap items-center justify-between gap-2">
                                 <h4 class="text-xs font-black text-slate-900">اضغط على أي لاعب «لم يُقيّم» لتقييمه مباشرة:</h4>
@@ -413,7 +454,6 @@
                         </div>
 
                         <div id="eval-inputs-container" class="space-y-5">
-                            <!-- الحضور -->
                             <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/70 space-y-2.5">
                                 <label class="block text-xs font-extrabold text-slate-700">حالة الحضور</label>
                                 <div class="grid grid-cols-3 gap-2">
@@ -423,7 +463,6 @@
                                 </div>
                             </div>
 
-                            <!-- سلايدرات التقييم الأصلية (1 - 10) -->
                             <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/70 space-y-4">
                                 <div>
                                     <div class="flex justify-between items-center mb-1.5">
@@ -555,7 +594,6 @@
         </div>
     </div>
 
-    <!-- شريط تنقل سفلي للموبايل في لوحة الكابتن -->
     <div id="mobile-bottom-nav" class="hidden fixed bottom-0 left-0 right-0 bg-slate-950 text-white border-t border-slate-800 py-2 px-3 z-40 no-print">
         <div class="flex justify-around items-center">
             <button onclick="switchCoachTab('eval')" id="mnav-eval" class="flex flex-col items-center gap-1 text-[10px] font-black text-lime-400">
@@ -578,10 +616,10 @@
     </div>
 
     <!-- =========================================================
-         3. لوحة الطالب
+         4. لوحة الطالب
          ========================================================= -->
-    <div id="page-player" class="hidden min-h-screen bg-slate-100">
-        <div class="court-gradient text-white px-4 sm:px-8 pt-6 pb-16">
+    <div id="page-player" class="hidden min-h-screen bg-slate-100 text-slate-900">
+        <div class="bg-gradient-to-br from-emerald-950 via-emerald-900 to-slate-900 text-white px-4 sm:px-8 pt-6 pb-16">
             <div class="max-w-4xl mx-auto flex justify-between items-center">
                 <div class="flex items-center gap-3.5">
                     <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-lime-400 text-slate-950 flex items-center justify-center text-xl font-black shrink-0" id="player-avatar">م</div>
@@ -619,7 +657,7 @@
     <!-- =========================================================
          المودالات
          ========================================================= -->
-    <div id="modal-delete-confirm" class="fixed inset-0 bg-slate-950/60 backdrop-blur-md z-[70] hidden flex items-center justify-center p-4">
+    <div id="modal-delete-confirm" class="fixed inset-0 bg-slate-950/60 backdrop-blur-md z-[70] hidden flex items-center justify-center p-4 text-slate-900">
         <div class="bg-white border border-rose-200 p-6 sm:p-7 rounded-3xl max-w-sm w-full space-y-5 shadow-2xl text-center">
             <div class="w-16 h-16 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto text-2xl">
                 <i class="fa-solid fa-trash-can"></i>
@@ -645,7 +683,7 @@
         </div>
     </div>
 
-    <div id="modal-player-details" class="fixed inset-0 bg-slate-950/50 backdrop-blur-md z-[60] hidden flex items-center justify-center p-4">
+    <div id="modal-player-details" class="fixed inset-0 bg-slate-950/50 backdrop-blur-md z-[60] hidden flex items-center justify-center p-4 text-slate-900">
         <div class="bg-white border border-slate-200 p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl">
             <div class="text-center space-y-2 border-b border-slate-100 pb-4">
                 <div class="w-14 h-14 rounded-2xl bg-emerald-700 text-white font-black text-2xl flex items-center justify-center mx-auto" id="pd-avatar">م</div>
@@ -686,7 +724,7 @@
         </div>
     </div>
 
-    <div id="modal-coach-login" class="fixed inset-0 bg-slate-950/55 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div id="modal-coach-login" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 text-slate-900">
         <div class="bg-white p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl">
             <div class="text-center">
                 <img src="logo.jpg" alt="Logo" class="w-12 h-12 rounded-2xl object-cover mx-auto mb-2 border border-slate-200">
@@ -707,7 +745,7 @@
         </div>
     </div>
 
-    <div id="modal-change-own-pass" class="fixed inset-0 bg-slate-950/55 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div id="modal-change-own-pass" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 text-slate-900">
         <div class="bg-white p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl">
             <h3 class="text-base font-black text-slate-900">تغيير كلمة المرور الخاصة بك</h3>
             <input type="password" id="own-new-pass" placeholder="أدخل كلمة المرور الجديدة" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold">
@@ -718,7 +756,7 @@
         </div>
     </div>
 
-    <div id="modal-admin-coach-pass" class="fixed inset-0 bg-slate-950/55 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div id="modal-admin-coach-pass" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 text-slate-900">
         <div class="bg-white p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl">
             <div class="text-center">
                 <h3 class="text-base font-black text-slate-900">تغيير كلمة مرور الكابتن</h3>
@@ -732,7 +770,7 @@
         </div>
     </div>
 
-    <div id="modal-player-login" class="fixed inset-0 bg-slate-950/55 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div id="modal-player-login" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 text-slate-900">
         <div class="bg-white p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl">
             <div class="text-center">
                 <img src="logo.jpg" alt="Logo" class="w-12 h-12 rounded-2xl object-cover mx-auto mb-2 border border-slate-200">
@@ -741,31 +779,14 @@
             </div>
             <div>
                 <input type="text" id="login-player-code-input" placeholder="مثال: P-101" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-center font-black tracking-widest uppercase focus:outline-none focus:border-emerald-600">
-                <button onclick="showHowToGetCodeModal()" class="w-full text-center text-xs font-bold text-slate-600 hover:text-emerald-700 mt-2.5 flex items-center justify-center gap-1.5">
-                    <i class="fa-solid fa-circle-question text-emerald-600"></i> ليس لديك كود؟ كيف أحصل على الكود؟
+                <button onclick="closeModals(); showPage('register');" class="w-full text-center text-xs font-bold text-slate-600 hover:text-emerald-700 mt-2.5 flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-user-plus text-emerald-600"></i> ليس لديك كود؟ انضم إلينا الآن
                 </button>
             </div>
             <div class="flex gap-2">
                 <button onclick="loginPlayerWithCode()" class="flex-1 bg-slate-900 hover:bg-slate-800 py-3 rounded-xl font-black text-xs text-white">دخول</button>
                 <button onclick="closeModals()" class="px-4 bg-slate-100 hover:bg-slate-200 py-3 rounded-xl font-extrabold text-xs text-slate-700">إلغاء</button>
             </div>
-        </div>
-    </div>
-
-    <div id="modal-how-to-get-code" class="fixed inset-0 bg-slate-950/60 backdrop-blur-md z-[60] hidden flex items-center justify-center p-4">
-        <div class="bg-white p-6 rounded-3xl max-w-md w-full space-y-4 shadow-2xl">
-            <div class="text-center border-b border-slate-100 pb-3">
-                <h3 class="text-base font-black text-slate-900">خطوات الحصول على الكود الخاص بك</h3>
-            </div>
-            <div class="space-y-2.5 text-xs">
-                <div class="p-3 rounded-2xl bg-slate-50"><strong>1.</strong> سجّل طلب انضمام من الصفحة الرئيسية.</div>
-                <div class="p-3 rounded-2xl bg-slate-50"><strong>2.</strong> تواصل مع الكابتن على واتساب: <span class="font-mono font-bold">01284429494</span>.</div>
-                <div class="p-3 rounded-2xl bg-slate-50"><strong>3.</strong> استلم كودك (مثال: <span class="font-mono font-bold">P-101</span>) وادخل لوحة الأوائل.</div>
-            </div>
-            <a href="https://wa.me/201284429494?text=%D8%A3%D9%87%D9%84%D8%A7%D9%8B%20%D9%83%D8%A7%D8%A8%D8%AA%D9%86%D8%8C%20%D8%A3%D9%86%D8%A7%20%D8%B9%D8%A7%D9%85%D9%84%20%D8%B7%D9%84%D8%A8%20%D8%A7%D9%86%D8%B6%D9%85%D8%A7%D9%85%20%D9%88%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%AD%D8%B5%D9%84%20%D8%B9%D9%84%D9%89%20%D9%83%D9%88%D8%AF%D9%8A%20%D8%A7%D9%84%D8%AE%D8%A7%D8%B5" target="_blank" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-black py-3 rounded-xl text-xs flex items-center justify-center gap-2">
-                <i class="fa-brands fa-whatsapp text-base"></i> مراسلة الكابتن على واتساب
-            </a>
-            <button onclick="closeModals()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold py-2.5 rounded-xl text-xs">إغلاق</button>
         </div>
     </div>
 
@@ -1021,6 +1042,13 @@
             }).catch(() => {
                 showToast('حدث خطأ أثناء محاولة الاسترجاع.', 'error');
             });
+        }
+
+        function resetRegistrationFormView() {
+            const formBox = document.getElementById('reg-form-box');
+            const waitingBox = document.getElementById('reg-waiting-code-box');
+            if (formBox) formBox.classList.remove('hidden');
+            if (waitingBox) waitingBox.classList.add('hidden');
         }
 
         function updateSliderUI(type) {
@@ -1434,12 +1462,16 @@
         }
 
         function showPage(pageId) {
-            ['page-register', 'page-coach', 'page-player'].forEach(id => {
+            ['page-home', 'page-register', 'page-coach', 'page-player'].forEach(id => {
                 const page = document.getElementById(id);
                 if (page) page.classList.add('hidden');
             });
             const targetPage = document.getElementById('page-' + pageId);
             if (targetPage) targetPage.classList.remove('hidden');
+
+            if (pageId === 'register') {
+                resetRegistrationFormView();
+            }
 
             const mNav = document.getElementById('mobile-bottom-nav');
             if (mNav) {
@@ -1514,16 +1546,11 @@
             document.getElementById('modal-player-login').classList.remove('hidden');
         }
 
-        function showHowToGetCodeModal() {
-            document.getElementById('modal-how-to-get-code').classList.remove('hidden');
-        }
-
         function closeModals() {
             document.getElementById('modal-coach-login').classList.add('hidden');
             document.getElementById('modal-player-login').classList.add('hidden');
             document.getElementById('modal-change-own-pass').classList.add('hidden');
             document.getElementById('modal-admin-coach-pass').classList.add('hidden');
-            document.getElementById('modal-how-to-get-code').classList.add('hidden');
             document.getElementById('modal-player-details').classList.add('hidden');
             document.getElementById('modal-delete-confirm').classList.add('hidden');
         }
@@ -1572,7 +1599,7 @@
         function logout() {
             loggedInPlayerId = null;
             loggedInCoach = null;
-            showPage('register');
+            showPage('home');
             showToast('تم تسجيل الخروج بنجاح', 'info');
         }
 
@@ -1941,8 +1968,14 @@
                 }
                 saveFullBackupLocally(buildFullSnapshot());
                 refreshUI();
-                showToast('تم إرسال طلب انضمامك للكابتن بنجاح! سيتم مراجعته وإرسال الكود لك.', 'success');
                 e.target.reset();
+
+                const formBox = document.getElementById('reg-form-box');
+                const waitingBox = document.getElementById('reg-waiting-code-box');
+                if (formBox) formBox.classList.add('hidden');
+                if (waitingBox) waitingBox.classList.remove('hidden');
+
+                showToast('تم إرسال طلبك! انتظر كودك الخاص بعد مراجعة الكابتن.', 'success');
             })
             .catch(() => {
                 showToast('حدث ضغط على النظام، يرجى المحاولة مرة أخرى.', 'error');
@@ -1986,7 +2019,7 @@
             if (coachDateEl) coachDateEl.value = todayStr;
             if (playerDateEl) playerDateEl.value = todayStr;
 
-            showPage('register');
+            showPage('home');
             setAttendance('present');
 
             setInterval(() => {
