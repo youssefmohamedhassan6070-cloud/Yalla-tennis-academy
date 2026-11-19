@@ -4,18 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>يلا تنس أكاديمي | Yalla Tennis Academy</title>
-    <!-- أيقونة التاب (Favicon) بشعار الأكاديمية logo.jpg -->
     <link rel="icon" type="image/jpeg" href="logo.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 
-    <!-- استيراد مكتبات Firebase المتوافقة مع الكود -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
     <script>
-      // إعدادات السيرفر بتاعتك من فايربيز
       const firebaseConfig = {
           apiKey: "AIzaSyC5OqWo3DQaLQuHz5Ge549A-5d2i59Q",
           authDomain: "yalla-f08bf.firebaseapp.com",
@@ -25,7 +22,6 @@
           appId: "1:1092948527573:web:984828d0332adaf2ef555c"
       };
 
-      // تهيئة فايربيز وتفعيل قاعدة البيانات
       firebase.initializeApp(firebaseConfig);
       const dbFirestore = firebase.firestore();
     </script>
@@ -42,7 +38,7 @@
         }
         .toast-enter { animation: toastIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .toast-exit { animation: toastOut 0.3s cubic-bezier(0.7, 0, 0.84, 0) forwards; }
-        
+
         ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: #f7fee7; }
         ::-webkit-scrollbar-thumb { background: #bef264; border-radius: 999px; }
@@ -56,10 +52,8 @@
 </head>
 <body class="bg-lime-50/40 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-lime-200 pb-20 md:pb-0">
 
-    <!-- حاوية التنبيهات -->
     <div id="toast-container" class="fixed top-3 left-1/2 -translate-x-1/2 z-[100] w-full max-w-xs sm:max-w-sm px-3 pointer-events-none flex flex-col gap-2"></div>
 
-    <!-- الهيدر العام مع شعار يلا تنس الحقيقي logo.jpg -->
     <header id="main-header" class="bg-white/90 backdrop-blur-md border-b border-lime-200 p-3 sm:p-4 sticky top-0 z-50 shadow-sm no-print">
         <div class="max-w-7xl mx-auto flex justify-between items-center gap-2">
             <div class="flex items-center space-x-2.5 space-x-reverse cursor-pointer" onclick="showPage('register')">
@@ -80,7 +74,7 @@
 
     <main class="max-w-7xl mx-auto p-3 sm:p-4 md:p-6 flex-grow w-full">
 
-        <!-- ==================== 1. صفحة انضمام عامة (الصفحة الرئيسية) ==================== -->
+        <!-- 1. صفحة انضمام عامة -->
         <div id="page-register" class="max-w-md mx-auto space-y-4 my-2 sm:my-6">
             <div class="bg-gradient-to-br from-lime-600 to-emerald-700 text-white p-5 sm:p-6 rounded-3xl shadow-lg text-center space-y-2 relative overflow-hidden">
                 <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-2xl mx-auto p-1.5 border border-white/40 shadow-inner mb-2 flex items-center justify-center overflow-hidden">
@@ -125,7 +119,7 @@
             </div>
         </div>
 
-        <!-- ==================== 2. لوحة تحكم الكابتن ==================== -->
+        <!-- 2. لوحة تحكم الكابتن -->
         <div id="page-coach" class="space-y-5 hidden">
             <div class="flex flex-wrap justify-between items-center bg-white p-3.5 sm:p-4 rounded-2xl border border-lime-200 shadow-sm gap-2">
                 <div class="flex items-center gap-3">
@@ -180,7 +174,7 @@
                             <input type="date" id="coach-selected-date" onchange="onDateChange()" class="w-full sm:w-auto bg-lime-50/60 border border-lime-200 text-slate-800 text-xs rounded-xl p-2 font-bold focus:outline-none focus:border-lime-500">
                         </div>
                     </div>
-                    
+
                     <div class="space-y-4">
                         <div>
                             <label class="block text-xs font-bold text-slate-700 mb-1">ابحث واختر اللاعب:</label>
@@ -190,7 +184,6 @@
                             <select id="coach-player-select" onchange="checkPlayerEvalStatusForSelectedDate()" class="w-full bg-lime-50/40 border border-lime-200 rounded-xl p-3 text-xs text-slate-800 font-bold"></select>
                         </div>
 
-                        <!-- التنبيه لمنع التكرار والتهنيج -->
                         <div id="already-evaluated-alert" class="hidden p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold flex flex-col gap-2 transition-all">
                             <div class="flex items-center justify-between">
                                 <span id="already-evaluated-text" class="flex items-center gap-2"><i class="fa-solid fa-lock text-amber-600"></i> تم تقييم هذا الطالب مسبقاً.</span>
@@ -272,7 +265,6 @@
                             <i class="fa-solid fa-users text-lime-600"></i> قائمة اللاعبين المسجلين
                         </h3>
 
-                        <!-- أزرار الفلاتر -->
                         <div class="flex flex-wrap gap-1.5 w-full sm:w-auto">
                             <button onclick="setPlayerFilter('all')" id="pf-btn-all" class="px-2.5 py-1.5 rounded-xl font-bold text-[11px] bg-lime-600 text-white shadow-sm transition">الكل</button>
                             <button onclick="setPlayerFilter('active')" id="pf-btn-active" class="px-2.5 py-1.5 rounded-xl font-bold text-[11px] bg-white text-slate-700 border border-lime-200 hover:bg-lime-50 transition">🟢 شغال</button>
@@ -317,7 +309,7 @@
 
         </div>
 
-        <!-- ==================== 3. لوحة الطالب بالبحث والتاريخ ==================== -->
+        <!-- 3. لوحة الطالب بالبحث والتاريخ -->
         <div id="page-player" class="space-y-5 hidden max-w-3xl mx-auto">
             <div class="flex justify-between items-center bg-white p-3.5 sm:p-4 rounded-2xl border border-lime-200 shadow-sm">
                 <div class="flex items-center gap-3">
@@ -346,14 +338,13 @@
                 <div class="flex justify-end">
                     <span id="player-my-rank-badge" class="bg-lime-100 text-lime-800 text-xs font-bold px-3 py-1.5 rounded-xl border border-lime-200">ترتيبك في هذا اليوم: --</span>
                 </div>
-                
+
                 <div id="player-leaderboard" class="space-y-3 max-h-[420px] overflow-y-auto"></div>
             </div>
         </div>
 
     </main>
 
-    <!-- شريط التنقل السفلي للموبايل -->
     <div id="mobile-bottom-nav" class="hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-lime-200 p-2 z-40 no-print">
         <div class="flex justify-around items-center">
             <button onclick="switchCoachTab('eval')" id="mnav-eval" class="flex flex-col items-center gap-1 text-[10px] font-bold text-lime-700">
@@ -371,9 +362,7 @@
         </div>
     </div>
 
-    <!-- ================= المودالات (Popups) ================= -->
-
-    <!-- مودال تأكيد الحذف النهائى -->
+    <!-- المودالات -->
     <div id="modal-delete-confirm" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-[70] hidden flex items-center justify-center p-4 transition-all duration-300">
         <div class="bg-white border border-rose-200 p-6 sm:p-7 rounded-3xl max-w-sm w-full space-y-5 shadow-2xl relative overflow-hidden text-center transform scale-100">
             <div class="w-16 h-16 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto text-2xl border-4 border-rose-200 shadow-inner animate-pulse">
@@ -405,7 +394,6 @@
         </div>
     </div>
 
-    <!-- مودال تفاصيل الطالب -->
     <div id="modal-player-details" class="fixed inset-0 bg-slate-900/50 backdrop-blur-md z-[60] hidden flex items-center justify-center p-4">
         <div class="bg-white border border-lime-200 p-5 sm:p-7 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl relative overflow-hidden">
             <div class="text-center space-y-2 border-b border-lime-100 pb-4">
@@ -447,7 +435,6 @@
         </div>
     </div>
 
-    <!-- مودال دخول الكابتن -->
     <div id="modal-coach-login" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white border border-lime-200 p-5 sm:p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl">
             <div class="text-center">
@@ -472,7 +459,6 @@
         </div>
     </div>
 
-    <!-- مودال تغيير كلمة المرور الخاصة -->
     <div id="modal-change-own-pass" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white border border-lime-200 p-5 sm:p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl">
             <h3 class="text-base font-bold text-slate-900">تغيير كلمة المرور الخاصة بك</h3>
@@ -487,7 +473,6 @@
         </div>
     </div>
 
-    <!-- مودال تغيير مرور الكابتن بواسطة الأدمن -->
     <div id="modal-admin-coach-pass" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white border border-lime-200 p-5 sm:p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl">
             <div class="text-center">
@@ -508,7 +493,6 @@
         </div>
     </div>
 
-    <!-- مودال دخول الطالب بالكود -->
     <div id="modal-player-login" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white border border-lime-200 p-5 sm:p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl">
             <div class="text-center">
@@ -532,7 +516,6 @@
         </div>
     </div>
 
-    <!-- مودال خطوات الحصول على الكود -->
     <div id="modal-how-to-get-code" class="fixed inset-0 bg-slate-900/50 backdrop-blur-md z-[60] hidden flex items-center justify-center p-4">
         <div class="bg-white border border-lime-200 p-5 sm:p-7 rounded-3xl max-w-md w-full space-y-4 sm:space-y-5 shadow-2xl relative overflow-hidden">
             <div class="text-center space-y-1.5 border-b border-lime-100 pb-3">
@@ -548,7 +531,7 @@
                     <div class="w-6 h-6 rounded-xl bg-lime-600 text-white font-black flex items-center justify-center text-xs shrink-0 shadow-sm">1</div>
                     <div>
                         <h4 class="font-bold text-slate-900 text-xs">عمل طلب انضمام للأكاديمية</h4>
-                        <p class="text-[11px] text-slate-600 mt-0.5">اضغط على زر **"انضم للأكاديمية"** أعلى الصفحة وسجل اسمك وعمرك ورقم هاتفك.</p>
+                        <p class="text-[11px] text-slate-600 mt-0.5">اضغط على زر **"انضم إلينا"** أعلى الصفحة وسجل اسمك وعمرك ورقم هاتفك.</p>
                     </div>
                 </div>
 
@@ -578,7 +561,7 @@
             </div>
 
             <div class="pt-1 space-y-2">
-                <a href="https://wa.me/201284429494?text=%D8%A3%D9%87%D9%84%D8%A7%D9%8b%20%D9%83%D8%A7%D8%A8%D8%AA%D9%86%D8%8C%20%D8%A3%D9%86%D8%A7%20%D8%B9%D8%A7%D9%85%D9%84%20%D8%B7%D9%84%D8%A8%20%D8%A7%D9%86%D8%B6%D9%85%D8%A7%D9%85%20%D9%88%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%AD%D8%B5%D9%84%20%D8%B9%D9%84%D9%89%20%D9%83%D9%88%D8%AF%D9%8A%20%D8%A7%D9%84%D8%AE%D8%A7%D8%B5" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2 shadow-md transition">
+                <a href="https://wa.me/201284429494?text=%D8%A3%D9%87%D9%84%D8%A7%D9%8B%20%D9%83%D8%A7%D8%A8%D8%AA%D9%86%D8%8C%20%D8%A3%D9%86%D8%A7%20%D8%B9%D8%A7%D9%85%D9%84%20%D8%B7%D9%84%D8%A8%20%D8%A7%D9%86%D8%B6%D9%85%D8%A7%D9%85%20%D9%88%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%AD%D8%B5%D9%84%20%D8%B9%D9%84%D9%89%20%D9%83%D9%88%D8%AF%D9%8A%20%D8%A7%D9%84%D8%AE%D8%A7%D8%B5" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2 shadow-md transition">
                     <i class="fa-brands fa-whatsapp text-base"></i> إرسال رسالة للكابتن على الواتساب (01284429494)
                 </a>
                 <button onclick="closeModals()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-xs transition">حسناً، فهمت</button>
@@ -586,7 +569,6 @@
         </div>
     </div>
 
-    <!-- الفوتر -->
     <footer class="bg-white/60 border-t border-lime-200 py-4 text-center text-xs text-slate-500 no-print">
         <p>
             جميع الحقوق محفوظة © 2026 - يلا تنس أكاديمي | <span class="font-bold text-slate-700">تم التطوير بواسطة Y Creations</span> | <span onclick="showCoachLoginModal()" class="cursor-pointer font-bold text-lime-700 hover:underline">دخول الإدارة والكابتن</span>
@@ -598,12 +580,13 @@
         let loggedInPlayerId = null;
         let loggedInCoach = null;
         let selectedCoachForPassChangeId = null;
-        let currentPlayerFilter = 'all'; 
-        let playerToDeleteId = null;     
+        let currentPlayerFilter = 'all';
+        let playerToDeleteId = null;
+        let isInitialSyncDone = false;
 
         function showToast(message, type = 'success') {
             const container = document.getElementById('toast-container');
-            if(!container) return;
+            if (!container) return;
 
             const toast = document.createElement('div');
             let bgStyle = 'bg-slate-900 text-white border-slate-700';
@@ -646,7 +629,6 @@
 
         const todayStr = getTodayDateString();
 
-        // القاعدة الأساسية تبدأ خالية تماماً لتعتمد كلياً على سيرفر فايربيز الحقيقي
         let db = {
             coaches: [
                 { id: 10, name: "كابتن أحمد", pass: "1234", isAdmin: true, isBlocked: false },
@@ -657,17 +639,47 @@
             dailyEvaluations: {}
         };
 
-        // دالة حفظ آمنة بالكامل ({ merge: true }) لمنع مسح أو استبدال السجلات القديمة
-        function saveData() {
-            dbFirestore.collection("academy").doc("main_data").set(db, { merge: true })
-                .then(() => {
-                    console.log("تم الحفظ على سيرفر فايربيز بنجاح بشكل آمن!");
+        function saveData(options = {}) {
+            const { allowEmptyOverwrite = false } = options;
+            const mainDocRef = dbFirestore.collection("academy").doc("main_data");
+            const backupDocRef = dbFirestore.collection("academy").doc("backup_data");
+
+            return mainDocRef.get().then((currentDoc) => {
+                if (currentDoc.exists) {
+                    const existingData = currentDoc.data() || {};
+                    const hadPlayers = Array.isArray(existingData.players) && existingData.players.length > 0;
+                    const nowPlayersEmpty = !Array.isArray(db.players) || db.players.length === 0;
+
+                    if (hadPlayers && nowPlayersEmpty && !allowEmptyOverwrite) {
+                        console.warn("تم إيقاف عملية حفظ كانت ستفرغ قائمة اللاعبين.");
+                        showToast("تنبيه أمان: تم منع حفظ بيانات فارغة فوق اللاعبين الحاليين.", "error");
+                        return Promise.reject(new Error("Blocked empty players overwrite"));
+                    }
+
+                    backupDocRef.set({
+                        ...existingData,
+                        backedUpAt: firebase.firestore.FieldValue.serverTimestamp()
+                    }, { merge: false }).catch((err) => console.error("خطأ في النسخة الاحتياطية:", err));
+                }
+
+                return mainDocRef.set({
+                    coaches: db.coaches,
+                    players: db.players,
+                    requests: db.requests,
+                    dailyEvaluations: db.dailyEvaluations,
+                    lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+                }, { merge: true });
+            })
+            .then(() => {
+                if (typeof refreshUI === "function") {
                     refreshUI();
-                })
-                .catch((error) => {
-                    console.error("خطأ في الحفظ: ", error);
-                    showToast("حدث خطأ أثناء الحفظ على السيرفر", "error");
-                });
+                }
+            })
+            .catch((error) => {
+                if (error && error.message === "Blocked empty players overwrite") return;
+                console.error("خطأ في الحفظ:", error);
+                showToast("حدث خطأ أثناء الحفظ، تحقق من الاتصال أو صلاحيات Firestore.", "error");
+            });
         }
 
         function switchCoachTab(tabName) {
@@ -679,25 +691,25 @@
                 const tabEl = document.getElementById(`coach-tab-${t}`);
                 const btnEl = document.getElementById(`tab-btn-${t}`);
                 const mBtnEl = document.getElementById(`mnav-${t}`);
-                if(tabEl) tabEl.classList.add('hidden');
-                if(btnEl) btnEl.className = "px-4 py-2.5 rounded-xl font-bold text-xs bg-white text-slate-600 border border-lime-200 hover:bg-lime-50 transition flex items-center gap-2";
-                if(mBtnEl) mBtnEl.className = "flex flex-col items-center gap-1 text-[10px] font-bold text-slate-400";
+                if (tabEl) tabEl.classList.add('hidden');
+                if (btnEl) btnEl.className = "px-4 py-2.5 rounded-xl font-bold text-xs bg-white text-slate-600 border border-lime-200 hover:bg-lime-50 transition flex items-center gap-2";
+                if (mBtnEl) mBtnEl.className = "flex flex-col items-center gap-1 text-[10px] font-bold text-slate-400";
             });
 
             const targetTab = document.getElementById(`coach-tab-${tabName}`);
             const targetBtn = document.getElementById(`tab-btn-${tabName}`);
             const targetMBtn = document.getElementById(`mnav-${tabName}`);
-            if(targetTab) targetTab.classList.remove('hidden');
-            if(targetBtn) targetBtn.className = "px-4 py-2.5 rounded-xl font-bold text-xs bg-lime-600 text-white shadow-sm transition flex items-center gap-2";
-            if(targetMBtn) targetMBtn.className = "flex flex-col items-center gap-1 text-[10px] font-bold text-lime-700";
+            if (targetTab) targetTab.classList.remove('hidden');
+            if (targetBtn) targetBtn.className = "px-4 py-2.5 rounded-xl font-bold text-xs bg-lime-600 text-white shadow-sm transition flex items-center gap-2";
+            if (targetMBtn) targetMBtn.className = "flex flex-col items-center gap-1 text-[10px] font-bold text-lime-700";
         }
 
         function setPlayerFilter(filter) {
             currentPlayerFilter = filter;
             ['all', 'active', 'blocked', 'star'].forEach(f => {
                 const btn = document.getElementById(`pf-btn-${f}`);
-                if(btn) {
-                    if(f === filter) {
+                if (btn) {
+                    if (f === filter) {
                         btn.className = "px-2.5 py-1.5 rounded-xl font-bold text-[11px] bg-lime-600 text-white shadow-sm transition";
                     } else {
                         btn.className = "px-2.5 py-1.5 rounded-xl font-bold text-[11px] bg-white text-slate-700 border border-lime-200 hover:bg-lime-50 transition";
@@ -710,8 +722,8 @@
         function getPlayerAvgScore(playerId) {
             let totalScore = 0;
             let count = 0;
-            Object.keys(db.dailyEvaluations).forEach(date => {
-                if(db.dailyEvaluations[date][playerId]) {
+            Object.keys(db.dailyEvaluations || {}).forEach(date => {
+                if (db.dailyEvaluations[date] && db.dailyEvaluations[date][playerId]) {
                     let ev = db.dailyEvaluations[date][playerId];
                     totalScore += ev.rawScore || 0;
                     count++;
@@ -722,10 +734,10 @@
 
         function updateSliderUI(type) {
             const el = document.getElementById(`input-${type}`);
-            if(!el) return;
-            const val = el.value;
+            if (!el) return;
+            const val = Number(el.value);
             const badge = document.getElementById(`val-${type}`);
-            if(!badge) return;
+            if (!badge) return;
             badge.innerText = val;
 
             if (val <= 3) {
@@ -745,9 +757,9 @@
             const btnL = document.getElementById('btn-late');
             const btnA = document.getElementById('btn-absent');
 
-            if(btnP) btnP.className = "py-2.5 px-2 sm:px-3 rounded-xl font-bold text-[11px] sm:text-xs bg-white text-slate-600 border border-lime-200 transition";
-            if(btnL) btnL.className = "py-2.5 px-2 sm:px-3 rounded-xl font-bold text-[11px] sm:text-xs bg-white text-slate-600 border border-lime-200 transition";
-            if(btnA) btnA.className = "py-2.5 px-2 sm:px-3 rounded-xl font-bold text-[11px] sm:text-xs bg-white text-slate-600 border border-lime-200 transition";
+            if (btnP) btnP.className = "py-2.5 px-2 sm:px-3 rounded-xl font-bold text-[11px] sm:text-xs bg-white text-slate-600 border border-lime-200 transition";
+            if (btnL) btnL.className = "py-2.5 px-2 sm:px-3 rounded-xl font-bold text-[11px] sm:text-xs bg-white text-slate-600 border border-lime-200 transition";
+            if (btnA) btnA.className = "py-2.5 px-2 sm:px-3 rounded-xl font-bold text-[11px] sm:text-xs bg-white text-slate-600 border border-lime-200 transition";
 
             if (status === 'present' && btnP) btnP.className = "py-2.5 px-2 sm:px-3 rounded-xl font-bold text-[11px] sm:text-xs bg-emerald-600 text-white shadow-md transition";
             if (status === 'late' && btnL) btnL.className = "py-2.5 px-2 sm:px-3 rounded-xl font-bold text-[11px] sm:text-xs bg-amber-500 text-slate-900 shadow-md transition";
@@ -770,19 +782,28 @@
         }
 
         function filterCoachPlayerList() {
-            const searchVal = document.getElementById('coach-player-search').value.trim().toLowerCase();
+            const searchInput = document.getElementById('coach-player-search');
             const coachSelect = document.getElementById('coach-player-select');
-            if(!coachSelect) return;
+            if (!coachSelect) return;
+
+            const prevSelected = coachSelect.value;
+            const searchVal = searchInput ? searchInput.value.trim().toLowerCase() : '';
 
             let activePlayers = db.players.filter(p => !p.isBlocked);
-            if(searchVal) {
-                activePlayers = activePlayers.filter(p => p.name.toLowerCase().includes(searchVal) || p.code.toLowerCase().includes(searchVal));
+            if (searchVal) {
+                activePlayers = activePlayers.filter(p =>
+                    (p.name && p.name.toLowerCase().includes(searchVal)) ||
+                    (p.code && p.code.toLowerCase().includes(searchVal))
+                );
             }
 
-            if(activePlayers.length === 0) {
+            if (activePlayers.length === 0) {
                 coachSelect.innerHTML = `<option value="">لا يوجد لاعب مطابق للبحث</option>`;
             } else {
                 coachSelect.innerHTML = activePlayers.map(p => `<option value="${p.id}">${p.name} (كود: ${p.code})</option>`).join('');
+                if (prevSelected && activePlayers.some(p => String(p.id) === String(prevSelected))) {
+                    coachSelect.value = prevSelected;
+                }
             }
             checkPlayerEvalStatusForSelectedDate();
         }
@@ -790,8 +811,8 @@
         function checkPlayerEvalStatusForSelectedDate() {
             const selectedDate = getSelectedCoachDate();
             const coachSelect = document.getElementById('coach-player-select');
-            if(!coachSelect) return;
-            
+            if (!coachSelect) return;
+
             const pId = coachSelect.value;
             const alertBox = document.getElementById('already-evaluated-alert');
             const alertText = document.getElementById('already-evaluated-text');
@@ -799,43 +820,43 @@
             const evalInputs = document.getElementById('eval-inputs-container');
 
             if (!pId) {
-                if(alertBox) alertBox.classList.add('hidden');
-                if(evalInputs) evalInputs.classList.remove('opacity-40', 'pointer-events-none');
+                if (alertBox) alertBox.classList.add('hidden');
+                if (evalInputs) evalInputs.classList.remove('opacity-40', 'pointer-events-none');
                 return;
             }
 
-            const dateEvals = db.dailyEvaluations[selectedDate] || {};
+            const dateEvals = (db.dailyEvaluations && db.dailyEvaluations[selectedDate]) ? db.dailyEvaluations[selectedDate] : {};
             const existingEval = dateEvals[pId];
 
             if (existingEval) {
-                if(alertBox) alertBox.classList.remove('hidden');
-                if(alertText) alertText.innerHTML = `<i class="fa-solid fa-lock text-amber-600"></i> تم تقييم هذا الطالب في تاريخ (${selectedDate}) بواسطة (${existingEval.coachName || 'الكابتن'}) بالدرجة: ${existingEval.grade}.`;
-                
+                if (alertBox) alertBox.classList.remove('hidden');
+                if (alertText) alertText.innerHTML = `<i class="fa-solid fa-lock text-amber-600"></i> تم تقييم هذا الطالب في تاريخ (${selectedDate}) بواسطة (${existingEval.coachName || 'الكابتن'}) بالدرجة: ${existingEval.grade}.`;
+
                 if (loggedInCoach && loggedInCoach.isAdmin) {
-                    if(overrideBtn) overrideBtn.classList.remove('hidden');
+                    if (overrideBtn) overrideBtn.classList.remove('hidden');
                 } else {
-                    if(overrideBtn) overrideBtn.classList.add('hidden');
+                    if (overrideBtn) overrideBtn.classList.add('hidden');
                 }
 
-                if(evalInputs) evalInputs.classList.add('opacity-40', 'pointer-events-none');
+                if (evalInputs) evalInputs.classList.add('opacity-40', 'pointer-events-none');
             } else {
-                if(alertBox) alertBox.classList.add('hidden');
-                if(overrideBtn) overrideBtn.classList.add('hidden');
-                if(evalInputs) evalInputs.classList.remove('opacity-40', 'pointer-events-none');
+                if (alertBox) alertBox.classList.add('hidden');
+                if (overrideBtn) overrideBtn.classList.add('hidden');
+                if (evalInputs) evalInputs.classList.remove('opacity-40', 'pointer-events-none');
             }
         }
 
         function enableAdminEditOverride() {
             if (!loggedInCoach || !loggedInCoach.isAdmin) return showToast('هذه الصلاحية لكابتن أحمد (الأدمن) فقط', 'error');
             const evalInputs = document.getElementById('eval-inputs-container');
-            if(evalInputs) evalInputs.classList.remove('opacity-40', 'pointer-events-none');
+            if (evalInputs) evalInputs.classList.remove('opacity-40', 'pointer-events-none');
             showToast('تم تفعيل إمكانية التعديل بصلاحية كابتن أحمد الأدمن', 'info');
         }
 
         function saveEvaluation() {
             const selectedDate = getSelectedCoachDate();
             const pId = document.getElementById('coach-player-select').value;
-            if(!pId) return showToast('اختر لاعباً أولاً للتقييم', 'error');
+            if (!pId) return showToast('اختر لاعباً أولاً للتقييم', 'error');
 
             if (!db.dailyEvaluations[selectedDate]) {
                 db.dailyEvaluations[selectedDate] = {};
@@ -850,8 +871,8 @@
             const notes = document.getElementById('input-notes').value.trim() || "لا توجد ملاحظات إضافية.";
 
             let rawAvg = (fit + ten) / 2;
-            if(currentAttendance === 'late') rawAvg -= 1.0;
-            if(currentAttendance === 'absent') rawAvg = 0;
+            if (currentAttendance === 'late') rawAvg -= 1.0;
+            if (currentAttendance === 'absent') rawAvg = 0;
 
             let gradeStr = currentAttendance === 'absent' ? "غائب (0/10)" : `${rawAvg.toFixed(1)} / 10`;
 
@@ -872,26 +893,26 @@
 
         function openPlayerDetailsModal(playerId) {
             let player = db.players.find(p => p.id === playerId);
-            if(!player) return;
+            if (!player) return;
 
             document.getElementById('pd-name').innerText = player.name;
             document.getElementById('pd-code').innerText = player.code;
             document.getElementById('pd-age').innerText = player.age;
             document.getElementById('pd-level').innerText = player.level || "غير محدد";
             document.getElementById('pd-avatar').innerText = player.avatar || player.name.charAt(0);
-            
+
             const phoneVal = player.phone || "غير مسجل";
             document.getElementById('pd-phone').innerText = phoneVal;
             const phoneLink = document.getElementById('pd-phone-link');
-            if(phoneLink) {
+            if (phoneLink) {
                 phoneLink.href = player.phone ? `tel:${player.phone}` : "#";
             }
 
             let totalScore = 0;
             let count = 0;
 
-            Object.keys(db.dailyEvaluations).forEach(date => {
-                if(db.dailyEvaluations[date][playerId]) {
+            Object.keys(db.dailyEvaluations || {}).forEach(date => {
+                if (db.dailyEvaluations[date] && db.dailyEvaluations[date][playerId]) {
                     let ev = db.dailyEvaluations[date][playerId];
                     totalScore += ev.rawScore || 0;
                     count++;
@@ -906,9 +927,9 @@
         }
 
         function promptDeletePlayerModal(playerId) {
-            if(!loggedInCoach || !loggedInCoach.isAdmin) return showToast('حذف اللاعبين متاح لكابتن أحمد فقط', 'error');
+            if (!loggedInCoach || !loggedInCoach.isAdmin) return showToast('حذف اللاعبين متاح لكابتن أحمد فقط', 'error');
             let player = db.players.find(p => p.id === playerId);
-            if(player) {
+            if (player) {
                 playerToDeleteId = playerId;
                 document.getElementById('del-modal-name').innerText = player.name;
                 document.getElementById('del-modal-code').innerText = player.code;
@@ -918,18 +939,19 @@
         }
 
         function confirmExecuteDeletePlayer() {
-            if(!playerToDeleteId) return;
+            if (!playerToDeleteId) return;
             let player = db.players.find(p => p.id === playerToDeleteId);
-            if(player) {
-                db.players = db.players.filter(p => p.id !== playerToDeleteId);
-                
-                Object.keys(db.dailyEvaluations).forEach(date => {
-                    if(db.dailyEvaluations[date][playerToDeleteId]) {
+            if (player) {
+                const remainingPlayers = db.players.filter(p => p.id !== playerToDeleteId);
+                db.players = remainingPlayers;
+
+                Object.keys(db.dailyEvaluations || {}).forEach(date => {
+                    if (db.dailyEvaluations[date] && db.dailyEvaluations[date][playerToDeleteId]) {
                         delete db.dailyEvaluations[date][playerToDeleteId];
                     }
                 });
 
-                saveData();
+                saveData({ allowEmptyOverwrite: remainingPlayers.length === 0 });
                 closeModals();
                 showToast(`تم حذف الطالب (${player.name}) نهائياً من الأكاديمية`, 'info');
                 playerToDeleteId = null;
@@ -939,14 +961,14 @@
         function showPage(pageId) {
             ['page-register', 'page-coach', 'page-player'].forEach(id => {
                 const page = document.getElementById(id);
-                if(page) page.classList.add('hidden');
+                if (page) page.classList.add('hidden');
             });
             const targetPage = document.getElementById('page-' + pageId);
-            if(targetPage) targetPage.classList.remove('hidden');
+            if (targetPage) targetPage.classList.remove('hidden');
 
             const mNav = document.getElementById('mobile-bottom-nav');
-            if(mNav) {
-                if(pageId === 'coach' && window.innerWidth < 768) {
+            if (mNav) {
+                if (pageId === 'coach' && window.innerWidth < 768) {
                     mNav.classList.remove('hidden');
                 } else {
                     mNav.classList.add('hidden');
@@ -958,7 +980,7 @@
 
         function showCoachLoginModal() {
             let select = document.getElementById('coach-login-name');
-            if(select) {
+            if (select) {
                 let activeCoaches = db.coaches.filter(c => !c.isBlocked);
                 select.innerHTML = activeCoaches.map(c => `<option value="${c.name}">${c.name} ${c.isAdmin ? '(Admin)' : '(Co-Admin)'}</option>`).join('');
             }
@@ -973,11 +995,11 @@
 
         function saveOwnNewPass() {
             let newP = document.getElementById('own-new-pass').value.trim();
-            if(!newP) return showToast('أدخل كلمة المرور الجديدة', 'error');
+            if (!newP) return showToast('أدخل كلمة المرور الجديدة', 'error');
 
-            if(loggedInCoach) {
+            if (loggedInCoach) {
                 let c = db.coaches.find(x => x.id === loggedInCoach.id);
-                if(c) {
+                if (c) {
                     c.pass = newP;
                     loggedInCoach.pass = newP;
                     saveData();
@@ -988,9 +1010,9 @@
         }
 
         function openAdminCoachPassModal(id) {
-            if(!loggedInCoach || !loggedInCoach.isAdmin) return showToast('هذه الصلاحية لكابتن أحمد فقط', 'error');
+            if (!loggedInCoach || !loggedInCoach.isAdmin) return showToast('هذه الصلاحية لكابتن أحمد فقط', 'error');
             let coach = db.coaches.find(c => c.id === id);
-            if(coach) {
+            if (coach) {
                 selectedCoachForPassChangeId = id;
                 document.getElementById('target-coach-name-display').innerText = `كابتن: ${coach.name}`;
                 document.getElementById('target-coach-new-pass-input').value = '';
@@ -999,12 +1021,12 @@
         }
 
         function submitAdminCoachPassChange() {
-            if(!selectedCoachForPassChangeId) return;
+            if (!selectedCoachForPassChangeId) return;
             let newPass = document.getElementById('target-coach-new-pass-input').value.trim();
-            if(!newPass) return showToast('من فضلك أدخل كلمة المرور الجديدة', 'error');
+            if (!newPass) return showToast('من فضلك أدخل كلمة المرور الجديدة', 'error');
 
             let coach = db.coaches.find(c => c.id === selectedCoachForPassChangeId);
-            if(coach) {
+            if (coach) {
                 coach.pass = newPass;
                 saveData();
                 closeModals();
@@ -1036,13 +1058,13 @@
             let pass = document.getElementById('coach-pass').value;
             let coachObj = db.coaches.find(c => c.name === name && c.pass === pass);
 
-            if(coachObj) {
-                if(coachObj.isBlocked) return showToast('حسابك موقوف حالياً من الإدارة', 'error');
+            if (coachObj) {
+                if (coachObj.isBlocked) return showToast('حسابك موقوف حالياً من الإدارة', 'error');
                 loggedInCoach = coachObj;
                 closeModals();
                 document.getElementById('coach-welcome-title').innerText = `لوحة تحكم ${coachObj.name}`;
                 document.getElementById('coach-role-badge').innerText = coachObj.isAdmin ? 'صلاحية: Admin (الرئيسي - كابتن أحمد)' : 'صلاحية: Co-Admin (مشرف مساعد)';
-                
+
                 showPage('coach');
                 switchCoachTab('eval');
                 showToast(`أهلاً بك ${coachObj.name}، تم تسجيل الدخول بنجاح`, 'success');
@@ -1053,14 +1075,14 @@
 
         function loginPlayerWithCode() {
             let inputCode = document.getElementById('login-player-code-input').value.trim().toUpperCase();
-            if(!inputCode) return showToast('من فضلك أدخل كودك الخاص', 'info');
+            if (!inputCode) return showToast('من فضلك أدخل كودك الخاص', 'info');
 
-            let player = db.players.find(p => p.code.toUpperCase() === inputCode);
-            if(!player) {
+            let player = db.players.find(p => p.code && p.code.toUpperCase() === inputCode);
+            if (!player) {
                 return showToast('الكود غير صحيح، تأكد منه وأعد المحاولة!', 'error');
             }
 
-            if(player.isBlocked) {
+            if (player.isBlocked) {
                 return showToast('كود الحساب الخاص بك موقوف حالياً من الإدارة.', 'error');
             }
 
@@ -1078,9 +1100,9 @@
         }
 
         function toggleBlockPlayer(id) {
-            if(!loggedInCoach || !loggedInCoach.isAdmin) return showToast('هذه الصلاحية للأدمن الرئيسي (كابتن أحمد) فقط', 'error');
+            if (!loggedInCoach || !loggedInCoach.isAdmin) return showToast('هذه الصلاحية للأدمن الرئيسي (كابتن أحمد) فقط', 'error');
             let p = db.players.find(x => x.id === id);
-            if(p) {
+            if (p) {
                 p.isBlocked = !p.isBlocked;
                 saveData();
                 showToast(`تم ${p.isBlocked ? 'إيقاف' : 'تفعيل'} كود الطالب (${p.name})`, p.isBlocked ? 'error' : 'success');
@@ -1088,10 +1110,10 @@
         }
 
         function toggleBlockCoach(id) {
-            if(!loggedInCoach || !loggedInCoach.isAdmin) return showToast('هذه الصلاحية للأدمن الرئيسي (كابتن أحمد) فقط', 'error');
+            if (!loggedInCoach || !loggedInCoach.isAdmin) return showToast('هذه الصلاحية للأدمن الرئيسي (كابتن أحمد) فقط', 'error');
             let c = db.coaches.find(x => x.id === id);
-            if(c) {
-                if(c.isAdmin) return showToast('لا يمكن إيقاف حساب الأدمن الرئيسي!', 'error');
+            if (c) {
+                if (c.isAdmin) return showToast('لا يمكن إيقاف حساب الأدمن الرئيسي!', 'error');
                 c.isBlocked = !c.isBlocked;
                 saveData();
                 showToast(`تم ${c.isBlocked ? 'إيقاف' : 'تفعيل'} كود الكابتن (${c.name})`, c.isBlocked ? 'error' : 'success');
@@ -1105,47 +1127,49 @@
             const stTotal = document.getElementById('stat-total-players');
             const stEval = document.getElementById('stat-evaluated-today');
             const stReq = document.getElementById('stat-pending-requests');
-            
-            if(stTotal) stTotal.innerText = db.players.filter(p => !p.isBlocked).length;
-            if(stEval) {
-                const evalsToday = db.dailyEvaluations[selectedCoachDate] ? Object.keys(db.dailyEvaluations[selectedCoachDate]).length : 0;
+
+            if (stTotal) stTotal.innerText = db.players.filter(p => !p.isBlocked).length;
+            if (stEval) {
+                const evalsToday = (db.dailyEvaluations && db.dailyEvaluations[selectedCoachDate])
+                    ? Object.keys(db.dailyEvaluations[selectedCoachDate]).length
+                    : 0;
                 stEval.innerText = evalsToday;
             }
-            if(stReq) stReq.innerText = db.requests.length;
+            if (stReq) stReq.innerText = db.requests.length;
 
             const cLbDate = document.getElementById('coach-lb-date');
             const pLbDate = document.getElementById('player-lb-date');
-            if(cLbDate) cLbDate.innerText = `نتائج لوحة الأوائل ليوم: ${selectedCoachDate}`;
-            if(pLbDate) pLbDate.innerText = `تاريخ النتائج: ${selectedPlayerDate}`;
+            if (cLbDate) cLbDate.innerText = `نتائج لوحة الأوائل ليوم: ${selectedCoachDate}`;
+            if (pLbDate) pLbDate.innerText = `تاريخ النتائج: ${selectedPlayerDate}`;
 
             filterCoachPlayerList();
 
             const tabCoachesBtn = document.getElementById('tab-btn-coaches');
             const mNavCoachesBtn = document.getElementById('mnav-coaches');
-            if(tabCoachesBtn) {
-                if(loggedInCoach && loggedInCoach.isAdmin) {
+            if (tabCoachesBtn) {
+                if (loggedInCoach && loggedInCoach.isAdmin) {
                     tabCoachesBtn.classList.remove('hidden');
-                    if(mNavCoachesBtn) mNavCoachesBtn.classList.remove('hidden');
+                    if (mNavCoachesBtn) mNavCoachesBtn.classList.remove('hidden');
                 } else {
                     tabCoachesBtn.classList.add('hidden');
-                    if(mNavCoachesBtn) mNavCoachesBtn.classList.add('hidden');
+                    if (mNavCoachesBtn) mNavCoachesBtn.classList.add('hidden');
                 }
             }
 
             let adminPlayersList = document.getElementById('admin-players-list');
-            if(adminPlayersList) {
+            if (adminPlayersList) {
                 const isAdmin = loggedInCoach && loggedInCoach.isAdmin;
                 let filteredPlayers = [...db.players];
 
-                if(currentPlayerFilter === 'active') {
+                if (currentPlayerFilter === 'active') {
                     filteredPlayers = filteredPlayers.filter(p => !p.isBlocked);
-                } else if(currentPlayerFilter === 'blocked') {
+                } else if (currentPlayerFilter === 'blocked') {
                     filteredPlayers = filteredPlayers.filter(p => p.isBlocked);
-                } else if(currentPlayerFilter === 'star') {
+                } else if (currentPlayerFilter === 'star') {
                     filteredPlayers = filteredPlayers.filter(p => getPlayerAvgScore(p.id) >= 8.0);
                 }
 
-                if(filteredPlayers.length === 0) {
+                if (filteredPlayers.length === 0) {
                     adminPlayersList.innerHTML = `<p class="text-xs text-slate-400 font-bold p-3 col-span-2 text-center">لا يوجد لاعبين مطبق عليهم هذا الفلتر حالياً.</p>`;
                 } else {
                     adminPlayersList.innerHTML = filteredPlayers.map(p => {
@@ -1182,9 +1206,9 @@
             }
 
             let adminCoachesList = document.getElementById('admin-coaches-list');
-            if(adminCoachesList && loggedInCoach && loggedInCoach.isAdmin) {
+            if (adminCoachesList && loggedInCoach && loggedInCoach.isAdmin) {
                 let coaches = db.coaches.filter(c => !c.isAdmin);
-                if(coaches.length === 0) {
+                if (coaches.length === 0) {
                     adminCoachesList.innerHTML = `<p class="text-[11px] text-slate-400">لا يوجد كباتن مساعدين بعد.</p>`;
                 } else {
                     adminCoachesList.innerHTML = coaches.map(c => `
@@ -1203,8 +1227,8 @@
             }
 
             let reqContainer = document.getElementById('requests-list');
-            if(reqContainer) {
-                if(db.requests.length === 0) {
+            if (reqContainer) {
+                if (db.requests.length === 0) {
                     reqContainer.innerHTML = `<p class="text-xs text-slate-400">لا توجد طلبات معلقة.</p>`;
                 } else {
                     reqContainer.innerHTML = db.requests.map(r => `
@@ -1221,15 +1245,15 @@
 
             renderLeaderboards();
 
-            if(loggedInPlayerId) {
+            if (loggedInPlayerId) {
                 let player = db.players.find(p => p.id === loggedInPlayerId);
-                if(player) {
+                if (player) {
                     const pName = document.getElementById('p-display-name');
                     const pMeta = document.getElementById('p-display-meta');
                     const pAvatar = document.getElementById('player-avatar');
-                    if(pName) pName.innerText = `${player.name} (كودك: ${player.code})`;
-                    if(pMeta) pMeta.innerText = `يلا تنس أكاديمي - مستوى ${player.level}`;
-                    if(pAvatar) pAvatar.innerText = player.avatar || player.name.charAt(0);
+                    if (pName) pName.innerText = `${player.name} (كودك: ${player.code})`;
+                    if (pMeta) pMeta.innerText = `يلا تنس أكاديمي - مستوى ${player.level}`;
+                    if (pAvatar) pAvatar.innerText = player.avatar || player.name.charAt(0);
                 }
             }
 
@@ -1243,18 +1267,18 @@
 
             const activePlayers = db.players.filter(p => !p.isBlocked);
 
-            const coachDateEvals = db.dailyEvaluations[coachDate] || {};
+            const coachDateEvals = (db.dailyEvaluations && db.dailyEvaluations[coachDate]) ? db.dailyEvaluations[coachDate] : {};
             let rankedCoach = [...activePlayers].map(p => {
                 let evalData = coachDateEvals[p.id] || { rawScore: 0, grade: "لم يُقيّم", attendance: 'present', notes: '' };
                 return { ...p, score: evalData.rawScore || 0, grade: evalData.grade, evalData: evalData };
-            }).sort((a,b) => b.score - a.score);
+            }).sort((a, b) => b.score - a.score);
 
             let htmlCoach = rankedCoach.map((p, idx) => {
                 let ev = p.evalData;
                 let statusBadge = '';
-                if(ev.attendance === 'late') {
+                if (ev.attendance === 'late') {
                     statusBadge = '<span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-md border border-amber-300"><i class="fa-solid fa-clock text-amber-600 mr-0.5"></i> متأخر (خُصِم 1.0)</span>';
-                } else if(ev.attendance === 'absent') {
+                } else if (ev.attendance === 'absent') {
                     statusBadge = '<span class="bg-rose-100 text-rose-800 text-[10px] font-bold px-2 py-0.5 rounded-md border border-rose-300"><i class="fa-solid fa-user-xmark text-rose-600 mr-0.5"></i> غائب</span>';
                 }
 
@@ -1269,7 +1293,7 @@
                     <div class="p-3 sm:p-3.5 rounded-xl bg-lime-50/50 border border-lime-200 text-xs space-y-1">
                         <div class="flex justify-between items-center">
                             <div class="flex items-center gap-2">
-                                <span class="w-6 h-6 rounded-lg bg-white flex items-center justify-center font-bold text-[11px] text-slate-700 border border-lime-200 ${idx===0?'text-amber-600 border-amber-300 font-black':''}">${idx+1}</span>
+                                <span class="w-6 h-6 rounded-lg bg-white flex items-center justify-center font-bold text-[11px] text-slate-700 border border-lime-200 ${idx === 0 ? 'text-amber-600 border-amber-300 font-black' : ''}">${idx + 1}</span>
                                 <span class="font-bold text-slate-800 cursor-pointer hover:text-lime-700" onclick="openPlayerDetailsModal(${p.id})">${p.name} <span class="text-[10px] text-slate-400">(${p.code})</span></span>
                                 ${statusBadge}
                             </div>
@@ -1279,23 +1303,23 @@
                     </div>
                 `;
             }).join('');
-            
-            let coachLb = document.getElementById('coach-leaderboard');
-            if(coachLb) coachLb.innerHTML = htmlCoach;
 
-            const playerDateEvals = db.dailyEvaluations[playerDate] || {};
+            let coachLb = document.getElementById('coach-leaderboard');
+            if (coachLb) coachLb.innerHTML = htmlCoach;
+
+            const playerDateEvals = (db.dailyEvaluations && db.dailyEvaluations[playerDate]) ? db.dailyEvaluations[playerDate] : {};
             let rankedPlayer = [...activePlayers].map(p => {
                 let evalData = playerDateEvals[p.id] || { rawScore: 0, grade: "لم يُقيّم", attendance: 'present', notes: '' };
                 return { ...p, score: evalData.rawScore || 0, grade: evalData.grade, evalData: evalData };
-            }).sort((a,b) => b.score - a.score);
+            }).sort((a, b) => b.score - a.score);
 
             let htmlPlayer = rankedPlayer.map((p, idx) => {
                 let isMe = (p.id === loggedInPlayerId);
                 let ev = p.evalData;
                 let statusBadge = '';
-                if(ev.attendance === 'late') {
+                if (ev.attendance === 'late') {
                     statusBadge = '<span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-md border border-amber-300"><i class="fa-solid fa-clock text-amber-600 mr-0.5"></i> متأخر (خُصِم 1.0)</span>';
-                } else if(ev.attendance === 'absent') {
+                } else if (ev.attendance === 'absent') {
                     statusBadge = '<span class="bg-rose-100 text-rose-800 text-[10px] font-bold px-2 py-0.5 rounded-md border border-rose-300"><i class="fa-solid fa-user-xmark text-rose-600 mr-0.5"></i> غائب</span>';
                 }
 
@@ -1310,7 +1334,7 @@
                     <div class="p-3 sm:p-3.5 rounded-xl ${isMe ? 'border-2 border-lime-500 bg-lime-100/60 shadow-sm' : 'bg-lime-50/40 border border-lime-200'} text-xs space-y-1">
                         <div class="flex justify-between items-center">
                             <div class="flex items-center gap-2">
-                                <span class="w-6 h-6 rounded-lg bg-white flex items-center justify-center font-bold text-[11px] text-slate-700 border border-lime-200 ${idx===0?'text-amber-600 border-amber-300 font-black':''}">${idx+1}</span>
+                                <span class="w-6 h-6 rounded-lg bg-white flex items-center justify-center font-bold text-[11px] text-slate-700 border border-lime-200 ${idx === 0 ? 'text-amber-600 border-amber-300 font-black' : ''}">${idx + 1}</span>
                                 <span class="font-bold text-slate-800">${p.name} ${isMe ? '<span class="text-lime-800 font-black">(أنت)</span>' : ''}</span>
                                 ${statusBadge}
                             </div>
@@ -1322,11 +1346,11 @@
             }).join('');
 
             let playerLb = document.getElementById('player-leaderboard');
-            if(playerLb) {
+            if (playerLb) {
                 playerLb.innerHTML = htmlPlayer;
                 let myRank = rankedPlayer.findIndex(p => p.id === loggedInPlayerId) + 1;
                 let rankBadge = document.getElementById('player-my-rank-badge');
-                if(rankBadge) rankBadge.innerText = myRank > 0 ? `ترتيبك في تاريخ (${playerDate}): #${myRank}` : `ترتيبك في تاريخ (${playerDate}): غير متوفر`;
+                if (rankBadge) rankBadge.innerText = myRank > 0 ? `ترتيبك في تاريخ (${playerDate}): #${myRank}` : `ترتيبك في تاريخ (${playerDate}): غير متوفر`;
             }
         }
 
@@ -1336,15 +1360,15 @@
             let phoneInput = document.getElementById('admin-p-phone');
             let levelInput = document.getElementById('admin-p-level');
 
-            if(!nameInput || !ageInput || !phoneInput) return;
+            if (!nameInput || !ageInput || !phoneInput) return;
             let name = nameInput.value.trim();
             let age = ageInput.value;
             let phone = phoneInput.value.trim();
             let level = levelInput.value;
 
-            if(!name || !age || !phone) return showToast('يرجى إدخال اسم الطالب والعمر ورقم هاتف ولي الأمر!', 'error');
+            if (!name || !age || !phone) return showToast('يرجى إدخال اسم الطالب والعمر ورقم هاتف ولي الأمر!', 'error');
 
-            let newId = Date.now();
+            let newId = Date.now() + Math.floor(Math.random() * 1000);
             let newCode = "P-" + Math.floor(100 + Math.random() * 900);
             db.players.push({ id: newId, code: newCode, name, age, phone, level, avatar: name.charAt(0), isBlocked: false });
             saveData();
@@ -1355,17 +1379,17 @@
         }
 
         function addNewCoach() {
-            if(!loggedInCoach || !loggedInCoach.isAdmin) return showToast('هذه الصلاحية لكابتن أحمد فقط', 'error');
+            if (!loggedInCoach || !loggedInCoach.isAdmin) return showToast('هذه الصلاحية لكابتن أحمد فقط', 'error');
             let nameInput = document.getElementById('new-coach-name');
             let passInput = document.getElementById('new-coach-pass');
 
-            if(!nameInput || !passInput) return;
+            if (!nameInput || !passInput) return;
             let name = nameInput.value.trim();
             let pass = passInput.value.trim();
 
-            if(!name || !pass) return showToast('أدخل اسم الكابتن وكلمة المرور', 'error');
+            if (!name || !pass) return showToast('أدخل اسم الكابتن وكلمة المرور', 'error');
 
-            db.coaches.push({ id: Date.now(), name: name, pass: pass, isAdmin: false, isBlocked: false });
+            db.coaches.push({ id: Date.now() + Math.floor(Math.random() * 1000), name: name, pass: pass, isAdmin: false, isBlocked: false });
             saveData();
             nameInput.value = '';
             passInput.value = '';
@@ -1374,68 +1398,137 @@
 
         function submitPublicRegistration(e) {
             e.preventDefault();
-            let name = document.getElementById('pub-name').value.trim();
-            db.requests.push({
-                id: Date.now(),
-                name: name,
-                age: document.getElementById('pub-age').value,
-                level: document.getElementById('pub-level').value,
-                phone: document.getElementById('pub-phone').value,
-                avatar: name.charAt(0)
+            let nameInput = document.getElementById('pub-name');
+            let ageInput = document.getElementById('pub-age');
+            let levelInput = document.getElementById('pub-level');
+            let phoneInput = document.getElementById('pub-phone');
+
+            if (!nameInput || !ageInput || !phoneInput) return;
+
+            let newRequest = {
+                id: Date.now() + Math.floor(Math.random() * 1000),
+                name: nameInput.value.trim(),
+                age: ageInput.value,
+                level: levelInput.value,
+                phone: phoneInput.value.trim(),
+                avatar: nameInput.value.trim().charAt(0)
+            };
+
+            dbFirestore.collection("academy").doc("main_data").set({
+                requests: firebase.firestore.FieldValue.arrayUnion(newRequest),
+                lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+            }, { merge: true })
+            .then(() => {
+                if (!db.requests.some(r => r.id === newRequest.id)) {
+                    db.requests.push(newRequest);
+                }
+                refreshUI();
+                showToast('تم إرسال طلب انضمامك للكابتن بنجاح! سيتم مراجعته وإرسال الكود لك.', 'success');
+                e.target.reset();
+            })
+            .catch((error) => {
+                console.error("خطأ في تسجيل الطلب:", error);
+                showToast('حدث ضغط على النظام، يرجى المحاولة مرة أخرى.', 'error');
             });
-            saveData();
-            showToast('تم إرسال طلب انضمامك للكابتن بنجاح! سيتم مراجعته وإرسال الكود لك.', 'success');
-            e.target.reset();
         }
 
         function approveReq(id) {
-            if(!loggedInCoach || !loggedInCoach.isAdmin) return showToast('قبول الطلبات لكابتن أحمد فقط', 'error');
-            let idx = db.requests.findIndex(r => r.id === id);
-            if(idx !== -1) {
-                let req = db.requests.splice(idx, 1)[0];
-                req.code = "P-" + Math.floor(100 + Math.random() * 900);
-                req.isBlocked = false;
-                db.players.push(req);
-                saveData();
-                showToast(`تم قبول الطالب (${req.name})، والكود المولّد هو: [ ${req.code} ]`, 'success');
-            }
+            if (!loggedInCoach || !loggedInCoach.isAdmin) return showToast('قبول الطلبات لكابتن أحمد فقط', 'error');
+
+            dbFirestore.collection("academy").doc("main_data").get().then((doc) => {
+                if (doc.exists) {
+                    let remoteData = doc.data() || {};
+                    if (Array.isArray(remoteData.requests)) db.requests = remoteData.requests;
+                    if (Array.isArray(remoteData.players)) db.players = remoteData.players;
+                    if (Array.isArray(remoteData.coaches) && remoteData.coaches.length > 0) db.coaches = remoteData.coaches;
+                    if (remoteData.dailyEvaluations && typeof remoteData.dailyEvaluations === 'object') db.dailyEvaluations = remoteData.dailyEvaluations;
+                }
+
+                let idx = db.requests.findIndex(r => r.id === id);
+                if (idx !== -1) {
+                    let req = db.requests.splice(idx, 1)[0];
+                    req.code = "P-" + Math.floor(100 + Math.random() * 900);
+                    req.isBlocked = false;
+                    db.players.push(req);
+                    saveData();
+                    showToast(`تم قبول الطالب (${req.name})، والكود المولّد هو: [ ${req.code} ]`, 'success');
+                }
+            });
         }
 
         function rejectReq(id) {
-            if(!loggedInCoach || !loggedInCoach.isAdmin) return showToast('رفض الطلبات لكابتن أحمد فقط', 'error');
+            if (!loggedInCoach || !loggedInCoach.isAdmin) return showToast('رفض الطلبات لكابتن أحمد فقط', 'error');
             db.requests = db.requests.filter(r => r.id !== id);
-            saveData();
+            saveData({ allowEmptyOverwrite: db.players.length === 0 });
             showToast('تم رفض الطلب', 'info');
         }
 
-        // دالة التحميل الذكية (تعتمد كلياً على سيرفر فايربيز ولا تفرض ديفولت وهمي)
+        function restoreFromBackup() {
+            if (!loggedInCoach || !loggedInCoach.isAdmin) {
+                return showToast('استرجاع النسخة الاحتياطية متاح لكابتن أحمد فقط', 'error');
+            }
+
+            dbFirestore.collection("academy").doc("backup_data").get().then((doc) => {
+                if (!doc.exists) {
+                    showToast('لا توجد نسخة احتياطية متاحة حالياً.', 'info');
+                    return;
+                }
+                const backup = doc.data() || {};
+                db.coaches = (Array.isArray(backup.coaches) && backup.coaches.length > 0) ? backup.coaches : db.coaches;
+                db.players = Array.isArray(backup.players) ? backup.players : [];
+                db.requests = Array.isArray(backup.requests) ? backup.requests : [];
+                db.dailyEvaluations = (backup.dailyEvaluations && typeof backup.dailyEvaluations === 'object') ? backup.dailyEvaluations : {};
+
+                return dbFirestore.collection("academy").doc("main_data").set({
+                    coaches: db.coaches,
+                    players: db.players,
+                    requests: db.requests,
+                    dailyEvaluations: db.dailyEvaluations,
+                    restoredAt: firebase.firestore.FieldValue.serverTimestamp()
+                }, { merge: true });
+            }).then(() => {
+                refreshUI();
+                showToast('تم استرجاع النسخة الاحتياطية بنجاح.', 'success');
+            }).catch((error) => {
+                console.error("خطأ في استرجاع النسخة الاحتياطية:", error);
+                showToast('تعذر استرجاع النسخة الاحتياطية.', 'error');
+            });
+        }
+
         window.onload = function() {
             const coachDateEl = document.getElementById('coach-selected-date');
             const playerDateEl = document.getElementById('player-selected-date');
-            if(coachDateEl) coachDateEl.value = todayStr;
-            if(playerDateEl) playerDateEl.value = todayStr;
+            if (coachDateEl) coachDateEl.value = todayStr;
+            if (playerDateEl) playerDateEl.value = todayStr;
 
-            dbFirestore.collection("academy").doc("main_data").get()
-                .then((doc) => {
-                    if (doc.exists) {
-                        let remoteData = doc.data();
-                        if(remoteData.coaches) db.coaches = remoteData.coaches;
-                        // اعتماد داتا اللاعبين من الفايربيز بشكل مباشر
-                        if(remoteData.players) db.players = remoteData.players;
-                        if(remoteData.requests) db.requests = remoteData.requests;
-                        if(remoteData.dailyEvaluations) db.dailyEvaluations = remoteData.dailyEvaluations;
-                        console.log("تم تحميل البيانات الحقيقية من فايربيز بنجاح تام.");
-                    } else {
-                        saveData();
+            showPage('register');
+            setAttendance('present');
+
+            dbFirestore.collection("academy").doc("main_data").onSnapshot((doc) => {
+                if (doc.exists) {
+                    const remoteData = doc.data() || {};
+                    if (Array.isArray(remoteData.coaches) && remoteData.coaches.length > 0) {
+                        db.coaches = remoteData.coaches;
                     }
-                    showPage('register');
-                    setAttendance('present');
-                })
-                .catch((error) => {
-                    console.error("خطأ في التحميل:", error);
-                    showPage('register');
-                    setAttendance('present');
-                });
+                    if (Array.isArray(remoteData.players)) {
+                        db.players = remoteData.players;
+                    }
+                    if (Array.isArray(remoteData.requests)) {
+                        db.requests = remoteData.requests;
+                    }
+                    if (remoteData.dailyEvaluations && typeof remoteData.dailyEvaluations === 'object') {
+                        db.dailyEvaluations = remoteData.dailyEvaluations;
+                    }
+                    isInitialSyncDone = true;
+                    refreshUI();
+                } else if (!isInitialSyncDone) {
+                    isInitialSyncDone = true;
+                    refreshUI();
+                }
+            }, (error) => {
+                console.error("خطأ في المزامنة مع Firestore:", error);
+                showToast("تعذر الاتصال بقاعدة البيانات، راجع اتصال الإنترنت أو صلاحيات Firestore", "error");
+            });
         };
     </script>
 </body>
